@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sistema de Escoteiros</title>
+    
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Liberation+Serif:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="../css/global.css">
+    
+    <!-- CSS Específico -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-desktop">
+        <!-- Decorative Background Elements -->
+        <div class="decorative-background"></div>
+        <div class="background-blur blur-1"></div>
+        <div class="background-blur blur-2"></div>
+        
+        <!-- Main Content Shell -->
+        <div class="main-content-shell">
+            <!-- Left Side: Visual/Hero Section -->
+            <div class="left-side-hero">
+                <!-- Organic Brushstroke Accent -->
+                <div class="brushstroke-accent"></div>
+                
+                <!-- Paw Print Decorative Trail -->
+                <div class="paw-print-trail">
+                    <div class="paw-print paw-1">
+                        <img src="assets/3-16.svg" alt="Paw Print 1" class="paw-icon">
+                    </div>
+                    <div class="paw-print paw-2">
+                        <img src="assets/3-18.svg" alt="Paw Print 2" class="paw-icon">
+                    </div>
+                    <div class="paw-print paw-3">
+                        <img src="assets/3-20.svg" alt="Paw Print 3" class="paw-icon">
+                    </div>
+                </div>
+                
+                <!-- Hero Content -->
+                <div class="hero-content">
+                    <!-- Logo -->
+                    <div class="logo-container">
+                        <img src="assets/3-1192.webp" alt="Logo Ramo Lobinho" class="logo-image">
+                    </div>
+                    
+                    <!-- Heading -->
+                    <h1 class="hero-title">Ramo Lobinho</h1>
+                    
+                    <!-- Tagline -->
+                    <div class="hero-tagline">
+                        <p>"O Melhor Possível" começa com o<br>seu primeiro passo na trilha.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Side: Login Form -->
+            <div class="right-side-form">
+                <!-- Header -->
+                <div class="form-header">
+                    <h2 class="form-title">Sempre Alerta!</h2>
+                    <p class="form-subtitle">Faça login para continuar sua aventura.</p>
+                </div>
+                
+                <!-- Form -->
+                <form class="login-form" id="loginForm">
+                    <!-- Número de Matrícula Input -->
+                    <div class="form-group">
+                        <label for="matricula" class="form-label">Número de Matrícula</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                id="matricula" 
+                                class="form-input" 
+                                placeholder="000.000-0"
+                                required
+                            >
+                            <div class="input-icon-left">
+                                <img src="assets/3-47.svg" alt="Ícone Matrícula" class="icon-image">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Senha Input -->
+                    <div class="form-group">
+                        <label for="senha" class="form-label">Senha</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="password" 
+                                id="senha" 
+                                class="form-input" 
+                                placeholder="••••••••"
+                                required
+                            >
+                            <div class="input-icon-left">
+                                <img src="assets/3-57.svg" alt="Ícone Senha" class="icon-image">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Button -->
+                    <button type="submit" class="action-button">
+                        <span class="button-text">Entrar</span>
+                        <img src="assets/3-62.svg" alt="Seta" class="button-icon">
+                    </button>
+                </form>
+                
+                <!-- Footer Links -->
+                <div class="form-footer">
+                    <!-- Forgot Password Link -->
+                    <a href="#" class="forgot-password-link">Esqueci minha senha</a>
+                    
+                    <!-- Divider -->
+                    <div class="divider-container">
+                        <div class="divider-line"></div>
+                        <span class="divider-text">Ou</span>
+                        <div class="divider-line"></div>
+                    </div>
+                    
+                    <!-- Sign Up Link -->
+                    <div class="signup-container">
+                        <span class="signup-text">Ainda não faz parte da alcateia? </span>
+                        <a href="#" class="signup-link">Cadastre-se</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation Shell -->
+        <div class="navigation-shell">
+            <p class="footer-text">Escoteiros do Brasil • Ramo Lobinho</p>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

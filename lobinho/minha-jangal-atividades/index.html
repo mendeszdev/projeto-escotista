@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Jângal - Atividades e Eixos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3 class="sidebar-title">Lobinho</h3>
+            </div>
+            <div class="sidebar-status">
+                <p class="status-title">Sempre Alerta</p>
+                <p class="status-subtitle">Lobinho Ativo</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="../dashboard/" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+                <a href="../minha-jangal-atividades/" class="nav-item active">
+                    <span class="nav-icon">🗺️</span>
+                    <span class="nav-label">Minha Jângal</span>
+                </a>
+                <a href="../minha-matilha/" class="nav-item">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-label">Minha Alcateia</span>
+                </a>
+                <a href="../perfil-usuario/" class="nav-item">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-label">Meu Perfil</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- TOP BAR -->
+            <div class="top-bar">
+                <div class="top-bar-left">
+                    <button class="btn-share" id="btnShare">
+                        <span class="share-icon">📤</span>
+                    </button>
+                </div>
+                <div class="top-bar-right">
+                    <button class="top-bar-btn" id="btnProfile">
+                        <div class="user-avatar">
+                            <img src="98-1053.webp" alt="Avatar" class="avatar-image">
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONTENT AREA -->
+            <div class="content-area">
+                <!-- HERO SECTION -->
+                <div class="hero-section">
+                    <div class="decorative-shape"></div>
+                    <div class="hero-content">
+                        <h1 class="hero-title">Eixos de Progressão</h1>
+                        <p class="hero-description">Escolha um dos caminhos da Jângal para ver suas<br/>conquistas e novas especialidades.</p>
+                    </div>
+                </div>
+
+                <!-- BENTO GRID OF EIXOS -->
+                <div class="eixos-grid">
+                    <!-- EIXO 1: Habilidades para a Vida -->
+                    <div class="eixo-card eixo-1" data-eixo="1">
+                        <div class="eixo-header">
+                            <div class="eixo-icon" style="background-color: #feb300;">
+                                <img src="120-18.svg" alt="Habilidades">
+                            </div>
+                            <div class="eixo-percentage">85%</div>
+                        </div>
+                        <h3 class="eixo-title">Habilidades para a Vida</h3>
+                        <p class="eixo-description">Aprenda a cuidar de si mesmo, cozinhar e organizar sua<br/>mochila para grandes aventuras.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%; background-color: #865c00;"></div>
+                        </div>
+                        <div class="decorative-paw">
+                            <img src="120-28.svg" alt="Pegada">
+                        </div>
+                    </div>
+
+                    <!-- EIXO 2: Meio Ambiente -->
+                    <div class="eixo-card eixo-2" data-eixo="2">
+                        <div class="eixo-header">
+                            <div class="eixo-icon" style="background-color: #9df197;">
+                                <img src="120-32.svg" alt="Meio Ambiente">
+                            </div>
+                            <div class="eixo-percentage">42%</div>
+                        </div>
+                        <h3 class="eixo-title">Meio Ambiente</h3>
+                        <p class="eixo-description">Explore a natureza, conheça as plantas e animais da nossa<br/>mata e aprenda a reciclar.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 42%; background-color: #237329;"></div>
+                        </div>
+                        <div class="decorative-paw">
+                            <img src="120-42.svg" alt="Pegada">
+                        </div>
+                    </div>
+
+                    <!-- EIXO 3: Paz e Desenvolvimento -->
+                    <div class="eixo-card eixo-3" data-eixo="3">
+                        <div class="eixo-header">
+                            <div class="eixo-icon" style="background-color: #5fe0f6;">
+                                <img src="120-46.svg" alt="Paz">
+                            </div>
+                            <div class="eixo-percentage">60%</div>
+                        </div>
+                        <h3 class="eixo-title">Paz e Desenvolvimento</h3>
+                        <p class="eixo-description">Trabalhe em equipe na Alcateia e entenda como ajudar sua<br/>comunidade e amigos.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%; background-color: #004387;"></div>
+                        </div>
+                        <div class="decorative-paw">
+                            <img src="120-56.svg" alt="Pegada">
+                        </div>
+                    </div>
+
+                    <!-- EIXO 4: Saúde e Bem-Estar -->
+                    <div class="eixo-card eixo-4" data-eixo="4">
+                        <div class="eixo-header">
+                            <div class="eixo-icon" style="background-color: #f5a623;">
+                                <img src="120-60.svg" alt="Saúde">
+                            </div>
+                            <div class="eixo-percentage">25%</div>
+                        </div>
+                        <h3 class="eixo-title">Saúde e Bem-Estar</h3>
+                        <p class="eixo-description">Mantenha seu corpo forte, alimente-se bem e participe de<br/>jogos ativos na Jângal.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 25%; background-color: #be2d06;"></div>
+                        </div>
+                        <div class="decorative-paw">
+                            <img src="120-70.svg" alt="Pegada">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRÓXIMA ESPECIALIDADE CARD -->
+                <div class="proxima-especialidade-card">
+                    <div class="card-content">
+                        <h3 class="card-title">Próxima Especialidade</h3>
+                        <p class="card-description">Você está a apenas 2 passos de conquistar o distintivo de <strong>**Amigo das Árvores**!</strong></p>
+                        <button class="btn-ver-missoes" id="btnVerMissoes">Ver Missões</button>
+                    </div>
+                    <div class="card-image">
+                        <img src="132-14.webp" alt="Amigo das Árvores" class="insignia-image">
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="../../js/main.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

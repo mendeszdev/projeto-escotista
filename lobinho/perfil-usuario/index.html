@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Lobinho</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Plus+Jakarta+Sans:wght@400;600;700&family=Manrope:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3 class="sidebar-title">🐺 Lobinho</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h4 class="nav-section-title">Minha Jângal</h4>
+                </div>
+                <a href="../dashboard/" class="nav-item">Dashboard</a>
+                <a href="../minha-jangal-atividades/" class="nav-item">Minha Jângal</a>
+                <a href="../minha-matilha/" class="nav-item">Minha Matilha</a>
+                <a href="../perfil-usuario/" class="nav-item active">Meu Perfil</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- TOP BAR -->
+            <div class="top-bar">
+                <h1 class="page-title">Meu Perfil</h1>
+                <div class="top-bar-actions">
+                    <button id="btnShare" class="btn-icon" title="Compartilhar">
+                        <span>📤</span>
+                    </button>
+                    <button id="btnProfile" class="btn-icon" title="Perfil">
+                        <span>👤</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONTENT AREA -->
+            <div class="content-area">
+                <!-- HEADER PROFILE -->
+                <div class="profile-header">
+                    <div class="profile-avatar-wrapper">
+                        <div class="profile-avatar">
+                            <img src="./assets/avatar.webp" alt="Avatar do Lobinho" />
+                        </div>
+                        <div class="profile-badges">
+                            <span class="badge-small">🐺</span>
+                            <span class="badge-small">⭐</span>
+                            <span class="badge-small">🏆</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-info">
+                        <h2 class="profile-name">Pedro Silva</h2>
+                        <p class="profile-role">Lobinho - Matilha Lobos Cinzentos</p>
+                        <p class="profile-id">Matrícula: 000.123-4</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <span class="stat-value">2026</span>
+                                <span class="stat-label">Ano de Ingresso</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">85%</span>
+                                <span class="stat-label">Progresso</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">12</span>
+                                <span class="stat-label">Especialidades</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROGRESS SECTION -->
+                <section class="profile-section">
+                    <h3 class="section-title">Meu Progresso na Trilha</h3>
+                    <div class="progress-track">
+                        <div class="track-item completed">
+                            <div class="track-dot"></div>
+                            <p class="track-label">Início</p>
+                        </div>
+                        <div class="track-item completed">
+                            <div class="track-dot"></div>
+                            <p class="track-label">Pata Tenta</p>
+                        </div>
+                        <div class="track-item completed">
+                            <div class="track-dot"></div>
+                            <p class="track-label">Saltador</p>
+                        </div>
+                        <div class="track-item active">
+                            <div class="track-dot"></div>
+                            <p class="track-label">Rastreador</p>
+                        </div>
+                        <div class="track-item">
+                            <div class="track-dot"></div>
+                            <p class="track-label">Caçador</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ESPECIALIDADES SECTION -->
+                <section class="profile-section">
+                    <div class="section-header-with-action">
+                        <h3 class="section-title">Minhas Especialidades</h3>
+                        <a href="#" class="link-action">Ver Todas</a>
+                    </div>
+                    <div class="especialidades-grid">
+                        <div class="especialidade-card">
+                            <div class="especialidade-icon">🍳</div>
+                            <h4 class="especialidade-name">Culinária</h4>
+                            <p class="especialidade-date">Concluída em 15/03/2026</p>
+                            <span class="badge-status completed">✓ Concluída</span>
+                        </div>
+                        <div class="especialidade-card">
+                            <div class="especialidade-icon">🏥</div>
+                            <h4 class="especialidade-name">Socorrista</h4>
+                            <p class="especialidade-date">Concluída em 22/03/2026</p>
+                            <span class="badge-status completed">✓ Concluída</span>
+                        </div>
+                        <div class="especialidade-card">
+                            <div class="especialidade-icon">🏕️</div>
+                            <h4 class="especialidade-name">Pioneira</h4>
+                            <p class="especialidade-date">Concluída em 08/04/2026</p>
+                            <span class="badge-status completed">✓ Concluída</span>
+                        </div>
+                        <div class="especialidade-card">
+                            <div class="especialidade-icon">🌤️</div>
+                            <h4 class="especialidade-name">Clima</h4>
+                            <p class="especialidade-date">Em Progresso</p>
+                            <span class="badge-status pending">⏳ Em Progresso</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ATIVIDADES SECTION -->
+                <section class="profile-section">
+                    <div class="section-header-with-action">
+                        <h3 class="section-title">Minhas Atividades Recentes</h3>
+                        <a href="#" class="link-action">Ver Todas</a>
+                    </div>
+                    <div class="activities-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">📋</div>
+                            <div class="activity-info">
+                                <h4 class="activity-title">Boa Ação da Semana</h4>
+                                <p class="activity-date">Concluída em 18/05/2026</p>
+                            </div>
+                            <span class="badge-status completed">✓</span>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">🌳</div>
+                            <div class="activity-info">
+                                <h4 class="activity-title">Identificar Árvores</h4>
+                                <p class="activity-date">Concluída em 15/05/2026</p>
+                            </div>
+                            <span class="badge-status completed">✓</span>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">🔥</div>
+                            <div class="activity-info">
+                                <h4 class="activity-title">Fazer Fogo de Acampamento</h4>
+                                <p class="activity-date">Pendente de validação</p>
+                            </div>
+                            <span class="badge-status pending">⏳</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DOCUMENTOS SECTION -->
+                <section class="profile-section">
+                    <h3 class="section-title">Meus Documentos</h3>
+                    <div class="documents-list">
+                        <div class="document-item">
+                            <div class="document-icon">📄</div>
+                            <div class="document-info">
+                                <h4 class="document-name">Carteira de Identidade</h4>
+                                <p class="document-date">Enviado em 01/01/2026</p>
+                            </div>
+                            <div class="document-actions">
+                                <button class="btn-small" title="Visualizar">👁️</button>
+                                <button class="btn-small" title="Baixar">⬇️</button>
+                            </div>
+                        </div>
+                        <div class="document-item">
+                            <div class="document-icon">📄</div>
+                            <div class="document-info">
+                                <h4 class="document-name">Comprovante de Filiação</h4>
+                                <p class="document-date">Enviado em 05/01/2026</p>
+                            </div>
+                            <div class="document-actions">
+                                <button class="btn-small" title="Visualizar">👁️</button>
+                                <button class="btn-small" title="Baixar">⬇️</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FLOATING ACTION BUTTON -->
+                <button id="btnUpdateProfile" class="btn-floating">
+                    ✏️ Atualizar Informações
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/main.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

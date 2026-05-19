@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Escotista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3 class="sidebar-title">Escotista</h3>
+                <p class="sidebar-status">Sempre Alerta</p>
+                <span class="status-badge">ESCOTISTA ATIVO</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">✓</span>
+                    <span class="nav-label">Atividades</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-label">Matilha</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-label">Perfil</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <div class="top-bar-left">
+                    <button class="btn-menu">☰</button>
+                </div>
+                <div class="top-bar-right">
+                    <button class="btn-icon">📤</button>
+                    <button class="btn-profile">👤</button>
+                </div>
+            </div>
+
+            <div class="content-area">
+                <section class="header-section">
+                    <h1 class="page-title">Painel do Escotista</h1>
+                    <p class="page-description">Gestão da Alcateia Jângal: Visão geral de progresso e missões pendentes.</p>
+                </section>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <p class="stat-label">TOTAL LOBINHOS</p>
+                            <p class="stat-number">32</p>
+                            <p class="stat-detail">Ativos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚠️</div>
+                        <div class="stat-content">
+                            <p class="stat-label">VALIDAÇÕES</p>
+                            <p class="stat-number">14</p>
+                            <p class="stat-detail urgent">Urgentes</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-content">
+                            <p class="stat-label">ENOJAMENTO</p>
+                            <p class="stat-number">88%</p>
+                            <p class="stat-detail">+5% sem.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="main-grid">
+                    <section class="atividades-pendentes">
+                        <div class="section-header">
+                            <h2>✓ Atividades Pendentes</h2>
+                            <a href="#" class="link-historico">Ver Histórico</a>
+                        </div>
+
+                        <div class="atividade-item">
+                            <div class="atividade-avatar">👤</div>
+                            <div class="atividade-info">
+                                <h4 class="atividade-nome">Pedro Silva</h4>
+                                <span class="atividade-badge">Especialidade: Culinária</span>
+                                <p class="atividade-quote">"Fiz o pão de caçador na fogueira do quintal com meu pai. Ficou bem assado e crocante!"</p>
+                                <p class="atividade-time">HÁ 2 HORAS</p>
+                            </div>
+                            <div class="atividade-actions">
+                                <button class="btn-aprovar">✓ Aprovar</button>
+                                <button class="btn-rejeitar">✕ Rejeitar</button>
+                            </div>
+                        </div>
+
+                        <div class="atividade-item">
+                            <div class="atividade-avatar">👤</div>
+                            <div class="atividade-info">
+                                <h4 class="atividade-nome">Mariana Costa</h4>
+                                <span class="atividade-badge">Atividade: Observação</span>
+                                <p class="atividade-quote">"Identifiquei um Bem-te-vi e um Sabiá-laranjeira no parque hoje de manhã."</p>
+                                <p class="atividade-time">HÁ 5 HORAS</p>
+                            </div>
+                            <div class="atividade-actions">
+                                <button class="btn-aprovar">✓ Aprovar</button>
+                                <button class="btn-rejeitar">✕ Rejeitar</button>
+                            </div>
+                        </div>
+
+                        <button class="btn-ver-todas">Ver todas as 14 pendências</button>
+                    </section>
+
+                    <aside class="sidebar-right">
+                        <div class="spirit-card">
+                            <div class="spirit-header">ESPÍRITO DA JÂNGAL</div>
+                            <h3 class="spirit-title">🌟 Radiante</h3>
+                        </div>
+
+                        <section class="top-performance">
+                            <h3 class="section-title">Top Performance</h3>
+                            <div class="performance-item">
+                                <div class="perf-avatar">👤</div>
+                                <div class="perf-info">
+                                    <p class="perf-name">Thiago Martins</p>
+                                    <div class="perf-bar"><div class="perf-fill" style="width: 92%;"></div></div>
+                                </div>
+                                <p class="perf-percent">92%</p>
+                            </div>
+                            <div class="performance-item">
+                                <div class="perf-avatar">👤</div>
+                                <div class="perf-info">
+                                    <p class="perf-name">Lucas Rocha</p>
+                                    <div class="perf-bar"><div class="perf-fill" style="width: 75%;"></div></div>
+                                </div>
+                                <p class="perf-percent">75%</p>
+                            </div>
+                            <button class="btn-ver-rank">VER RANK COMPLETO</button>
+                        </section>
+
+                        <section class="destaque-semana">
+                            <h3 class="section-title">Destaque da Semana</h3>
+                            <div class="destaque-card">
+                                <div class="destaque-avatar">👤</div>
+                                <h4 class="destaque-nome">Bia Oliveira</h4>
+                                <p class="destaque-desc">Completou 3 progressões em tempo recorde!</p>
+                                <button class="btn-parabenizar">Mandar Parabéns</button>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../js/main.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

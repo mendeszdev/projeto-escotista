@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Matilha - Lobinho</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Open+Sans:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../../css/global.css">
+    
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3 class="sidebar-title">Lobinho</h3>
+            </div>
+            <div class="user-info">
+                <p class="user-status">Sempre Alerta</p>
+                <p class="user-subtitle">Lobinho Ativo</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h4 class="nav-section-title">Painel do Lobinho</h4>
+                </div>
+                <a href="../dashboard/" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+                <a href="../minha-jangal-atividades/" class="nav-item">
+                    <span class="nav-icon">🗺️</span>
+                    <span class="nav-label">Minha Jângal</span>
+                </a>
+                <a href="#" class="nav-item active">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-label">Minha Matilha</span>
+                </a>
+                <a href="../perfil-usuario/" class="nav-item">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-label">Meu Perfil</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- TOP BAR -->
+            <div class="top-bar">
+                <div class="top-bar-left">
+                    <h1 class="page-title">Minha Matilha</h1>
+                </div>
+                <div class="top-bar-right">
+                    <button class="btn-share" id="btnShare" title="Compartilhar">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                            <polyline points="16 6 12 2 8 6"></polyline>
+                            <line x1="12" y1="2" x2="12" y2="15"></line>
+                        </svg>
+                    </button>
+                    <button class="btn-profile" id="btnProfile" title="Perfil">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <circle cx="16" cy="16" r="15" fill="#fab818" stroke="#865c00" stroke-width="2"/>
+                            <circle cx="16" cy="12" r="4" fill="#865c00"/>
+                            <path d="M10 24C10 20.5 12.5 18 16 18C19.5 18 22 20.5 22 24" fill="#865c00"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONTENT AREA -->
+            <div class="content-area">
+                <!-- HERO BANNER -->
+                <div class="hero-banner">
+                    <div class="banner-overlay"></div>
+                    <div class="banner-content">
+                        <span class="banner-badge">MATILHA ATIVA</span>
+                        <h1 class="banner-title">Nossa Matilha: Lobos Cinzentos</h1>
+                        <p class="banner-subtitle">Juntos somos mais fortes na trilha da jângal!</p>
+                    </div>
+                </div>
+
+                <!-- CHEFES SECTION -->
+                <section class="chefes-section">
+                    <div class="section-header">
+                        <div class="section-icon">⭐</div>
+                        <h2 class="section-title">Nossos Chefes</h2>
+                    </div>
+
+                    <div class="chefes-grid">
+                        <!-- AKELA -->
+                        <div class="chefe-card">
+                            <div class="chefe-avatar">
+                                <img src="./72-2280.webp" alt="Akela" />
+                                <span class="chefe-badge">👑</span>
+                            </div>
+                            <h3 class="chefe-name">Akela</h3>
+                            <p class="chefe-role">Chefe de Alcateia</p>
+                        </div>
+
+                        <!-- BALOO -->
+                        <div class="chefe-card">
+                            <div class="chefe-avatar">
+                                <img src="./72-2281.webp" alt="Baloo" />
+                                <span class="chefe-badge">🏆</span>
+                            </div>
+                            <h3 class="chefe-name">Baloo</h3>
+                            <p class="chefe-role">Instrutor da Jângal</p>
+                        </div>
+
+                        <!-- NOVOS CHEFES EM BREVE -->
+                        <div class="chefe-card placeholder">
+                            <div class="placeholder-icon">👥</div>
+                            <p class="placeholder-text">NOVOS CHEFES EM BREVE</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MEMBROS SECTION -->
+                <section class="membros-section">
+                    <div class="section-header">
+                        <div class="section-icon">🐾</div>
+                        <h2 class="section-title">Meus Irmãos de Lobo</h2>
+                    </div>
+
+                    <div class="membros-grid">
+                        <!-- MEMBRO 1 -->
+                        <div class="membro-card">
+                            <div class="membro-background" style="background-color: #e8f5e9;"></div>
+                            <div class="membro-image">
+                                <img src="./72-2282.webp" alt="Mowgli" />
+                            </div>
+                            <h3 class="membro-name">Mowgli</h3>
+                            <span class="membro-badge pro">PRÓ</span>
+                        </div>
+
+                        <!-- MEMBRO 2 -->
+                        <div class="membro-card">
+                            <div class="membro-background" style="background-color: #fff3e0;"></div>
+                            <div class="membro-image">
+                                <img src="./72-2283.webp" alt="Bagheera" />
+                            </div>
+                            <h3 class="membro-name">Bagheera</h3>
+                            <span class="membro-badge pata-tenta">Pata Tenta</span>
+                        </div>
+
+                        <!-- MEMBRO 3 -->
+                        <div class="membro-card">
+                            <div class="membro-background" style="background-color: #e0f2f1;"></div>
+                            <div class="membro-image">
+                                <img src="./72-2284.webp" alt="Raksha" />
+                            </div>
+                            <h3 class="membro-name">Raksha</h3>
+                            <span class="membro-badge rastreador">Rastreador</span>
+                        </div>
+
+                        <!-- MEMBRO 4 -->
+                        <div class="membro-card">
+                            <div class="membro-background" style="background-color: #f5f5f5;"></div>
+                            <div class="membro-image">
+                                <img src="./72-2285.webp" alt="Chil" />
+                            </div>
+                            <h3 class="membro-name">Chil</h3>
+                            <span class="membro-badge pata-veya">Pata Veya</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- STATS FOOTER -->
+                <div class="stats-footer">
+                    <div class="stat-item">
+                        <div class="stat-number">450</div>
+                        <div class="stat-label">Especialidades</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Grandes Caçadas</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Sempre Alerta</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/main.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

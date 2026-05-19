@@ -1,0 +1,750 @@
+/* ============================================================================
+   DESIGN SYSTEM GLOBAL - ESCOTEIROS
+   Variáveis, cores, tipografia e componentes padrão extraídos do Figma
+   ============================================================================ */
+
+/* ============================================================================
+   1. VARIÁVEIS CSS - CORES
+   ============================================================================ */
+
+:root {
+  /* Cores Primárias */
+  --color-primary-brown: #865c00;
+  --color-primary-yellow: #fab818;
+  --color-primary-blue: #004387;
+  
+  /* Cores Secundárias */
+  --color-secondary-green: #237329;
+  --color-secondary-red: #be2d06;
+  --color-secondary-cyan: #5fe0f6;
+  --color-secondary-orange: #f9a825;
+  
+  /* Cores de Fundo */
+  --color-bg-light: #fdf9f2;
+  --color-bg-white: #fffbff;
+  --color-bg-card: #ffffff;
+  --color-bg-hover: #f0f0f0;
+  --color-bg-disabled: #e2e2e2;
+  
+  /* Cores de Texto */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #393834;
+  --color-text-tertiary: #66645f;
+  --color-text-muted: #999999;
+  --color-text-light: #bcb9b3;
+  
+  /* Cores de Status */
+  --color-status-success: #12661e;
+  --color-status-warning: #f9a825;
+  --color-status-error: #be2d06;
+  --color-status-info: #004387;
+  
+  /* Cores de Borda */
+  --color-border-light: #e2e2e2;
+  --color-border-medium: #bcb9b3;
+  --color-border-dark: #66645f;
+}
+
+/* ============================================================================
+   2. VARIÁVEIS CSS - TIPOGRAFIA
+   ============================================================================ */
+
+:root {
+  /* Fontes */
+  --font-serif: 'Bree Serif', serif;
+  --font-sans-primary: 'Plus Jakarta Sans', sans-serif;
+  --font-sans-secondary: 'Manrope', sans-serif;
+  --font-mono: 'Liberation Mono', monospace;
+  
+  /* Tamanhos de Fonte */
+  --font-size-xs: 10px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 28px;
+  --font-size-5xl: 32px;
+  --font-size-6xl: 36px;
+  --font-size-7xl: 48px;
+  
+  /* Pesos de Fonte */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 900;
+}
+
+/* ============================================================================
+   3. VARIÁVEIS CSS - ESPAÇAMENTO
+   ============================================================================ */
+
+:root {
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-base: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 20px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+  --spacing-3xl: 40px;
+  --spacing-4xl: 48px;
+}
+
+/* ============================================================================
+   4. VARIÁVEIS CSS - BORDER RADIUS
+   ============================================================================ */
+
+:root {
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+}
+
+/* ============================================================================
+   5. VARIÁVEIS CSS - SOMBRAS
+   ============================================================================ */
+
+:root {
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.2);
+  --shadow-2xl: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================================================
+   6. VARIÁVEIS CSS - TRANSIÇÕES
+   ============================================================================ */
+
+:root {
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* ============================================================================
+   7. RESET E ESTILOS BASE
+   ============================================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-light);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================================
+   8. TIPOGRAFIA GLOBAL
+   ============================================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3;
+  color: var(--color-text-secondary);
+}
+
+h1 {
+  font-size: var(--font-size-7xl);
+}
+
+h2 {
+  font-size: var(--font-size-5xl);
+}
+
+h3 {
+  font-size: var(--font-size-3xl);
+}
+
+h4 {
+  font-size: var(--font-size-2xl);
+}
+
+h5 {
+  font-size: var(--font-size-xl);
+}
+
+h6 {
+  font-size: var(--font-size-lg);
+}
+
+p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--color-primary-blue);
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================================
+   9. COMPONENTES - BOTÕES
+   ============================================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-base) var(--spacing-md);
+  font-family: var(--font-sans-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Variante: Primary */
+.btn-primary {
+  background-color: var(--color-primary-brown);
+  color: white;
+  padding: var(--spacing-base) var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  border-radius: var(--radius-xl);
+}
+
+.btn-primary:hover {
+  background-color: #694b00;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:disabled {
+  background-color: var(--color-bg-disabled);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Variante: Secondary */
+.btn-secondary {
+  background-color: var(--color-bg-white);
+  color: var(--color-text-tertiary);
+  border: 1px solid var(--color-border-light);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-bg-hover);
+  border-color: var(--color-primary-brown);
+}
+
+/* Variante: Success */
+.btn-success {
+  background-color: var(--color-secondary-green);
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #1a5620;
+  box-shadow: var(--shadow-md);
+}
+
+/* Variante: Danger */
+.btn-danger {
+  background-color: var(--color-secondary-red);
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #a02305;
+  box-shadow: var(--shadow-md);
+}
+
+/* Variante: Outline */
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-text-tertiary);
+  border: 2px solid var(--color-border-light);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-primary-brown);
+  color: var(--color-primary-brown);
+}
+
+/* Variante: Link */
+.btn-link {
+  background-color: transparent;
+  color: var(--color-primary-blue);
+  padding: 0;
+  text-decoration: underline;
+}
+
+.btn-link:hover {
+  color: #003366;
+}
+
+/* Variante: Icon */
+.btn-icon {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xl);
+}
+
+.btn-icon:hover {
+  background-color: var(--color-border-light);
+}
+
+/* ============================================================================
+   10. COMPONENTES - INPUTS
+   ============================================================================ */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  padding: var(--spacing-base) var(--spacing-md);
+  font-family: var(--font-sans-secondary);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-disabled);
+  border: none;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  background-color: #d4d4d4;
+  box-shadow: 0 0 0 3px rgba(0, 67, 135, 0.1);
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* ============================================================================
+   11. COMPONENTES - CARDS
+   ============================================================================ */
+
+.card {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  border: 1px solid rgba(188, 185, 179, 0.3);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.card-title {
+  font-family: var(--font-sans-primary);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* ============================================================================
+   12. COMPONENTES - BADGES
+   ============================================================================ */
+
+.badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-base);
+  font-family: var(--font-sans-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-primary {
+  background-color: var(--color-primary-yellow);
+  color: #523700;
+}
+
+.badge-success {
+  background-color: var(--color-secondary-green);
+  color: white;
+}
+
+.badge-danger {
+  background-color: var(--color-secondary-red);
+  color: white;
+}
+
+.badge-info {
+  background-color: var(--color-secondary-cyan);
+  color: #006f7d;
+}
+
+.badge-warning {
+  background-color: var(--color-secondary-orange);
+  color: #523700;
+}
+
+/* ============================================================================
+   13. COMPONENTES - PROGRESS BAR
+   ============================================================================ */
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-border-light);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary-brown) 0%, var(--color-primary-yellow) 100%);
+  border-radius: var(--radius-sm);
+  transition: width var(--transition-base);
+}
+
+/* ============================================================================
+   14. COMPONENTES - ALERTS
+   ============================================================================ */
+
+.alert {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  border-left: 4px solid;
+  margin-bottom: var(--spacing-md);
+}
+
+.alert-success {
+  background-color: rgba(18, 102, 30, 0.1);
+  border-color: var(--color-status-success);
+  color: var(--color-status-success);
+}
+
+.alert-error {
+  background-color: rgba(190, 45, 6, 0.1);
+  border-color: var(--color-status-error);
+  color: var(--color-status-error);
+}
+
+.alert-warning {
+  background-color: rgba(249, 168, 37, 0.1);
+  border-color: var(--color-status-warning);
+  color: #523700;
+}
+
+.alert-info {
+  background-color: rgba(0, 67, 135, 0.1);
+  border-color: var(--color-status-info);
+  color: var(--color-status-info);
+}
+
+/* ============================================================================
+   15. COMPONENTES - MODAL
+   ============================================================================ */
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  max-width: 500px;
+  width: 90%;
+  box-shadow: var(--shadow-2xl);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: var(--font-size-2xl);
+  cursor: pointer;
+  color: var(--color-text-muted);
+}
+
+/* ============================================================================
+   16. COMPONENTES - TABELAS
+   ============================================================================ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--spacing-md) 0;
+}
+
+thead {
+  background-color: var(--color-bg-hover);
+}
+
+th {
+  padding: var(--spacing-md);
+  text-align: left;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  border-bottom: 2px solid var(--color-border-light);
+}
+
+td {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+tbody tr:hover {
+  background-color: var(--color-bg-light);
+}
+
+/* ============================================================================
+   17. UTILITÁRIOS - FLEXBOX
+   ============================================================================ */
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.gap-md {
+  gap: var(--spacing-md);
+}
+
+.gap-lg {
+  gap: var(--spacing-lg);
+}
+
+/* ============================================================================
+   18. UTILITÁRIOS - ESPAÇAMENTO
+   ============================================================================ */
+
+.m-0 { margin: 0; }
+.m-sm { margin: var(--spacing-sm); }
+.m-md { margin: var(--spacing-md); }
+.m-lg { margin: var(--spacing-lg); }
+
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+
+.p-0 { padding: 0; }
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+
+/* ============================================================================
+   19. UTILITÁRIOS - TEXTO
+   ============================================================================ */
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-primary {
+  color: var(--color-primary-brown);
+}
+
+.text-success {
+  color: var(--color-status-success);
+}
+
+.text-error {
+  color: var(--color-status-error);
+}
+
+.font-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.font-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+/* ============================================================================
+   20. UTILITÁRIOS - VISIBILIDADE
+   ============================================================================ */
+
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  display: block !important;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.opacity-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+   21. RESPONSIVIDADE
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: var(--font-size-5xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+
+  .card {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: var(--font-size-4xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* ============================================================================
+   22. IMPRESSÃO
+   ============================================================================ */
+
+@media print {
+  body {
+    background-color: white;
+  }
+
+  .btn,
+  .modal {
+    display: none;
+  }
+}
