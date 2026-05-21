@@ -364,7 +364,32 @@ input[type="password"]::placeholder,
 textarea::placeholder {
   color: var(--color-text-muted);
 }
+/* ============================================================================
+   INPUT COM ÍCONE À ESQUERDA
+   ============================================================================ */
 
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon-left {
+  position: absolute;
+  left: 14px;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  transform: translateY(-7px);
+}
+
+.icon-image {
+  width: 18px;
+  height: 18px;
+}
+
+.form-input {
+  padding-left: 50px !important;
+}
 /* ============================================================================
    11. COMPONENTES - CARDS
    ============================================================================ */
