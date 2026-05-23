@@ -1,65 +1,356 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criação de Atividade - Escotista</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escotista – Criar Nova Atividade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Open+Sans:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,100,0,0" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="dashboard-container">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h3 class="sidebar-title">Escotista</h3>
-                <p class="sidebar-status">Sempre Alerta</p>
-                <span class="status-badge">ESCOTISTA ATIVO</span>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <a class="topbar-logo" href="../dashboard/">Escotista</a>
+  <div class="topbar-right">
+    <button class="topbar-icon-btn" title="Sair">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        <polyline points="16 17 21 12 16 7"/>
+        <line x1="21" y1="12" x2="9" y2="12"/>
+      </svg>
+    </button>
+    <div class="topbar-avatar" title="Meu perfil">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
+                 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-name">Sempre Alerta</div>
+    <div class="sidebar-brand-role">Escotista Ativo</div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="nav-link" href="../dashboard/">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <rect x="3" y="3" width="7" height="7" rx="1"/>
+        <rect x="14" y="3" width="7" height="7" rx="1"/>
+        <rect x="3" y="14" width="7" height="7" rx="1"/>
+        <rect x="14" y="14" width="7" height="7" rx="1"/>
+      </svg>
+      Dashboard
+    </a>
+
+    <a class="nav-link active" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+      </svg>
+      Atividades
+    </a>
+
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      Matilha
+    </a>
+
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      Perfil
+    </a>
+  </nav>
+
+  <div class="sidebar-footer"></div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="content">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-deco" aria-hidden="true"><span class="material-symbols-outlined">forest</span></div>
+      <h1 class="page-title">Criar Nova Atividade</h1>
+      <p class="page-subtitle">
+        Planeje a próxima caçada para a sua alcateia. Defina os objetivos e
+        selecione os lobinhos que participarão desta jornada.
+      </p>
+    </section>
+
+    <!-- FORM -->
+    <form id="create-form" novalidate>
+      <div class="form-grid">
+
+        <!-- LEFT COLUMN -->
+        <div class="form-left">
+
+          <!-- Basic Info Card -->
+          <div class="form-card">
+            <!-- Nome -->
+            <div class="field">
+              <label class="field-label" for="activity-name">
+                Nome da Atividade
+              </label>
+              <input
+                class="field-input"
+                id="activity-name"
+                type="text"
+                placeholder="Ex: O Grande Rastro de Akelá"
+                autocomplete="off"
+              />
             </div>
-            <nav class="sidebar-nav">
-                <a href="../dashboard/" class="nav-item">
-                    <span class="nav-icon">📊</span>
-                    <span class="nav-label">Dashboard</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">✓</span>
-                    <span class="nav-label">Atividades</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">👥</span>
-                    <span class="nav-label">Matilha</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">👤</span>
-                    <span class="nav-label">Perfil</span>
-                </a>
-            </nav>
+
+            <!-- Descrição -->
+            <div class="field">
+              <label class="field-label" for="activity-desc">
+                Descrição da Tarefa
+              </label>
+              <textarea
+                class="field-textarea"
+                id="activity-desc"
+                placeholder="Descreva os detalhes da aventura, as regras e o que os lobinhos precisam alcançar..."
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Selection Grid (Bloco + Data) -->
+          <div class="mini-grid">
+
+            <!-- Bloco de Aprendizagem -->
+            <div class="form-card-sm">
+              <label class="field-label" for="activity-block">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                Bloco de Aprendizagem
+              </label>
+              <select class="field-select" id="activity-block">
+                <option value="">Selecione uma área...</option>
+                <option value="habitos">Hábitos Saudáveis</option>
+                <option value="intelectual">Intelectual</option>
+                <option value="espiritual">Espiritualidade</option>
+                <option value="social">Social</option>
+                <option value="natureza">Natureza</option>
+                <option value="criatividade">Criatividade</option>
+              </select>
+            </div>
+
+            <!-- Data Limite -->
+            <div class="form-card-sm">
+              <label class="field-label" for="activity-date">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                Data Limite
+              </label>
+              <div class="date-input-wrap">
+                <input class="field-date" id="activity-date" type="date" />
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+              </div>
+            </div>
+
+          </div><!-- /mini-grid -->
+        </div><!-- /form-left -->
+
+        <!-- RIGHT COLUMN — Lobinhos panel -->
+        <aside class="lobinhos-panel" aria-label="Seleção de lobinhos">
+          <div class="panel-header">
+            <span class="panel-title">Lobinhos da Matilha</span>
+            <span class="panel-badge" id="selection-badge">RF10</span>
+          </div>
+
+          <ul class="lobinho-list" role="listbox" aria-label="Lobinhos disponíveis" aria-multiselectable="true">
+
+            <li class="lobinho-item" role="option" aria-selected="false">
+              <div class="lobinho-checkbox" aria-hidden="true"></div>
+              <div class="lobinho-avatar">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                           7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
+                           4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="lobinho-name">Mowgli</div>
+                <div class="lobinho-pack">Matilha Branca</div>
+              </div>
+            </li>
+
+            <li class="lobinho-item" role="option" aria-selected="false">
+              <div class="lobinho-checkbox" aria-hidden="true"></div>
+              <div class="lobinho-avatar">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                           7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
+                           4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="lobinho-name">Kim</div>
+                <div class="lobinho-pack">Matilha Vermelha</div>
+              </div>
+            </li>
+
+            <li class="lobinho-item" role="option" aria-selected="false">
+              <div class="lobinho-checkbox" aria-hidden="true"></div>
+              <div class="lobinho-avatar">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                           7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
+                           4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="lobinho-name">Chil</div>
+                <div class="lobinho-pack">Matilha Cinza</div>
+              </div>
+            </li>
+
+            <li class="lobinho-item" role="option" aria-selected="false">
+              <div class="lobinho-checkbox" aria-hidden="true"></div>
+              <div class="lobinho-avatar">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                           7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
+                           4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="lobinho-name">Rikki</div>
+                <div class="lobinho-pack">Matilha Branca</div>
+              </div>
+            </li>
+
+            <li class="lobinho-item" role="option" aria-selected="false">
+              <div class="lobinho-checkbox" aria-hidden="true"></div>
+              <div class="lobinho-avatar">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                           7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
+                           4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="lobinho-name">Sahi</div>
+                <div class="lobinho-pack">Matilha Vermelha</div>
+              </div>
+            </li>
+
+            <li class="lobinho-item" role="option" aria-selected="false">
+              <div class="lobinho-checkbox" aria-hidden="true"></div>
+              <div class="lobinho-avatar">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                           7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
+                           4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="lobinho-name">Baloo</div>
+                <div class="lobinho-pack">Matilha Cinza</div>
+              </div>
+            </li>
+
+            <li class="lobinho-item" role="option" aria-selected="false">
+              <div class="lobinho-checkbox" aria-hidden="true"></div>
+              <div class="lobinho-avatar">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                           7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
+                           4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="lobinho-name">Bagheera</div>
+                <div class="lobinho-pack">Matilha Branca</div>
+              </div>
+            </li>
+
+          </ul>
+
+          <!-- Select all -->
+          <div class="panel-divider">
+            <button class="btn-select-all" id="btn-select-all" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span id="select-all-label">Selecionar Toda a Matilha</span>
+            </button>
+          </div>
         </aside>
 
-        <main class="main-content">
-            <div class="top-bar">
-                <div class="top-bar-left">
-                    <button class="btn-menu">☰</button>
-                </div>
-                <div class="top-bar-right">
-                    <button class="btn-icon">📤</button>
-                    <button class="btn-profile">👤</button>
-                </div>
-            </div>
 
-            <div class="content-area">
-                <section class="header-section">
-                    <h1 class="page-title">Criação de Atividade</h1>
-                    <p class="page-description">Tela em desenvolvimento - criacao-atividade-escotista</p>
-                </section>
-                <div class="placeholder-content">
-                    <p>Conteúdo específico da tela Criação de Atividade será renderizado aqui.</p>
-                </div>
-            </div>
-        </main>
-    </div>
+      </div><!-- /form-grid -->
 
-    <script src="../../js/main.js"></script>
-    <script src="script.js"></script>
+      <!-- FORM ACTIONS -->
+      <div class="form-actions">
+        <button class="btn-cancel" id="btn-cancel" type="button">Cancelar</button>
+        <button class="btn-submit" type="submit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          Criar Atividade
+        </button>
+      </div>
+    </form>
+
+  </div><!-- /content -->
+</main>
+
+<!-- Decorative paw print -->
+<div class="deco-paw" aria-hidden="true">
+  <svg viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="70" cy="88" rx="30" ry="36" fill="#237329"/>
+    <ellipse cx="30" cy="54" rx="14" ry="18" fill="#237329"/>
+    <ellipse cx="110" cy="54" rx="14" ry="18" fill="#237329"/>
+    <ellipse cx="50" cy="36" rx="11" ry="15" fill="#237329"/>
+    <ellipse cx="90" cy="36" rx="11" ry="15" fill="#237329"/>
+  </svg>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" role="alert" aria-live="polite">
+  <span class="toast-icon" id="toast-icon"></span>
+  <span id="toast-msg"></span>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
