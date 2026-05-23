@@ -1,65 +1,826 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela Matilhas - Escotista</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="dashboard-container">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h3 class="sidebar-title">Escotista</h3>
-                <p class="sidebar-status">Sempre Alerta</p>
-                <span class="status-badge">ESCOTISTA ATIVO</span>
-            </div>
-            <nav class="sidebar-nav">
-                <a href="../dashboard/" class="nav-item">
-                    <span class="nav-icon">📊</span>
-                    <span class="nav-label">Dashboard</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">✓</span>
-                    <span class="nav-label">Atividades</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">👥</span>
-                    <span class="nav-label">Matilha</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">👤</span>
-                    <span class="nav-label">Perfil</span>
-                </a>
-            </nav>
-        </aside>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escotista – Matilha</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Open+Sans:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="topbar-logo" href="#">Escotista</a>
+      <div class="topbar-right">
+        <button class="topbar-icon-btn" title="Sair">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" y1="12" x2="9" y2="12" />
+          </svg>
+        </button>
+        <div class="topbar-avatar" title="Meu perfil">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
+                 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
+            />
+          </svg>
+        </div>
+      </div>
+    </header>
 
-        <main class="main-content">
-            <div class="top-bar">
-                <div class="top-bar-left">
-                    <button class="btn-menu">☰</button>
-                </div>
-                <div class="top-bar-right">
-                    <button class="btn-icon">📤</button>
-                    <button class="btn-profile">👤</button>
-                </div>
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-name">Sempre Alerta</div>
+        <div class="sidebar-brand-role">Escotista Ativo</div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link" href="#">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+          Dashboard
+        </a>
+        <a class="nav-link" href="#">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+            />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+          </svg>
+          Atividades
+        </a>
+        <a class="nav-link active" href="#">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          Matilhas
+        </a>
+        <a class="nav-link" href="#">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          Perfil
+        </a>
+      </nav>
+
+      <div class="sidebar-footer"></div>
+    </aside>
+
+    <main class="main">
+      <div class="content">
+        <!-- ── FILTERS ── -->
+        <section class="filters-section" aria-label="Filtros">
+          <div class="filters-row">
+            <!-- Buscar lobinho -->
+            <div class="filter-group">
+              <label class="filter-label" for="search-input"
+                >Buscar Lobinho</label
+              >
+              <div class="filter-input-wrap">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input
+                  class="filter-input"
+                  id="search-input"
+                  type="text"
+                  placeholder="Nome do Lobinho..."
+                  autocomplete="off"
+                />
+              </div>
             </div>
 
-            <div class="content-area">
-                <section class="header-section">
-                    <h1 class="page-title">Tela Matilhas</h1>
-                    <p class="page-description">Tela em desenvolvimento - matilhas-escotista</p>
-                </section>
-                <div class="placeholder-content">
-                    <p>Conteúdo específico da tela Tela Matilhas será renderizado aqui.</p>
-                </div>
+            <!-- Status -->
+            <div class="filter-group">
+              <label class="filter-label" for="status-select">Status</label>
+              <select class="filter-select" id="status-select">
+                <option value="all">Todos Status</option>
+                <option value="pending">Com Pendências</option>
+                <option value="ok">Em Dia</option>
+              </select>
             </div>
-        </main>
+
+            <!-- Período -->
+            <div class="filter-group">
+              <span class="filter-label">Período</span>
+              <button class="filter-period" type="button">
+                <span>Últimos 30 dias</span>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Filtrar -->
+            <button class="btn-filter" id="btn-filter" type="button">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+              </svg>
+              Filtrar
+            </button>
+          </div>
+        </section>
+
+        <!-- ── LOBINHOS SECTION ── -->
+        <section class="lobinhos-section" aria-label="Lobinhos da matilha">
+          <div class="section-header">
+            <div class="section-title">
+              <h2 class="title-green">Lobinhos</h2>
+              <!-- leaf icon -->
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#237329"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="width: 18px; height: 18px"
+              >
+                <path d="M2 2s4 0 8 4 4 8 4 8-4 0-8-4-4-8-4-8z" />
+                <line x1="2" y1="22" x2="10" y2="14" />
+              </svg>
+            </div>
+            <button class="btn-see-all" id="btn-ver-todos" type="button">
+              Ver todos
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="width: 12px; height: 12px"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="lobinhos-grid">
+            <!-- MOWGLI -->
+            <div class="lobinho-card">
+              <div class="pending-badge" aria-label="2 pendentes">
+                2 PENDENTES
+              </div>
+              <div class="card-avatar-area">
+                <div class="card-avatar">
+                  <img
+                    src="https://www.figma.com/api/mcp/asset/40205308-e4c3-49cc-8fa2-4ce4aedd8142"
+                    alt="Mowgli"
+                    loading="lazy"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <!-- fallback SVG shown when image isn't available -->
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="#a8a29e"
+                    style="
+                      position: absolute;
+                      inset: 0;
+                      width: 100%;
+                      height: 100%;
+                      padding: 12px;
+                    "
+                  >
+                    <path
+                      d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
+                    />
+                  </svg>
+                </div>
+                <!-- verified badge -->
+                <div class="card-avatar-badge">
+                  <svg
+                    viewBox="0 0 19 19"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle cx="9.5" cy="9.5" r="9.5" fill="#237329" />
+                    <polyline
+                      points="5,9.5 8.5,13 14,7"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="card-info">
+                <span class="card-name">Mowgli</span>
+                <span class="card-rank rank-teal">Pata-Tenra</span>
+              </div>
+              <div class="card-progress">
+                <div class="progress-row">
+                  <span class="progress-label">Progresso</span>
+                  <span class="progress-pct">45%</span>
+                </div>
+                <div class="progress-track">
+                  <div
+                    class="progress-fill"
+                    data-width="45%"
+                    data-delay="0"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BAGHEERA -->
+            <div class="lobinho-card">
+              <div class="card-avatar-area">
+                <div class="card-avatar">
+                  <img
+                    src="https://www.figma.com/api/mcp/asset/7cf00044-b172-4301-bb30-7783450ca83c"
+                    alt="Bagheera"
+                    loading="lazy"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="#a8a29e"
+                    style="
+                      position: absolute;
+                      inset: 0;
+                      width: 100%;
+                      height: 100%;
+                      padding: 12px;
+                    "
+                  >
+                    <path
+                      d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
+                    />
+                  </svg>
+                </div>
+                <div class="card-avatar-badge">
+                  <svg
+                    viewBox="0 0 19 19"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle cx="9.5" cy="9.5" r="9.5" fill="#237329" />
+                    <polyline
+                      points="5,9.5 8.5,13 14,7"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="card-info">
+                <span class="card-name">Bagheera</span>
+                <span class="card-rank rank-green">Saltador</span>
+              </div>
+              <div class="card-progress">
+                <div class="progress-row">
+                  <span class="progress-label">Progresso</span>
+                  <span class="progress-pct">82%</span>
+                </div>
+                <div class="progress-track">
+                  <div
+                    class="progress-fill"
+                    data-width="82%"
+                    data-delay="80"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BALOO -->
+            <div class="lobinho-card">
+              <div class="pending-badge" aria-label="5 pendentes">
+                5 PENDENTE
+              </div>
+              <div class="card-avatar-area">
+                <div class="card-avatar">
+                  <img
+                    src="https://www.figma.com/api/mcp/asset/48609fc4-3688-410a-8b8f-370f1203f2ef"
+                    alt="Baloo"
+                    loading="lazy"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="#a8a29e"
+                    style="
+                      position: absolute;
+                      inset: 0;
+                      width: 100%;
+                      height: 100%;
+                      padding: 12px;
+                    "
+                  >
+                    <path
+                      d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
+                    />
+                  </svg>
+                </div>
+                <!-- no badge on purpose for Baloo, matching Figma -->
+              </div>
+              <div class="card-info">
+                <span class="card-name">Baloo</span>
+                <span class="card-rank rank-teal">Pata-Tenra</span>
+              </div>
+              <div class="card-progress">
+                <div class="progress-row">
+                  <span class="progress-label">Progresso</span>
+                  <span class="progress-pct">20%</span>
+                </div>
+                <div class="progress-track">
+                  <div
+                    class="progress-fill"
+                    data-width="20%"
+                    data-delay="160"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- RAKSHA -->
+            <div class="lobinho-card">
+              <div class="card-avatar-area">
+                <div class="card-avatar">
+                  <img
+                    src="https://www.figma.com/api/mcp/asset/b5eec1b7-7f9d-4476-8bcb-1923c7e524c5"
+                    alt="Raksha"
+                    loading="lazy"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="#a8a29e"
+                    style="
+                      position: absolute;
+                      inset: 0;
+                      width: 100%;
+                      height: 100%;
+                      padding: 12px;
+                    "
+                  >
+                    <path
+                      d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="card-info">
+                <span class="card-name">Raksha</span>
+                <span class="card-rank rank-yellow">Rastreador</span>
+              </div>
+              <div class="card-progress">
+                <div class="progress-row">
+                  <span class="progress-label">Progresso</span>
+                  <span class="progress-pct">55%</span>
+                </div>
+                <div class="progress-track">
+                  <div
+                    class="progress-fill"
+                    data-width="55%"
+                    data-delay="240"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /lobinhos-grid -->
+        </section>
+
+        <!-- ── DESTAQUES + ÚLTIMAS AÇÕES ── -->
+        <div class="bottom-grid">
+          <!-- LEFT: Destaques da Matilha -->
+          <div class="destaques-col">
+            <div class="section-title">
+              <h2 class="title-gold">Destaques da Matilha</h2>
+              <!-- sparkles icon -->
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#865c00"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="width: 22px; height: 22px"
+              >
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                />
+              </svg>
+            </div>
+
+            <!-- Highlight cards -->
+            <div class="highlights-grid">
+              <!-- 1st place -->
+              <div class="highlight-card rank-1">
+                <div class="highlight-rank-badge rank-badge-gold">1º</div>
+                <div class="highlight-info">
+                  <div class="highlight-name">Bagheera</div>
+                  <div class="highlight-desc">8 Atividades<br />completas</div>
+                </div>
+                <!-- icon cluster -->
+                <div class="icon-cluster">
+                  <div class="icon-cluster-item cluster-teal">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#004d57"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <div class="icon-cluster-item cluster-green">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#005c15"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2nd place -->
+              <div class="highlight-card rank-2">
+                <div class="highlight-rank-badge rank-badge-green">2º</div>
+                <div class="highlight-info">
+                  <div class="highlight-name">Mowgli</div>
+                  <div class="highlight-desc">6 Atividades completas</div>
+                </div>
+                <div class="icon-cluster">
+                  <div class="icon-cluster-item cluster-yellow">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#523700"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polygon
+                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Akela reminder -->
+            <div class="akela-card">
+              <!-- decorative paw -->
+              <div class="akela-deco" aria-hidden="true">
+                <svg
+                  viewBox="0 0 100 100"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <ellipse cx="50" cy="65" rx="28" ry="32" fill="#237329" />
+                  <ellipse cx="22" cy="38" rx="12" ry="16" fill="#237329" />
+                  <ellipse cx="78" cy="38" rx="12" ry="16" fill="#237329" />
+                  <ellipse cx="36" cy="24" rx="10" ry="13" fill="#237329" />
+                  <ellipse cx="64" cy="24" rx="10" ry="13" fill="#237329" />
+                </svg>
+              </div>
+              <div class="akela-title">Lembrete de Akela</div>
+              <p class="akela-text">
+                "A força da alcateia é o lobo, e a força do lobo é a alcateia."
+                Prepare a próxima Grande Caçada para o sábado!
+              </p>
+            </div>
+          </div>
+
+          <!-- RIGHT: Últimas Ações -->
+          <div class="actions-col">
+            <div class="section-title">
+              <h2
+                class="title-dark"
+                style="font-family: &quot;Bree Serif&quot;, serif"
+              >
+                Últimas Ações
+              </h2>
+              <!-- clock icon -->
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#393834"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="width: 18px; height: 18px"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+
+            <div class="actions-list">
+              <!-- Action 1 -->
+              <div class="action-item">
+                <div class="action-icon icon-teal">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#004d57"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="action-title">Progresso validado</div>
+                  <div class="action-desc">
+                    Raksha completou 'Nós e Amarras'.
+                  </div>
+                  <div class="action-time">Há 2 horas</div>
+                </div>
+              </div>
+
+              <!-- Action 2 -->
+              <div class="action-item">
+                <div class="action-icon icon-yellow">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#523700"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="action-title">Nova Atividade</div>
+                  <div class="action-desc">
+                    Postada: 'O Ciclo da Água na Selva'.
+                  </div>
+                  <div class="action-time">Há 5 horas</div>
+                </div>
+              </div>
+
+              <!-- Action 3 -->
+              <div class="action-item">
+                <div class="action-icon icon-stone">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#78716c"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <line x1="19" y1="8" x2="19" y2="14" />
+                    <line x1="22" y1="11" x2="16" y2="11" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="action-title">Novo Lobinho</div>
+                  <div class="action-desc">Hathi se juntou à Alcatéia!</div>
+                  <div class="action-time">Ontem</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /bottom-grid -->
+
+        <!-- ── MATILHA CARD ── -->
+        <section aria-label="Matilha Cinza">
+          <div class="matilha-card">
+            <!-- Icon box -->
+            <div class="matilha-icon-box">
+              <svg
+                viewBox="0 0 40 38"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <!-- paw icon in white -->
+                <ellipse
+                  cx="20"
+                  cy="26"
+                  rx="11"
+                  ry="12"
+                  fill="white"
+                  opacity=".85"
+                />
+                <ellipse
+                  cx="8"
+                  cy="14"
+                  rx="5"
+                  ry="6.5"
+                  fill="white"
+                  opacity=".85"
+                />
+                <ellipse
+                  cx="32"
+                  cy="14"
+                  rx="5"
+                  ry="6.5"
+                  fill="white"
+                  opacity=".85"
+                />
+                <ellipse
+                  cx="13"
+                  cy="8"
+                  rx="4"
+                  ry="5"
+                  fill="white"
+                  opacity=".85"
+                />
+                <ellipse
+                  cx="27"
+                  cy="8"
+                  rx="4"
+                  ry="5"
+                  fill="white"
+                  opacity=".85"
+                />
+              </svg>
+              <div class="matilha-sub-badge">Cinza</div>
+            </div>
+
+            <!-- Info -->
+            <div class="matilha-info">
+              <div class="matilha-name">Matilha Cinza</div>
+              <div class="matilha-meta">
+                <div class="meta-item">
+                  <!-- people icon -->
+                  <svg
+                    viewBox="0 0 24 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1 8c0-2.2 1.8-4 4-4h14c2.2 0 4 1.8 4 4"
+                      stroke="#a8a29e"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                    <circle
+                      cx="8"
+                      cy="3"
+                      r="2.5"
+                      stroke="#a8a29e"
+                      stroke-width="1.5"
+                    />
+                    <circle
+                      cx="16"
+                      cy="3"
+                      r="2.5"
+                      stroke="#a8a29e"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+                  <strong>08</strong>
+                  <span>Lobinhos</span>
+                </div>
+                <div class="meta-item">
+                  <!-- person icon -->
+                  <svg
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="6"
+                      cy="4"
+                      r="2.5"
+                      stroke="#a8a29e"
+                      stroke-width="1.5"
+                    />
+                    <path
+                      d="M1 11c0-2.2 2.2-4 5-4s5 1.8 5 4"
+                      stroke="#a8a29e"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                  <span>Akela</span>
+                  <strong>Ricardo Silva</strong>
+                </div>
+              </div>
+              <div class="matilha-progress">
+                <div class="matilha-progress-row">
+                  <span class="matilha-progress-label">Progresso Médio</span>
+                  <span class="matilha-progress-pct">72%</span>
+                </div>
+                <div class="matilha-track">
+                  <div
+                    class="matilha-fill"
+                    data-width="72%"
+                    data-delay="300"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Arrow -->
+            <button
+              class="btn-matilha-detail"
+              type="button"
+              aria-label="Ver detalhes da Matilha Cinza"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
+        </section>
+      </div>
+      <!-- /content -->
+    </main>
+
+    <div class="toast" id="toast" role="alert" aria-live="polite">
+      <span class="toast-icon" id="toast-icon"></span>
+      <span id="toast-msg"></span>
     </div>
 
-    <script src="../../js/main.js"></script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
