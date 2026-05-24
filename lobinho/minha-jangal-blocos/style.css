@@ -2,9 +2,79 @@
    MINHA JÂNGAL - BLOCOS DE EIXO
    ============================================ */
 
-/* NAVIGATION BACK */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #f5f2f5;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================
+   LAYOUT PRINCIPAL
+   ============================================ */
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f6f4f1;
+    overflow-x: hidden;
+}
+
+/* ============================================
+   SIDEBAR
+   ============================================ */
+
+.sidebar {
+    width: 250px;
+    min-width: 250px;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   NAV ITEMS
+   ============================================ */
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    height: 54px;
+    padding: 0 16px;
+    border-radius: 18px;
+    text-decoration: none;
+    color: #7a746d;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.25s ease;
+}
+
+.nav-item:hover {
+    background-color: #e8f5e9;
+}
+
+.nav-item.active {
+    background-color: #dcead7;
+    color: #237329;
+    font-weight: 700;
+}
+
+.nav-icon {
+    font-size: 18px;
+}
+
+.nav-label {
+    flex: 1;
+}
+
+/* ============================================
+   NAVIGATION BACK
+   ============================================ */
+
 .navigation-back {
-    margin-bottom: 2rem;
+    margin-bottom: 1.8rem;
 }
 
 .back-link {
@@ -16,7 +86,7 @@
     font-family: 'Bree Serif', serif;
     font-size: 1rem;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .back-link:hover {
@@ -28,46 +98,201 @@
     height: 20px;
 }
 
-/* HERO SECTION - BENTO STYLE */
-.hero-section-bento {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: 3rem;
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+
+.main-content {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+
+    background-color: #f8f7f5;
+
+    padding: 0 2.5rem 3rem;
+
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-.hero-main-card {
-    background: #865c00;
-    border-radius: 24px;
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
+/* ============================================
+   TOP BAR
+   ============================================ */
+
+.top-bar {
+    height: 78px;
+
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    min-height: 256px;
-    color: white;
+
+    padding: 0 10px;
+
+    background: transparent;
 }
+
+/* TEXTO */
+
+.top-bar-left {
+    display: flex;
+    align-items: center;
+}
+
+.top-bar-center {
+    margin-left: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.top-bar-title {
+    font-family: 'Bree Serif', serif;
+    font-size: 22px;
+    color: #865c00;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.top-bar-subtitle {
+    font-size: 12px;
+    color: #8b8882;
+    letter-spacing: 1px;
+    margin-top: 2px;
+}
+
+/* ÁREA DIREITA */
+
+.top-bar-right {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* BOTÕES */
+
+
+.top-bar-btn {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    background: transparent;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.top-bar-btn:hover {
+    background-color: #f1f1f1;
+}
+
+/* ÍCONE */
+
+.top-bar-btn .icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* AVATAR */
+
+.user-avatar {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+    border: 2px solid #d39b00;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+}
+
+
+/* IMAGEM AVATAR */
+
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.hero-section-bento {
+    display: grid;
+    grid-template-columns: 2.2fr 0.9fr;
+    gap: 1.2rem;
+    margin-bottom: 2.3rem;
+    align-items: stretch;
+}
+
+/* HERO CARD */
+
+.hero-main-card {
+    background: #946700;
+    border-radius: 24px;
+    padding: 2.2rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 175px;
+
+    display: flex;
+    align-items: center;
+}
+
+/* ORGANIC SHAPE */
 
 .decorative-background-patterns {
     position: absolute;
-    width: 160px;
-    height: 160px;
-    right: 88px;
-    top: 17px;
-    background: rgba(35, 115, 41, 0.1);
-    border-radius: 50%;
+
+    width: 150px;
+    height: 150px;
+
+    right: 65px;
+    top: 18px;
+
+    background: rgba(255, 255, 255, 0.30);
+
+    border-radius: 42% 58% 61% 39%;
+
+    transform: rotate(-28deg);
+
+    z-index: 1;
 }
+
+/* DARK CIRCLE */
 
 .decorative-background-small {
     position: absolute;
-    width: 80px;
-    height: 80px;
-    right: 83px;
-    top: -10px;
-    background: rgba(35, 115, 41, 0.05);
+
+    width: 135px;
+    height: 135px;
+
+    right: -25px;
+    bottom: -35px;
+
+    background: rgba(92, 66, 0, 0.45);
+
     border-radius: 50%;
 }
+
+/* REMOVE OVERLAY */
+
+.hero-overlay {
+    display: none;
+}
+
+/* HERO CONTENT */
 
 .hero-content {
     position: relative;
@@ -77,44 +302,34 @@
 
 .hero-title {
     font-family: 'Bree Serif', serif;
-    font-size: 3rem;
-    font-weight: 400;
+    font-size: 2.8rem;
+    line-height: 1.05;
     color: white;
-    margin-bottom: 1rem;
-    line-height: 1.2;
+    margin-bottom: 0.5rem;
 }
 
 .hero-description {
     font-family: 'Open Sans', sans-serif;
-    font-size: 1.125rem;
+    font-size: 1rem;
+    line-height: 1.55;
+    max-width: 430px;
     color: white;
-    line-height: 1.6;
-    max-width: 448px;
 }
 
-.hero-overlay {
-    position: absolute;
-    width: 192px;
-    height: 192px;
-    right: 32px;
-    top: 32px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 115px 38px 67px 125px;
-    z-index: 1;
-}
+/* ============================================
+   TRILHA CARD
+   ============================================ */
 
-/* TRILHA CARD */
 .trilha-card {
-    background: #5fe0f6;
+    background: #5fdcf3;
     border-radius: 24px;
-    padding: 2.5rem;
+    padding: 1.7rem;
+    min-height: 175px;
+
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 1rem;
-    min-height: 256px;
-    overflow: hidden;
+    align-items: center;
 }
 
 .trilha-icon {
@@ -125,183 +340,259 @@
 }
 
 .trilha-icon img {
-    width: 42px;
-    height: 42px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
 }
 
 .trilha-title {
     font-family: 'Bree Serif', serif;
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: #004d57;
+    font-size: 1.7rem;
+    color: #004a58;
     margin: 0;
 }
 
 .progress-container {
     width: 100%;
-    max-width: 200px;
+    max-width: 210px;
     margin: 1rem 0;
 }
 
 .progress-bar {
     width: 100%;
-    height: 16px;
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 8px;
+    height: 10px;
+
+    background: rgba(255, 255, 255, 0.45);
+
+    border-radius: 999px;
     overflow: hidden;
 }
 
 .progress-fill {
     height: 100%;
-    background: #006f7d;
-    border-radius: 8px;
-    transition: width 0.3s ease;
+    background: #006a78;
+    border-radius: 999px;
 }
 
 .progress-text {
     font-family: 'Open Sans', sans-serif;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    color: #004d57;
-    margin: 0;
+    color: #004a58;
 }
 
-/* LEARNING BLOCKS GRID */
+/* ============================================
+   LEARNING BLOCKS GRID
+   ============================================ */
+
 .learning-blocks-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    padding-top: 1rem;
+
+    gap: 1.4rem;
+
+    width: 100%;
+    align-items: stretch;
 }
 
+/* CARDS */
+
 .learning-block {
-    background: #fdf9f2;
-    border-radius: 24px 12px 24px 24px;
-    padding: 1.5rem;
+    width: 100%;
+    min-width: 0;
+
+    background: #f7f3ed;
+
+    border-radius: 20px;
+
+    padding: 1.3rem;
+
+    min-height: 245px;
+
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
     position: relative;
     overflow: hidden;
 }
 
+/* SHADOW COLORS */
+
 .learning-block[data-color="green"] {
-    box-shadow: 0 8px 0 0 rgba(157, 241, 151, 1);
+    box-shadow: 0 6px 0 #8be38b;
 }
 
 .learning-block[data-color="yellow"] {
-    box-shadow: 0 8px 0 0 rgba(254, 179, 0, 1);
+    box-shadow: 0 6px 0 #f2af00;
 }
 
 .learning-block[data-color="blue"] {
-    box-shadow: 0 8px 0 0 rgba(95, 224, 246, 1);
+    box-shadow: 0 6px 0 #61d8ef;
 }
 
+/* ICON */
+
 .block-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 20px;
+    width: 54px;
+    height: 54px;
+
+    border-radius: 18px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 0.5rem;
 }
 
 .block-icon img {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
 }
 
+/* TITLE */
+
 .block-title {
     font-family: 'Bree Serif', serif;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 400;
     color: #865c00;
     margin: 0;
 }
 
+/* DESCRIPTION */
+
 .block-description {
     font-family: 'Open Sans', sans-serif;
-    font-size: 1rem;
-    color: #66645f;
+    font-size: 0.93rem;
     line-height: 1.6;
+    color: #66645f;
     margin: 0;
     flex-grow: 1;
 }
 
+/* BUTTON */
+
 .btn-registrar-atividade {
-    background: #feb300;
+    width: 100%;
+
+    background: #f7b500;
     color: #523700;
+
     border: none;
-    padding: 1rem;
-    border-radius: 24px;
+
+    min-height: 48px;
+
+    padding: 0.85rem 1rem;
+
+    border-radius: 999px;
+
     font-family: 'Open Sans', sans-serif;
-    font-size: 1rem;
+    font-size: 0.92rem;
     font-weight: 700;
-    cursor: pointer;
+
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    transition: all 0.3s ease;
-    position: relative;
-    box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .btn-registrar-atividade:hover {
-    background: #f5a600;
+    background: #efac00;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .btn-registrar-atividade svg {
-    width: 18px;
+    width: 16px;
     height: 16px;
 }
 
-/* RESPONSIVE */
+/* ============================================
+   CONTENT AREA
+   ============================================ */
+
+.content-area {
+    width: 100%;
+    max-width: 1520px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
 @media (max-width: 1440px) {
+
     .learning-blocks-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 1024px) {
+
     .hero-section-bento {
         grid-template-columns: 1fr;
     }
-    
-    .hero-title {
-        font-size: 2rem;
-    }
-    
+
     .learning-blocks-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
     }
 }
 
 @media (max-width: 768px) {
-    .hero-main-card {
+
+    .main-content {
+        padding: 0 1rem 2rem;
+    }
+
+    .top-bar {
         flex-direction: column;
-        text-align: center;
+        align-items: flex-start;
+        gap: 1rem;
+
+        height: auto;
+
+        padding: 1rem 0;
+    }
+
+    .top-bar-right {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .hero-main-card {
         min-height: auto;
+        text-align: center;
     }
-    
-    .hero-overlay {
-        display: none;
-    }
-    
+
     .hero-title {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
-    
+
+    .hero-description {
+        max-width: 100%;
+    }
+
     .learning-blocks-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .learning-block {
         border-radius: 16px;
+    }
+
+    .decorative-background-patterns,
+    .decorative-background-small {
+        display: none;
     }
 }
