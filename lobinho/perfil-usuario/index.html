@@ -19,16 +19,25 @@
         <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="sidebar-header">
-                <h3 class="sidebar-title">🐺 Lobinho</h3>
+                <h3 class="sidebar-title">Lobinho</h3>
             </div>
-            <nav class="sidebar-nav">
-                <div class="nav-section">
-                    <h4 class="nav-section-title">Minha Jângal</h4>
-                </div>
-                <a href="../dashboard/" class="nav-item">Dashboard</a>
-                <a href="../minha-jangal-atividades/" class="nav-item">Minha Jângal</a>
-                <a href="../minha-matilha/" class="nav-item">Minha Matilha</a>
-                <a href="../perfil-usuario/" class="nav-item active">Meu Perfil</a>
+           <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">🗺️</span>
+                    <span class="nav-label">Minha Jângal</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-label">Minha Alcateia</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-label">Meu Perfil</span>
+                </a>
             </nav>
         </aside>
 
@@ -49,134 +58,196 @@
 
             <!-- CONTENT AREA -->
             <div class="content-area">
-                <!-- HEADER PROFILE -->
-                <div class="profile-header">
-                    <div class="profile-avatar-wrapper">
-                        <div class="profile-avatar">
-                            <img src="./assets/avatar.webp" alt="Avatar do Lobinho" />
-                        </div>
-                        <div class="profile-badges">
-                            <span class="badge-small">🐺</span>
-                            <span class="badge-small">⭐</span>
-                            <span class="badge-small">🏆</span>
-                        </div>
-                    </div>
-                    
-                    <div class="profile-info">
-                        <h2 class="profile-name">Pedro Silva</h2>
-                        <p class="profile-role">Lobinho - Matilha Lobos Cinzentos</p>
-                        <p class="profile-id">Matrícula: 000.123-4</p>
-                        <div class="profile-stats">
-                            <div class="stat">
-                                <span class="stat-value">2026</span>
-                                <span class="stat-label">Ano de Ingresso</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-value">85%</span>
-                                <span class="stat-label">Progresso</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-value">12</span>
-                                <span class="stat-label">Especialidades</span>
-                            </div>
-                        </div>
-                    </div>
+
+    <!-- HEADER -->
+    <section class="profile-header">
+        <div class="profile-avatar">
+            <span> 👩🏻 </span>
+        </div>
+
+        <div class="profile-header-info">
+            <h2>Beatriz Silva Santos</h2>
+
+            <div class="profile-tags">
+                <span class="tag yellow">Lobinha</span>
+                <span class="tag green">Matilha Cinza</span>
+                <span class="tag blue">ID #4429</span>
+            </div>
+        </div>
+
+        <div class="paw-icon">🐾</div>
+    </section>
+
+    <!-- COLUNA ESQUERDA -->
+    <div class="left-column">
+
+        <!-- INFORMAÇÕES -->
+        <section class="card">
+            <h3 class="card-title">Informações Básicas</h3>
+
+            <div class="info-grid">
+
+                <div class="info-item">
+                    <span>NOME COMPLETO</span>
+                    <strong>Beatriz Silva Santos</strong>
                 </div>
 
-                <!-- PROGRESS SECTION -->
-                <section class="profile-section">
-                    <h3 class="section-title">Meu Progresso na Trilha</h3>
-                    <div class="progress-track">
-                        <div class="track-item completed">
-                            <div class="track-dot"></div>
-                            <p class="track-label">Início</p>
-                        </div>
-                        <div class="track-item completed">
-                            <div class="track-dot"></div>
-                            <p class="track-label">Pata Tenta</p>
-                        </div>
-                        <div class="track-item completed">
-                            <div class="track-dot"></div>
-                            <p class="track-label">Saltador</p>
-                        </div>
-                        <div class="track-item active">
-                            <div class="track-dot"></div>
-                            <p class="track-label">Rastreador</p>
-                        </div>
-                        <div class="track-item">
-                            <div class="track-dot"></div>
-                            <p class="track-label">Caçador</p>
-                        </div>
-                    </div>
-                </section>
+                <div class="info-item">
+                    <span>DATA DE NASCIMENTO</span>
+                    <strong>12 de Maio de 2015</strong>
+                </div>
 
-                <!-- ESPECIALIDADES SECTION -->
-                <section class="profile-section">
-                    <div class="section-header-with-action">
-                        <h3 class="section-title">Minhas Especialidades</h3>
-                        <a href="#" class="link-action">Ver Todas</a>
-                    </div>
-                    <div class="especialidades-grid">
-                        <div class="especialidade-card">
-                            <div class="especialidade-icon">🍳</div>
-                            <h4 class="especialidade-name">Culinária</h4>
-                            <p class="especialidade-date">Concluída em 15/03/2026</p>
-                            <span class="badge-status completed">✓ Concluída</span>
-                        </div>
-                        <div class="especialidade-card">
-                            <div class="especialidade-icon">🏥</div>
-                            <h4 class="especialidade-name">Socorrista</h4>
-                            <p class="especialidade-date">Concluída em 22/03/2026</p>
-                            <span class="badge-status completed">✓ Concluída</span>
-                        </div>
-                        <div class="especialidade-card">
-                            <div class="especialidade-icon">🏕️</div>
-                            <h4 class="especialidade-name">Pioneira</h4>
-                            <p class="especialidade-date">Concluída em 08/04/2026</p>
-                            <span class="badge-status completed">✓ Concluída</span>
-                        </div>
-                        <div class="especialidade-card">
-                            <div class="especialidade-icon">🌤️</div>
-                            <h4 class="especialidade-name">Clima</h4>
-                            <p class="especialidade-date">Em Progresso</p>
-                            <span class="badge-status pending">⏳ Em Progresso</span>
-                        </div>
-                    </div>
-                </section>
+                <div class="info-item">
+                    <span>E-MAIL DO RESPONSÁVEL</span>
+                    <strong>contato@familia.com.br</strong>
+                </div>
 
-                <!-- ATIVIDADES SECTION -->
-                <section class="profile-section">
-                    <div class="section-header-with-action">
-                        <h3 class="section-title">Minhas Atividades Recentes</h3>
-                        <a href="#" class="link-action">Ver Todas</a>
-                    </div>
-                    <div class="activities-list">
-                        <div class="activity-item">
-                            <div class="activity-icon">📋</div>
-                            <div class="activity-info">
-                                <h4 class="activity-title">Boa Ação da Semana</h4>
-                                <p class="activity-date">Concluída em 18/05/2026</p>
-                            </div>
-                            <span class="badge-status completed">✓</span>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-icon">🌳</div>
-                            <div class="activity-info">
-                                <h4 class="activity-title">Identificar Árvores</h4>
-                                <p class="activity-date">Concluída em 15/05/2026</p>
-                            </div>
-                            <span class="badge-status completed">✓</span>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-icon">🔥</div>
-                            <div class="activity-info">
-                                <h4 class="activity-title">Fazer Fogo de Acampamento</h4>
-                                <p class="activity-date">Pendente de validação</p>
-                            </div>
-                            <span class="badge-status pending">⏳</span>
-                        </div>
-                    </div>
-                </section>
+                <div class="info-item">
+                    <span>TELEFONE DE EMERGÊNCIA</span>
+                    <strong>(11) 98765-4321</strong>
+                </div>
+
+            </div>
+
+            <div class="responsavel-box">
+                <div class="responsavel-icon">👩</div>
+
+                <div>
+                    <strong>Maria Aparecida Silva</strong>
+                    <p>Mãe • Responsável Financeiro</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONQUISTAS -->
+        <section class="card">
+            <div class="card-flex">
+                <h3 class="card-title">Últimas Conquistas</h3>
+
+                <div class="progress-pill">
+                    Progresso 65%
+                </div>
+            </div>
+
+            <div class="conquistas-grid">
+
+                <div class="conquista-item">
+                    🌿
+                    <span>ECOLOGIA</span>
+                </div>
+
+                <div class="conquista-item">
+                    ➕
+                    <span>P. SOCORROS</span>
+                </div>
+
+                <div class="conquista-item">
+                    ⛺
+                    <span>ACAMPAMENTO</span>
+                </div>
+
+                <div class="conquista-item locked">
+                    🔒
+                    <span>PRÓXIMA</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- DOCUMENTOS -->
+        <section class="card">
+            <h3 class="card-title">Meus Documentos</h3>
+
+            <div class="document-item">
+                <div>
+                    <strong>Autorização de Acampamento</strong>
+                    <p>PDF • 1.2 MB</p>
+                </div>
+
+                <div class="doc-actions">
+                    👁️ ⬇️
+                </div>
+            </div>
+
+            <div class="document-item">
+                <div>
+                    <strong>RG - Beatriz</strong>
+                    <p>JPG • 450 KB</p>
+                </div>
+
+                <div class="doc-actions">
+                    👁️ ⬇️
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- COLUNA DIREITA -->
+    <div class="right-column">
+
+        <!-- FICHA MÉDICA -->
+        <section class="medical-card">
+
+            <h3>Ficha Médica</h3>
+
+            <div class="blood-box">
+                <span>TIPO SANGUÍNEO</span>
+                <strong>O+</strong>
+            </div>
+
+            <div class="medical-section">
+                <span>DOCUMENTAÇÃO MÉDICA</span>
+
+                <div class="medical-doc">
+                    ✅ Exame de Sangue
+                </div>
+
+                <div class="medical-doc">
+                    ✅ Atestado Médico
+                </div>
+
+                <div class="medical-doc alert">
+                    ⚠ Carteira Vacinação
+                </div>
+            </div>
+
+            <div class="medical-section">
+                <span>ALERGIAS CRÍTICAS</span>
+
+                <div class="allergy-tags">
+                    <small>LACTOSE</small>
+                    <small>PENICILINA</small>
+                </div>
+            </div>
+
+            <button class="btn-medical">
+                Imprimir Ficha Completa
+            </button>
+
+        </section>
+
+        <!-- META -->
+        <section class="goal-card">
+
+            <div class="goal-top">
+                <span>Meta 2026</span>
+                <strong>65%</strong>
+            </div>
+
+            <div class="goal-bar">
+                <div class="goal-fill"></div>
+            </div>
+
+            <p>
+                Faltam apenas 3 especialidades para o distintivo Cruzeiro do Sul
+            </p>
+
+        </section>
+
+    </div>
+
+</div>
 
                 <!-- DOCUMENTOS SECTION -->
                 <section class="profile-section">
