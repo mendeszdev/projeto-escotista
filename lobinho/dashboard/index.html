@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Lobinho</title>
-    
+
     <!-- Fontes do Figma -->
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400&family=Open+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400&family=Open+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- CSS Global -->
     <link rel="stylesheet" href="../../css/global.css">
-    
+
     <!-- CSS Específico -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="dashboard-container">
         <!-- SIDEBAR -->
@@ -21,12 +25,12 @@
             <div class="sidebar-header">
                 <h3 class="sidebar-title">Lobinho</h3>
             </div>
-            
+
             <div class="sidebar-status">
                 <h4 class="status-title">Sempre Alerta</h4>
                 <p class="status-subtitle">LOBINHO ATIVO</p>
             </div>
-            
+
             <nav class="sidebar-nav">
                 <a href="#" class="nav-item active">
                     <span class="nav-icon">📊</span>
@@ -46,41 +50,44 @@
                 </a>
             </nav>
         </aside>
-        
+
         <!-- MAIN CONTENT -->
         <main class="main-content">
             <!-- TOP BAR -->
             <div class="top-bar">
+                <div class="top-bar">
+                </div>
                 <button class="top-bar-btn" id="btnShare">
-                    <img src="assets/72-101.svg" alt="Share" class="icon">
+                    <img src="assets/98-1051.svg" alt="Share" class="icon">
                 </button>
                 <div class="user-avatar">
                     <img src="assets/98-1053.webp" alt="User Avatar" class="avatar-image">
                 </div>
             </div>
-            
+
             <!-- HERO SECTION: Educational Progress Path -->
             <section class="hero-section">
                 <div class="hero-container">
                     <div class="hero-content">
                         <h1 class="hero-title">A Grande Caçada de Mowgli</h1>
-                        <p class="hero-subtitle">Continue sua trilha pela Jângal. Akela e Baloo estão<br>esperando por suas próximas conquistas!</p>
+                        <p class="hero-subtitle">Continue sua trilha pela Jângal. Akela e Baloo estão<br>esperando por
+                            suas próximas conquistas!</p>
                     </div>
                     <button class="btn-register-activity">
                         <img src="assets/72-12.svg" alt="Register" class="btn-icon">
                         <span class="btn-text">Registrar Atividade</span>
                     </button>
                 </div>
-                
+
                 <!-- Baloo Illustration -->
                 <img src="assets/72-14.webp" alt="Baloo" class="hero-illustration">
-                
+
                 <!-- Jungle Path Progress -->
                 <div class="progress-track">
                     <div class="progress-bar">
                         <div class="progress-fill"></div>
                     </div>
-                    
+
                     <div class="waypoints">
                         <!-- Início -->
                         <div class="waypoint">
@@ -89,7 +96,7 @@
                             </div>
                             <span class="waypoint-label">Início</span>
                         </div>
-                        
+
                         <!-- Pata Tenra -->
                         <div class="waypoint">
                             <div class="waypoint-circle">
@@ -97,7 +104,7 @@
                             </div>
                             <span class="waypoint-label">Pata Tenra</span>
                         </div>
-                        
+
                         <!-- Saltador (Current) -->
                         <div class="waypoint current">
                             <div class="waypoint-circle current">
@@ -105,7 +112,7 @@
                             </div>
                             <span class="waypoint-label">Saltador</span>
                         </div>
-                        
+
                         <!-- Rastreador (Inactive) -->
                         <div class="waypoint inactive">
                             <div class="waypoint-circle">
@@ -113,7 +120,7 @@
                             </div>
                             <span class="waypoint-label">Rastreador</span>
                         </div>
-                        
+
                         <!-- Caçador (Inactive) -->
                         <div class="waypoint inactive">
                             <div class="waypoint-circle">
@@ -124,7 +131,7 @@
                     </div>
                 </div>
             </section>
-            
+
             <!-- BENTO GRID LAYOUT -->
             <section class="bento-grid">
                 <!-- My Badges: Meus Distintivos -->
@@ -139,7 +146,7 @@
                             <img src="assets/72-63.svg" alt="Arrow" class="link-icon">
                         </a>
                     </div>
-                    
+
                     <div class="badges-grid">
                         <!-- Badge: Culinária -->
                         <div class="badge-item">
@@ -148,7 +155,7 @@
                             </div>
                             <p class="badge-name">Culinária</p>
                         </div>
-                        
+
                         <!-- Badge: Socorrista -->
                         <div class="badge-item">
                             <div class="badge-circle" style="background-color: #5fe0f6;">
@@ -156,7 +163,7 @@
                             </div>
                             <p class="badge-name">Socorrista</p>
                         </div>
-                        
+
                         <!-- Badge: Pioneira -->
                         <div class="badge-item">
                             <div class="badge-circle" style="background-color: #feb300;">
@@ -164,7 +171,7 @@
                             </div>
                             <p class="badge-name">Pioneira</p>
                         </div>
-                        
+
                         <!-- Badge: Clima -->
                         <div class="badge-item">
                             <div class="badge-circle" style="background-color: #5fe0f6;">
@@ -172,7 +179,7 @@
                             </div>
                             <p class="badge-name">Clima</p>
                         </div>
-                        
+
                         <!-- Badge: Camping (Locked) -->
                         <div class="badge-item locked">
                             <div class="badge-circle" style="background-color: #ece8e0;">
@@ -182,14 +189,14 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- User Profile Card -->
                 <div class="bento-card profile-card">
                     <div class="profile-header">
                         <h3 class="profile-name">Mowgli Silva</h3>
                         <p class="profile-alcateia">Alcateia Seeonee</p>
                     </div>
-                    
+
                     <div class="profile-xp">
                         <p class="xp-label">Experiência</p>
                         <p class="xp-value">2.450 XP</p>
@@ -197,7 +204,7 @@
                             <div class="xp-fill" style="width: 65%;"></div>
                         </div>
                     </div>
-                    
+
                     <div class="profile-stats">
                         <div class="stat">
                             <span class="stat-value">12</span>
@@ -213,7 +220,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- My Activities Section -->
                 <div class="bento-card activities-section">
                     <div class="card-header">
@@ -222,12 +229,12 @@
                         </h2>
                         <span class="today-badge">HOJE</span>
                     </div>
-                    
+
                     <div class="activities-list">
                         <!-- Activity 1: Lei do Lobinho -->
                         <div class="activity-item">
                             <div class="activity-icon">
-                                <img src="assets/72-125.svg" alt="Lei do Lobinho" class="icon">
+                                <img src="assets/72-101.svg" alt="Lei do Lobinho" class="icon">
                             </div>
                             <div class="activity-content">
                                 <p class="activity-title">Lei do Lobinho</p>
@@ -235,11 +242,11 @@
                             </div>
                             <span class="activity-status concluded">CONCLUÍDO</span>
                         </div>
-                        
+
                         <!-- Activity 2: Boa Ação Diária -->
                         <div class="activity-item">
                             <div class="activity-icon">
-                                <img src="assets/72-133.svg" alt="Boa Ação Diária" class="icon">
+                                <img src="assets/72-113.svg" alt="Boa Ação Diária" class="icon">
                             </div>
                             <div class="activity-content">
                                 <p class="activity-title">Boa Ação Diária</p>
@@ -247,11 +254,11 @@
                             </div>
                             <span class="activity-status pending">PENDENTE</span>
                         </div>
-                        
+
                         <!-- Activity 3: Identificar Árvores -->
                         <div class="activity-item">
                             <div class="activity-icon">
-                                <img src="assets/72-113.svg" alt="Identificar Árvores" class="icon">
+                                <img src="assets/72-125.svg" alt="Identificar Árvores" class="icon">
                             </div>
                             <div class="activity-content">
                                 <p class="activity-title">Identificar Árvores</p>
@@ -261,13 +268,13 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Learning Trails Section -->
                 <div class="bento-card trails-section">
                     <div class="card-header">
                         <h2 class="card-title">Trilhas de Aprendizagem</h2>
                     </div>
-                    
+
                     <div class="trails-grid">
                         <!-- Trail 1: A História da Jângal -->
                         <div class="trail-item">
@@ -276,7 +283,8 @@
                                 <img src="assets/72-174.svg" alt="Lock" class="trail-icon">
                             </div>
                             <h3 class="trail-title">A História da Jângal</h3>
-                            <p class="trail-description">Aprenda sobre a Alcateia de Seeonee e nossos amigos Akela, Baloo e Bagheera.</p>
+                            <p class="trail-description">Aprenda sobre a Alcateia de Seeonee e nossos amigos Akela,
+                                Baloo e Bagheera.</p>
                             <div class="trail-participants">
                                 <img src="assets/72-184.webp" alt="Participant 1" class="participant-avatar">
                                 <img src="assets/72-186.webp" alt="Participant 2" class="participant-avatar">
@@ -284,7 +292,7 @@
                             </div>
                             <a href="#" class="trail-link">→</a>
                         </div>
-                        
+
                         <!-- Trail 2: Primeiros Cuidados -->
                         <div class="trail-item">
                             <div class="trail-header">
@@ -292,7 +300,8 @@
                                 <img src="assets/72-191.svg" alt="Unlock" class="trail-icon">
                             </div>
                             <h3 class="trail-title">Primeiros Cuidados</h3>
-                            <p class="trail-description">Conheça as ervas da Jângal e como tratar pequenos arranhões de espinhos.</p>
+                            <p class="trail-description">Conheça as ervas da Jângal e como tratar pequenos arranhões de
+                                espinhos.</p>
                             <div class="trail-participants">
                                 <img src="assets/72-206.webp" alt="Participant 1" class="participant-avatar">
                                 <span class="participant-count">+8</span>
@@ -304,9 +313,10 @@
             </section>
         </main>
     </div>
-    
+
     <!-- Scripts -->
     <script src="../../js/main.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
