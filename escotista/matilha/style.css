@@ -1,0 +1,372 @@
+.matilha-filters {
+  background: var(--gold-bg);
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr 0.9fr auto;
+  gap: 16px;
+  align-items: end;
+}
+
+.matilha-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.lobinhos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.lobinho-card {
+  position: relative;
+  min-height: 230px;
+  border-radius: var(--radius-lg);
+  background: var(--gold-bg);
+  padding: 20px;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(57, 56, 52, 0.04);
+}
+
+.lobinho-card.is-hidden {
+  display: none;
+}
+
+.pending-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border-radius: 999px;
+  background: var(--red);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 900;
+  padding: 4px 8px;
+  text-transform: uppercase;
+}
+
+.portrait {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-weight: 900;
+  font-size: 18px;
+  box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.65);
+}
+
+.portrait.dark {
+  background: #2f2b28;
+}
+
+.portrait.gold {
+  background: var(--gold);
+}
+
+.portrait.teal {
+  background: var(--teal);
+}
+
+.portrait.red {
+  background: var(--red);
+}
+
+.portrait.green {
+  background: var(--green-dark);
+}
+
+.lobinho-card h2 {
+  margin-top: 10px;
+  font-family: "Bree Serif", Georgia, serif;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.card-progress {
+  width: 100%;
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px;
+  text-align: left;
+}
+
+.card-progress span {
+  color: var(--stone-500);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.card-progress strong {
+  font-size: 11px;
+}
+
+.card-progress .progress-track {
+  grid-column: 1 / -1;
+  height: 7px;
+}
+
+.card-link {
+  margin-top: 12px;
+  border: 0;
+  background: transparent;
+  color: var(--gold);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.matilha-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 28px;
+  align-items: start;
+}
+
+.left-stack {
+  display: grid;
+  gap: 22px;
+}
+
+.highlights {
+  display: grid;
+  gap: 14px;
+}
+
+.podium {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.podium-item {
+  border-radius: var(--radius-lg);
+  background: var(--gold-bg);
+  padding: 18px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 14px;
+  align-items: center;
+}
+
+.podium-item span {
+  grid-row: span 2;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold);
+  color: var(--white);
+  font-weight: 900;
+}
+
+.podium-item.second span {
+  background: var(--green-dark);
+}
+
+.podium-item small {
+  color: var(--stone-500);
+}
+
+.reminder-card {
+  padding: 26px 28px;
+  background: var(--green-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.reminder-card h2 {
+  color: var(--green-dark);
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.reminder-card p {
+  color: var(--stone-700);
+  line-height: 1.6;
+}
+
+.pack-card {
+  padding: 22px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  background: var(--gold-bg);
+}
+
+.pack-icon {
+  width: 78px;
+  height: 78px;
+  border-radius: 16px;
+  background: var(--stone-500);
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pack-icon svg {
+  width: 44px;
+  height: 44px;
+}
+
+.pack-card h2 {
+  font-family: "Bree Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.pack-card p {
+  margin-top: 4px;
+  color: var(--stone-700);
+  font-size: 13px;
+}
+
+.progress-row {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px;
+}
+
+.progress-row span {
+  color: var(--green-dark);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.progress-row .progress-track {
+  grid-column: 1 / -1;
+}
+
+.pack-action {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--stone-200);
+  color: var(--stone-700);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.actions-card {
+  display: grid;
+  gap: 18px;
+}
+
+.actions-list {
+  display: grid;
+  gap: 16px;
+}
+
+.action-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+}
+
+.action-item > span {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--stone-200);
+  color: var(--stone-700);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.action-item.complete > span {
+  background: var(--teal-soft);
+  color: var(--teal);
+}
+
+.action-item.new > span {
+  background: var(--gold-soft);
+  color: var(--gold);
+}
+
+.action-item strong {
+  font-size: 14px;
+}
+
+.action-item p {
+  margin-top: 3px;
+  color: var(--stone-700);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.action-item small {
+  display: block;
+  margin-top: 3px;
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.lobinho-detail {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+}
+
+.lobinho-detail h3 {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.lobinho-detail p {
+  color: var(--stone-600);
+  margin-bottom: 12px;
+}
+
+@media (max-width: 1060px) {
+  .lobinhos-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .matilha-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 820px) {
+  .filters-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .lobinhos-grid,
+  .podium,
+  .pack-card {
+    grid-template-columns: 1fr;
+  }
+
+  .pack-action {
+    justify-self: start;
+  }
+}

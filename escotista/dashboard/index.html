@@ -3,50 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Escotista – Painel do Escotista</title>
+    <title>Escotista - Painel do Escotista</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="../shared.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- TOP BAR -->
     <header class="topbar">
-      <a class="topbar-logo" href="#">Escotista</a>
-      <div class="topbar-right">
-        <button class="topbar-icon-btn" title="Sair">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-            <polyline points="16 17 21 12 16 7" />
-            <line x1="21" y1="12" x2="9" y2="12" />
+      <div class="topbar-left">
+        <button class="menu-toggle" type="button" title="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
-        <div class="topbar-avatar" title="Meu perfil">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
-            />
+        <a class="topbar-logo" href="../dashboard/index.html">Escotista</a>
+      </div>
+      <div class="topbar-right">
+        <a class="topbar-icon-btn" href="../../index.html" title="Sair">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <path d="m16 17 5-5-5-5M21 12H9" />
           </svg>
-        </div>
+        </a>
+        <a class="topbar-avatar" href="../perfil/index.html" title="Meu perfil">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12Zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8Z" />
+          </svg>
+        </a>
       </div>
     </header>
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="sidebar-brand">
         <div class="sidebar-brand-name">Sempre Alerta</div>
         <div class="sidebar-brand-role">Escotista Ativo</div>
       </div>
-      <nav class="sidebar-nav">
-        <a class="nav-link active" href="#">
+
+      <nav class="sidebar-nav" aria-label="Navegacao principal">
+        <a class="nav-link active" href="../dashboard/index.html">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <rect x="3" y="3" width="7" height="7" rx="1" />
             <rect x="14" y="3" width="7" height="7" rx="1" />
@@ -55,578 +52,240 @@
           </svg>
           Dashboard
         </a>
-        <a class="nav-link" href="#">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path
-              d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-            />
-            <polyline points="14 2 14 8 20 8" />
-            <line x1="16" y1="13" x2="8" y2="13" />
-            <line x1="16" y1="17" x2="8" y2="17" />
-            <polyline points="10 9 9 9 8 9" />
+        <a class="nav-link" href="../eixo/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
           </svg>
           Atividades
         </a>
-        <a class="nav-link" href="#">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+        <a class="nav-link" href="../matilha/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
             <circle cx="9" cy="7" r="4" />
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
           </svg>
           Matilha
         </a>
-        <a class="nav-link" href="#">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+        <a class="nav-link" href="../perfil/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
             <circle cx="12" cy="7" r="4" />
           </svg>
           Perfil
         </a>
-        <a class="nav-link" href="#">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="12" cy="12" r="3" />
-            <path
-              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
-            />
-          </svg>
-          Configurações
-        </a>
       </nav>
       <div class="sidebar-footer"></div>
     </aside>
 
-    <!-- MAIN -->
     <main class="main">
       <div class="content">
-        <!-- PAGE HEADER -->
         <div class="page-header">
           <div>
             <h1 class="page-title">Painel do Escotista</h1>
             <p class="page-subtitle">
-              Gestão da Alcateia Jângal: Visão geral de progresso e missões
-              pendentes.
+              Gestao da Alcateia Jangal: visao geral de progresso, validacoes
+              pendentes e missoes da semana.
             </p>
           </div>
           <div class="header-actions">
-            <button class="btn-icon" title="Exportar">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                />
-                <polyline points="14 2 14 8 20 8" />
-                <line x1="12" y1="18" x2="12" y2="12" />
-                <line x1="9" y1="15" x2="15" y2="15" />
+            <a class="icon-button export-link" href="../gestao-de-atividade/index.html" title="Exportar relatorio">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3" />
               </svg>
-            </button>
-            <button
-              class="btn-primary"
-              onclick="showToast('✅', 'Nova atividade criada!')"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
+            </a>
+            <a class="btn-primary" href="../criacao-de-atividade/index.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 5v14M5 12h14" />
               </svg>
               Nova Atividade
-            </button>
+            </a>
           </div>
         </div>
 
-        <!-- METRICS -->
-        <div class="metrics-grid">
-          <!-- Total Lobinhos -->
-          <div class="metric-card">
+        <section class="metrics-grid" aria-label="Indicadores">
+          <article class="metric-card card">
             <div class="metric-header">
-              <div class="metric-icon">
-                <svg
-                  viewBox="0 0 40 28"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="14" cy="10" r="7" fill="#feb300" opacity=".9" />
-                  <circle cx="26" cy="10" r="7" fill="#865c00" opacity=".7" />
-                  <ellipse
-                    cx="10"
-                    cy="22"
-                    rx="10"
-                    ry="5"
-                    fill="#feb300"
-                    opacity=".6"
-                  />
-                  <ellipse
-                    cx="30"
-                    cy="22"
-                    rx="10"
-                    ry="5"
-                    fill="#865c00"
-                    opacity=".5"
-                  />
+              <span class="metric-icon gold">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M16 11c1.93 0 3.5-1.57 3.5-3.5S17.93 4 16 4s-3.5 1.57-3.5 3.5S14.07 11 16 11Zm-8 0c1.93 0 3.5-1.57 3.5-3.5S9.93 4 8 4 4.5 5.57 4.5 7.5 6.07 11 8 11Zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5C15 14.17 10.33 13 8 13Zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5Z" />
                 </svg>
-              </div>
+              </span>
               <span class="metric-label">Total Lobinhos</span>
             </div>
             <div class="metric-value">
-              <span class="metric-number">32</span>
-              <span class="metric-badge badge-green">Ativos</span>
+              <strong>32</strong>
+              <span class="metric-note green">Ativos</span>
             </div>
-          </div>
+          </article>
 
-          <!-- Validações -->
-          <div class="metric-card">
+          <article class="metric-card card">
             <div class="metric-header">
-              <div class="metric-icon" style="width: 35px; height: 37px">
-                <svg
-                  viewBox="0 0 35 37"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect
-                    x="4"
-                    y="2"
-                    width="27"
-                    height="33"
-                    rx="4"
-                    fill="#fee2e2"
-                  />
-                  <rect
-                    x="4"
-                    y="2"
-                    width="27"
-                    height="33"
-                    rx="4"
-                    stroke="#be2d06"
-                    stroke-width="2"
-                  />
-                  <line
-                    x1="11"
-                    y1="12"
-                    x2="24"
-                    y2="12"
-                    stroke="#be2d06"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                  <line
-                    x1="11"
-                    y1="18"
-                    x2="24"
-                    y2="18"
-                    stroke="#be2d06"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                  <line
-                    x1="11"
-                    y1="24"
-                    x2="19"
-                    y2="24"
-                    stroke="#be2d06"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                  <circle cx="28" cy="8" r="6" fill="#be2d06" />
-                  <text
-                    x="28"
-                    y="12"
-                    text-anchor="middle"
-                    fill="white"
-                    font-size="8"
-                    font-weight="bold"
-                  >
-                    !
-                  </text>
+              <span class="metric-icon red">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M8 3h8l4 4v14H4V3h4Z" />
+                  <path d="M15 3v5h5M8 13h8M8 17h5" />
                 </svg>
-              </div>
-              <span class="metric-label">Validações</span>
+              </span>
+              <span class="metric-label">Validacoes</span>
             </div>
             <div class="metric-value">
-              <span class="metric-number">14</span>
-              <span class="metric-badge badge-red">Urgentes</span>
+              <strong id="pending-count">14</strong>
+              <span class="metric-note red">Urgentes</span>
             </div>
-          </div>
+          </article>
 
-          <!-- Engajamento -->
-          <div class="metric-card">
+          <article class="metric-card card">
             <div class="metric-header">
-              <div class="metric-icon" style="width: 36px; height: 28px">
-                <svg
-                  viewBox="0 0 36 28"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <polyline
-                    points="2,24 10,16 18,18 26,8 34,4"
-                    stroke="#237329"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <polyline
-                    points="28,4 34,4 34,10"
-                    stroke="#237329"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
+              <span class="metric-icon teal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="m3 17 6-6 4 4 8-9" />
+                  <path d="M15 6h6v6" />
                 </svg>
-              </div>
+              </span>
               <span class="metric-label">Engajamento</span>
             </div>
             <div class="metric-value">
-              <span class="metric-number">88%</span>
-              <span class="metric-badge badge-green">+5% sem.</span>
+              <strong>88%</strong>
+              <span class="metric-note green">+5% sem.</span>
             </div>
-          </div>
+          </article>
 
-          <!-- Espírito da Jângal -->
-          <div class="spirit-card">
-            <svg
-              class="spirit-mountain"
-              width="90"
-              height="74"
-              viewBox="0 0 90 74"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <polygon points="45,5 85,70 5,70" fill="rgba(255,255,255,0.12)" />
-              <polygon
-                points="65,20 90,70 40,70"
-                fill="rgba(255,255,255,0.08)"
-              />
-            </svg>
-            <div class="spirit-label">Espírito da Jângal</div>
-            <div class="spirit-value">
-              <span class="spirit-emoji">🌟</span>
-              <span class="spirit-text">Radiante</span>
-            </div>
-          </div>
-        </div>
-        <!-- /metrics-grid -->
+          <article class="spirit-card">
+            <div class="spirit-art" aria-hidden="true"></div>
+            <span class="spirit-label">Espirito da Jangal</span>
+            <strong>Radiante</strong>
+          </article>
+        </section>
 
-        <!-- CONTENT GRID -->
-        <div class="content-grid">
-          <!-- ACTIVITIES PANEL -->
-          <div class="activities-card">
-            <div class="activities-head">
-              <div class="activities-title-row">
-                <div class="activities-title-icon">
-                  <svg
-                    viewBox="0 0 34 36"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect
-                      x="2"
-                      y="4"
-                      width="30"
-                      height="30"
-                      rx="5"
-                      fill="#fef9c3"
-                      stroke="#865c00"
-                      stroke-width="2"
-                    />
-                    <polyline
-                      points="10,18 15,23 24,13"
-                      stroke="#237329"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
+        <section class="dashboard-grid">
+          <article class="activities-card card">
+            <div class="section-heading">
+              <div class="title-with-icon">
+                <span class="title-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <path d="M9 11l3 3L22 4" />
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
                   </svg>
-                </div>
-                <h2 class="activities-title">Atividades Pendentes</h2>
+                </span>
+                <h2 class="section-title">Atividades Pendentes</h2>
               </div>
-              <button class="btn-link">Ver Histórico</button>
+              <a class="btn-link" href="../gestao-de-atividade/index.html">Ver Historico</a>
             </div>
 
-            <div class="activities-list">
-              <!-- Item 1 -->
-              <div class="activity-item">
-                <div class="activity-inner">
-                  <div class="activity-avatar">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path
-                        d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
-                      />
-                    </svg>
-                  </div>
-                  <div class="activity-body">
-                    <div class="activity-top">
-                      <div>
-                        <div class="activity-name">Pedro Silva</div>
-                        <span class="activity-tag tag-gold"
-                          >Especialidade: Culinária</span
-                        >
-                      </div>
-                      <span class="activity-time">Há 2 horas</span>
-                    </div>
-                    <div class="activity-quote">
-                      "Fiz o pão de caçador na fogueira do quintal com meu pai.
-                      Ficou bem assado e crocante!"
-                    </div>
-                    <div class="activity-actions">
-                      <button
-                        class="btn-approve"
-                        onclick="handleAction(this, 'aprovada')"
-                      >
-                        <svg
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        Aprovar
-                      </button>
-                      <button
-                        class="btn-reject"
-                        onclick="handleAction(this, 'rejeitada')"
-                      >
-                        <svg
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <line x1="18" y1="6" x2="6" y2="18" />
-                          <line x1="6" y1="6" x2="18" y2="18" />
-                        </svg>
-                        Rejeitar
-                      </button>
-                    </div>
-                  </div>
+            <div class="activities-list" id="activities-list"></div>
+
+            <a class="see-all" href="../gestao-de-atividade/index.html" id="see-all-link">Ver todas as pendencias</a>
+          </article>
+
+          <aside class="right-column">
+            <article class="rank-card card card-pad">
+              <div class="section-heading compact">
+                <h3>Top Performance</h3>
+                <span class="rank-medal">TROFEU</span>
+              </div>
+              <div class="performer-list">
+                <div class="performer">
+                  <span class="performer-rank">1</span>
+                  <span class="performer-avatar green">TM</span>
+                  <span class="performer-info">
+                    <span>Thiago Martins</span>
+                    <span class="progress-track"><span class="progress-bar" style="width: 92%"></span></span>
+                  </span>
+                  <strong>92%</strong>
+                </div>
+                <div class="performer">
+                  <span class="performer-rank muted-rank">2</span>
+                  <span class="performer-avatar stone">LR</span>
+                  <span class="performer-info">
+                    <span>Lucas Rocha</span>
+                    <span class="progress-track"><span class="progress-bar stone-bar" style="width: 75%"></span></span>
+                  </span>
+                  <strong>75%</strong>
                 </div>
               </div>
+              <a class="btn-rank" href="../matilha/index.html">Ver Rank Completo</a>
+            </article>
 
-              <!-- Item 2 -->
-              <div class="activity-item">
-                <div class="activity-inner">
-                  <div class="activity-avatar">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path
-                        d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
-                      />
-                    </svg>
-                  </div>
-                  <div class="activity-body">
-                    <div class="activity-top">
-                      <div>
-                        <div class="activity-name">Mariana Costa</div>
-                        <span class="activity-tag tag-teal"
-                          >Atividade: Observação</span
-                        >
-                      </div>
-                      <span class="activity-time">Há 5 horas</span>
-                    </div>
-                    <div class="activity-quote">
-                      "Identifiquei um Bem-te-vi e um Sabiá-laranjeira no parque
-                      hoje de manhã."
-                    </div>
-                    <div class="activity-actions">
-                      <button
-                        class="btn-approve"
-                        onclick="handleAction(this, 'aprovada')"
-                      >
-                        <svg
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        Aprovar
-                      </button>
-                      <button
-                        class="btn-reject"
-                        onclick="handleAction(this, 'rejeitada')"
-                      >
-                        <svg
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <line x1="18" y1="6" x2="6" y2="18" />
-                          <line x1="6" y1="6" x2="18" y2="18" />
-                        </svg>
-                        Rejeitar
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- /activities-list -->
-
-            <div class="activities-footer">
-              <button class="btn-see-all">Ver todas as 14 pendências</button>
-            </div>
-          </div>
-          <!-- /activities-card -->
-
-          <!-- RIGHT COLUMN -->
-          <div class="right-col">
-            <!-- TOP PERFORMERS -->
-            <div class="top-card">
-              <div class="top-card-header">
-                <h3 class="top-card-title">Top Performance</h3>
-                <span class="trophy">🏆</span>
-              </div>
-              <div class="performers">
-                <!-- #1 -->
-                <div class="performer-item">
-                  <div class="performer-avatar-wrap">
-                    <div class="performer-avatar">
-                      <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                          d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
-                        />
-                      </svg>
-                    </div>
-                    <div class="performer-rank rank-1">1</div>
-                  </div>
-                  <div class="performer-info">
-                    <div class="performer-row">
-                      <span class="performer-name">Thiago Martins</span>
-                      <span class="performer-pct pct-green">92%</span>
-                    </div>
-                    <div class="progress-track">
-                      <div
-                        class="progress-bar bar-green"
-                        style="width: 92%"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- #2 -->
-                <div class="performer-item">
-                  <div class="performer-avatar-wrap">
-                    <div class="performer-avatar">
-                      <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                          d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
-                        />
-                      </svg>
-                    </div>
-                    <div class="performer-rank rank-2">2</div>
-                  </div>
-                  <div class="performer-info">
-                    <div class="performer-row">
-                      <span class="performer-name">Lucas Rocha</span>
-                      <span class="performer-pct pct-gray">75%</span>
-                    </div>
-                    <div class="progress-track">
-                      <div
-                        class="progress-bar bar-gray"
-                        style="width: 75%"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /performers -->
-              <button class="btn-rank">Ver Rank Completo</button>
-            </div>
-            <!-- /top-card -->
-
-            <!-- SPOTLIGHT -->
-            <div class="spotlight-card">
-              <div class="spotlight-header">
-                <span class="spotlight-icon">⭐</span>
-                <span class="spotlight-label">Destaque da Semana</span>
-              </div>
+            <article class="spotlight-card">
+              <div class="spotlight-label">Destaque da Semana</div>
               <div class="spotlight-person">
-                <div class="spotlight-avatar">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                      d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
-                    />
-                  </svg>
-                </div>
+                <span class="performer-avatar gold">BO</span>
                 <div>
-                  <div class="spotlight-name">Bia Oliveira</div>
-                  <div class="spotlight-desc">
-                    Completou 3 progressões em tempo recorde!
-                  </div>
+                  <strong>Bia Oliveira</strong>
+                  <p>Completou 3 progressoes em tempo recorde.</p>
                 </div>
               </div>
-              <button
-                class="btn-congrats"
-                onclick="
-                  showToast('🎉', 'Parabéns enviados para Bia Oliveira!')
-                "
-              >
-                Mandar Parabéns
-              </button>
-            </div>
-            <!-- /spotlight-card -->
-          </div>
-          <!-- /right-col -->
-        </div>
-        <!-- /content-grid -->
+              <button class="btn-congrats" type="button" id="congrats-btn">Mandar Parabens</button>
+            </article>
+          </aside>
+        </section>
       </div>
-      <!-- /content -->
     </main>
 
-    <!-- TOAST -->
-    <div class="toast" id="toast">
-      <span class="toast-icon" id="toast-icon"></span>
-      <span id="toast-msg"></span>
+    <div class="modal" id="activity-modal" aria-hidden="true">
+      <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="activity-modal-title">
+        <div class="modal-head">
+          <h2 class="modal-title" id="activity-modal-title">Detalhes da atividade</h2>
+          <button class="icon-button" type="button" data-close-modal title="Fechar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body detail-grid">
+          <div>
+            <span class="detail-label">Lobinho</span>
+            <strong id="modal-name"></strong>
+          </div>
+          <div>
+            <span class="detail-label">Bloco</span>
+            <strong id="modal-block"></strong>
+          </div>
+          <div>
+            <span class="detail-label">Data de conclusao</span>
+            <strong id="modal-date"></strong>
+          </div>
+          <div class="detail-full">
+            <span class="detail-label">Descricao enviada</span>
+            <p id="modal-description"></p>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn-outline" type="button" data-close-modal>Fechar</button>
+        </div>
+      </div>
     </div>
 
+    <div class="modal" id="reject-modal" aria-hidden="true">
+      <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="reject-title">
+        <div class="modal-head">
+          <h2 class="modal-title" id="reject-title">Justificar rejeicao</h2>
+          <button class="icon-button" type="button" data-close-modal title="Fechar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <form id="reject-form">
+          <div class="modal-body">
+            <div class="field">
+              <label for="reject-reason">Justificativa</label>
+              <textarea id="reject-reason" required placeholder="Explique o que precisa ser corrigido pelo lobinho."></textarea>
+              <span class="field-error" id="reject-error"></span>
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button class="btn-outline" type="button" data-close-modal>Cancelar</button>
+            <button class="btn-danger" type="submit">Rejeitar atividade</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="../shared.js"></script>
+    <script src="../shared-data.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

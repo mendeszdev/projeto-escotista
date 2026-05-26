@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escotista - Criacao de Atividade</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../shared.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle" type="button" title="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <a class="topbar-logo" href="../dashboard/index.html">Escotista</a>
+      </div>
+      <div class="topbar-right">
+        <a class="topbar-icon-btn" href="../../index.html" title="Sair">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <path d="m16 17 5-5-5-5M21 12H9" />
+          </svg>
+        </a>
+        <a class="topbar-avatar" href="../perfil/index.html" title="Meu perfil">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12Zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8Z" />
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-name">Sempre Alerta</div>
+        <div class="sidebar-brand-role">Escotista Ativo</div>
+      </div>
+      <nav class="sidebar-nav" aria-label="Navegacao principal">
+        <a class="nav-link" href="../dashboard/index.html">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+          Dashboard
+        </a>
+        <a class="nav-link active" href="../eixo/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <path d="M14 2v6h6M16 13H8M16 17H8" />
+          </svg>
+          Atividades
+        </a>
+        <a class="nav-link" href="../matilha/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          Matilha
+        </a>
+        <a class="nav-link" href="../perfil/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          Perfil
+        </a>
+      </nav>
+      <div class="sidebar-footer"></div>
+    </aside>
+
+    <main class="main">
+      <div class="content">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Criacao de Atividade</h1>
+            <p class="page-subtitle">
+              Cadastre uma atividade personalizada, vincule aos lobinhos e defina
+              o bloco de aprendizagem correspondente.
+            </p>
+          </div>
+          <div class="header-actions">
+            <a class="btn-outline" href="../gestao-de-atividade/index.html">Voltar para Gestao</a>
+          </div>
+        </div>
+
+        <section class="create-layout">
+          <form class="activity-form card card-pad" id="activity-form" novalidate>
+            <div class="section-heading form-heading">
+              <h2 class="section-title">Dados da atividade</h2>
+              <span class="pill green">Escotista</span>
+            </div>
+
+            <div class="form-grid">
+              <div class="field full">
+                <label for="activity-name">Nome da atividade</label>
+                <input id="activity-name" name="activityName" placeholder="Ex.: Trilha de observacao da natureza" />
+                <span class="field-error" data-error-for="activity-name"></span>
+              </div>
+
+              <div class="field">
+                <label for="activity-block">Bloco de aprendizagem</label>
+                <select id="activity-block" name="activityBlock">
+                  <option value="">Selecione</option>
+                  <option value="Habilidades para a Vida">Habilidades para a Vida</option>
+                  <option value="Meio Ambiente">Meio Ambiente</option>
+                  <option value="Paz e Desenvolvimento">Paz e Desenvolvimento</option>
+                  <option value="Saude e Bem-Estar">Saude e Bem-Estar</option>
+                </select>
+                <span class="field-error" data-error-for="activity-block"></span>
+              </div>
+
+              <div class="field">
+                <label for="deadline">Data limite</label>
+                <input id="deadline" name="deadline" type="date" />
+                <span class="field-error" data-error-for="deadline"></span>
+              </div>
+
+              <div class="field full">
+                <label for="activity-description">Descricao</label>
+                <textarea
+                  id="activity-description"
+                  name="activityDescription"
+                  placeholder="Descreva o objetivo, materiais e criterios de conclusao."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="lobinho-section">
+              <div class="section-heading">
+                <div>
+                  <h2 class="section-title">Lobinhos associados</h2>
+                  <p class="helper-text">Atividades podem ser vinculadas a varios lobinhos.</p>
+                </div>
+                <span class="pill teal" id="selected-count">0 selecionados</span>
+              </div>
+
+              <div class="lobinho-grid" id="lobinho-grid">
+                <label class="lobinho-option">
+                  <input type="checkbox" name="lobinhos" value="Mowgli" />
+                  <span class="lobinho-avatar green">MO</span>
+                  <span><strong>Mowgli</strong><small>Pata-Tenra</small></span>
+                </label>
+                <label class="lobinho-option">
+                  <input type="checkbox" name="lobinhos" value="Bagheera" />
+                  <span class="lobinho-avatar gold">BA</span>
+                  <span><strong>Bagheera</strong><small>Saltador</small></span>
+                </label>
+                <label class="lobinho-option">
+                  <input type="checkbox" name="lobinhos" value="Baloo" />
+                  <span class="lobinho-avatar teal">BL</span>
+                  <span><strong>Baloo</strong><small>Pata-Tenra</small></span>
+                </label>
+                <label class="lobinho-option">
+                  <input type="checkbox" name="lobinhos" value="Raksha" />
+                  <span class="lobinho-avatar red">RA</span>
+                  <span><strong>Raksha</strong><small>Rastreador</small></span>
+                </label>
+              </div>
+              <span class="field-error" id="lobinho-error"></span>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn-outline" type="reset">Limpar</button>
+              <button class="btn-primary" type="submit">Criar Atividade</button>
+            </div>
+          </form>
+
+          <aside class="preview-card card card-pad" aria-label="Resumo da atividade">
+            <span class="preview-kicker">Resumo</span>
+            <h2 id="preview-title">Nova atividade</h2>
+            <p id="preview-description">
+              Preencha os dados para visualizar o resumo antes de criar.
+            </p>
+
+            <div class="preview-list">
+              <div>
+                <span>Bloco</span>
+                <strong id="preview-block">Nao definido</strong>
+              </div>
+              <div>
+                <span>Data limite</span>
+                <strong id="preview-deadline">Nao definida</strong>
+              </div>
+              <div>
+                <span>Lobinhos</span>
+                <strong id="preview-lobinhos">Nenhum selecionado</strong>
+              </div>
+            </div>
+
+            <a class="btn-ghost preview-link" href="../gestao-de-atividade/index.html">Ver atividades cadastradas</a>
+          </aside>
+        </section>
+      </div>
+    </main>
+
+    <script src="../shared.js"></script>
+    <script src="../shared-data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

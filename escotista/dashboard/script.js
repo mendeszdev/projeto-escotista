@@ -1,62 +1,135 @@
-/* dashboard-escotista.js */
+let pendingRejectId = null;
 
-/**
- * Exibe um toast de notificação temporário.
- * @param {string} icon  - Emoji ou ícone exibido à esquerda
- * @param {string} msg   - Texto da mensagem
- * @param {number} [duration=3000] - Duração em ms antes de sumir
- */
-function showToast(icon, msg, duration = 3000) {
-  const toast = document.getElementById("toast");
-  const toastIcon = document.getElementById("toast-icon");
-  const toastMsg = document.getElementById("toast-msg");
-
-  toastIcon.textContent = icon;
-  toastMsg.textContent = msg;
-  toast.classList.add("show");
-
-  clearTimeout(toast._hideTimer);
-  toast._hideTimer = setTimeout(() => toast.classList.remove("show"), duration);
+function initials(name) {
+  return name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 }
 
-/**
- * Aprova ou rejeita uma atividade pendente:
- * anima a saída do item e exibe toast.
- * @param {HTMLElement} btn    - Botão clicado (aprovar ou rejeitar)
- * @param {string}      action - 'aprovada' | 'rejeitada'
- */
-function handleAction(btn, action) {
-  const item = btn.closest(".activity-item");
-  const name = item.querySelector(".activity-name").textContent.trim();
-  const emoji = action === "aprovada" ? "✅" : "❌";
-
-  item.style.transition = "opacity .4s, transform .4s";
-  item.style.opacity = "0";
-  item.style.transform = "translateX(30px)";
-
-  setTimeout(() => {
-    item.remove();
-    showToast(emoji, `Atividade de ${name} ${action}!`);
-  }, 400);
+function pendingActivities() {
+  return window.EscotistaData ? EscotistaData.getPendingActivities() : [];
 }
 
-/**
- * Inicializa o destaque de navegação da sidebar:
- * ao clicar em um link, remove .active dos demais e aplica no clicado.
- */
-function initSidebarNav() {
-  const links = document.querySelectorAll(".nav-link");
+function renderPendingActivities() {
+  const list = document.getElementById("activities-list");
+  const activities = pendingActivities();
+  const count = activities.length;
 
-  links.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      links.forEach((l) => l.classList.remove("active"));
-      link.classList.add("active");
+  document.getElementById("pending-count").textContent = String(count);
+  document.getElementById("see-all-link").textContent = `Ver todas as ${count} pendencia${count === 1 ? "" : "s"}`;
+
+  if (!count) {
+    list.innerHTML = `
+      <div class="empty-dashboard-state">
+        <div class="empty-icon">OK</div>
+        <strong>Tudo validado!</strong>
+        <span>Nenhuma atividade pendente no momento.</span>
+      </div>
+    `;
+    return;
+  }
+
+  list.innerHTML = activities
+    .slice(0, 2)
+    .map(
+      (activity) => `
+        <article
+          class="activity-item"
+          data-id="${activity.id}"
+          data-name="${activity.name}"
+          data-activity="${activity.tag}"
+          data-description="${activity.quote}"
+          data-block="${activity.block}"
+          data-date="${activity.date}"
+        >
+          <button class="activity-summary" type="button" data-open-details>
+            <span class="activity-avatar ${activity.tagType}">${initials(activity.name)}</span>
+            <span class="activity-copy">
+              <span class="activity-top">
+                <span>
+                  <strong>${activity.name}</strong>
+                  <span class="pill ${activity.tagType}">${activity.tag}</span>
+                </span>
+                <small>${activity.time}</small>
+              </span>
+              <span class="activity-quote">"${activity.quote}"</span>
+            </span>
+          </button>
+          <div class="activity-actions">
+            <button class="btn-secondary" type="button" data-action="approve">Aprovar</button>
+            <button class="btn-outline" type="button" data-action="reject">Rejeitar</button>
+          </div>
+        </article>
+      `,
+    )
+    .join("");
+
+  bindPendingActivityEvents();
+}
+
+function setActivityStatus(id, status) {
+  EscotistaData.updateActivityStatus(Number(id), status);
+  renderPendingActivities();
+}
+
+function fillDetails(item) {
+  document.getElementById("modal-name").textContent = item.dataset.name;
+  document.getElementById("modal-block").textContent = item.dataset.block;
+  document.getElementById("modal-date").textContent = item.dataset.date;
+  document.getElementById("modal-description").textContent = item.dataset.description;
+  EscotistaApp.openModal("activity-modal");
+}
+
+function bindPendingActivityEvents() {
+  document.querySelectorAll(".activity-item").forEach((item) => {
+    item.querySelector("[data-open-details]").addEventListener("click", () => fillDetails(item));
+
+    item.querySelectorAll("[data-action]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (button.dataset.action === "approve") {
+          setActivityStatus(item.dataset.id, "concluido");
+          EscotistaApp.showToast("OK", `Atividade de ${item.dataset.name} aprovada.`);
+          return;
+        }
+
+        pendingRejectId = Number(item.dataset.id);
+        document.getElementById("reject-reason").value = "";
+        document.getElementById("reject-error").textContent = "";
+        EscotistaApp.openModal("reject-modal");
+      });
     });
   });
 }
 
-/* ── Bootstrap ── */
+function initRejectForm() {
+  const form = document.getElementById("reject-form");
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const reason = document.getElementById("reject-reason").value.trim();
+    const error = document.getElementById("reject-error");
+
+    if (!reason) {
+      error.textContent = "A justificativa e obrigatoria para rejeitar.";
+      return;
+    }
+
+    if (pendingRejectId) {
+      setActivityStatus(pendingRejectId, "rejeitado");
+      pendingRejectId = null;
+    }
+    EscotistaApp.closeModal(document.getElementById("reject-modal"));
+    EscotistaApp.showToast("!", "Atividade rejeitada.");
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  initSidebarNav();
+  renderPendingActivities();
+  initRejectForm();
+
+  document.getElementById("congrats-btn").addEventListener("click", () => {
+    EscotistaApp.showToast("OK", "Parabens enviados para Bia Oliveira.");
+  });
 });

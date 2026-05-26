@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escotista - Gestao de Atividades</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../shared.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle" type="button" title="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <a class="topbar-logo" href="../dashboard/index.html">Escotista</a>
+      </div>
+      <div class="topbar-right">
+        <a class="topbar-icon-btn" href="../../index.html" title="Sair">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <path d="m16 17 5-5-5-5M21 12H9" />
+          </svg>
+        </a>
+        <a class="topbar-avatar" href="../perfil/index.html" title="Meu perfil">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12Zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8Z" />
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-name">Sempre Alerta</div>
+        <div class="sidebar-brand-role">Escotista Ativo</div>
+      </div>
+      <nav class="sidebar-nav" aria-label="Navegacao principal">
+        <a class="nav-link" href="../dashboard/index.html">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+          Dashboard
+        </a>
+        <a class="nav-link active" href="../eixo/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <path d="M14 2v6h6M16 13H8M16 17H8" />
+          </svg>
+          Atividades
+        </a>
+        <a class="nav-link" href="../matilha/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          Matilha
+        </a>
+        <a class="nav-link" href="../perfil/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          Perfil
+        </a>
+      </nav>
+      <div class="sidebar-footer"></div>
+    </aside>
+
+    <main class="main">
+      <div class="content">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Gestao de Atividades</h1>
+            <p class="page-subtitle">
+              Revise registros enviados pelos lobinhos, aprove ou rejeite em lote
+              e consulte o historico recente.
+            </p>
+          </div>
+          <div class="header-actions">
+            <a class="btn-outline" href="../eixo/index.html">Ver Eixos</a>
+            <a class="btn-primary" href="../criacao-de-atividade/index.html">Nova Atividade</a>
+          </div>
+        </div>
+
+        <section class="filters-card card card-pad" aria-label="Filtros de atividades">
+          <div class="filters-grid">
+            <div class="field">
+              <label for="search">Buscar lobinho ou atividade</label>
+              <input id="search" type="search" placeholder="Nome, atividade ou palavra-chave" />
+            </div>
+            <div class="field">
+              <label for="status-filter">Status</label>
+              <select id="status-filter">
+                <option value="todos">Todos os status</option>
+                <option value="pendente">Pendente</option>
+                <option value="concluido">Concluido</option>
+                <option value="rejeitado">Rejeitado</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="axis-filter">Bloco</label>
+              <select id="axis-filter">
+                <option value="todos">Todos os blocos</option>
+                <option value="habilidades">Habilidades para a Vida</option>
+                <option value="meio-ambiente">Meio Ambiente</option>
+                <option value="paz">Paz e Desenvolvimento</option>
+                <option value="saude">Saude e Bem-Estar</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <section class="bulk-bar card" aria-label="Acoes em lote">
+          <label class="select-all">
+            <input type="checkbox" id="select-all" />
+            <span>Selecionar visiveis</span>
+          </label>
+          <span id="selection-count">0 selecionadas</span>
+          <div class="bulk-actions">
+            <button class="btn-secondary" type="button" id="bulk-approve">Aprovar selecionadas</button>
+            <button class="btn-outline" type="button" id="bulk-reject">Rejeitar selecionadas</button>
+          </div>
+        </section>
+
+        <section class="activity-board" aria-label="Lista de atividades">
+          <article
+            class="activity-row card"
+            data-status="pendente"
+            data-eixo="habilidades"
+            data-lobinho="Pedro Silva"
+            data-title="Especialidade: Culinaria"
+            data-date="24/05/2026"
+            data-description="Fiz o pao de cacador na fogueira do quintal com meu pai. Ficou bem assado e crocante."
+          >
+            <label class="row-check-wrap">
+              <input class="row-check" type="checkbox" />
+              <span class="visually-hidden">Selecionar Pedro Silva</span>
+            </label>
+            <span class="row-avatar gold">PS</span>
+            <div class="row-main">
+              <div class="row-top">
+                <div>
+                  <strong>Pedro Silva</strong>
+                  <span>Especialidade: Culinaria</span>
+                </div>
+                <span class="pill gold status-pill">Pendente</span>
+              </div>
+              <p>"Fiz o pao de cacador na fogueira do quintal com meu pai. Ficou bem assado e crocante."</p>
+              <div class="row-meta">
+                <span>Habilidades para a Vida</span>
+                <span>Data: 24/05/2026</span>
+              </div>
+            </div>
+            <div class="row-actions">
+              <button class="btn-ghost" type="button" data-detail>Detalhes</button>
+              <button class="btn-secondary" type="button" data-row-action="approve">Aprovar</button>
+              <button class="btn-outline" type="button" data-row-action="reject">Rejeitar</button>
+            </div>
+          </article>
+
+          <article
+            class="activity-row card"
+            data-status="pendente"
+            data-eixo="meio-ambiente"
+            data-lobinho="Mariana Costa"
+            data-title="Atividade: Observacao"
+            data-date="24/05/2026"
+            data-description="Identifiquei um Bem-te-vi e um Sabia-laranjeira no parque hoje de manha."
+          >
+            <label class="row-check-wrap">
+              <input class="row-check" type="checkbox" />
+              <span class="visually-hidden">Selecionar Mariana Costa</span>
+            </label>
+            <span class="row-avatar teal">MC</span>
+            <div class="row-main">
+              <div class="row-top">
+                <div>
+                  <strong>Mariana Costa</strong>
+                  <span>Atividade: Observacao</span>
+                </div>
+                <span class="pill gold status-pill">Pendente</span>
+              </div>
+              <p>"Identifiquei um Bem-te-vi e um Sabia-laranjeira no parque hoje de manha."</p>
+              <div class="row-meta">
+                <span>Meio Ambiente</span>
+                <span>Data: 24/05/2026</span>
+              </div>
+            </div>
+            <div class="row-actions">
+              <button class="btn-ghost" type="button" data-detail>Detalhes</button>
+              <button class="btn-secondary" type="button" data-row-action="approve">Aprovar</button>
+              <button class="btn-outline" type="button" data-row-action="reject">Rejeitar</button>
+            </div>
+          </article>
+
+          <article
+            class="activity-row card"
+            data-status="concluido"
+            data-eixo="paz"
+            data-lobinho="Thiago Martins"
+            data-title="Mutirao da Praca"
+            data-date="23/05/2026"
+            data-description="Ajudou a organizar o mutirao da praca e apoiou os lobinhos menores durante a atividade."
+          >
+            <label class="row-check-wrap">
+              <input class="row-check" type="checkbox" />
+              <span class="visually-hidden">Selecionar Thiago Martins</span>
+            </label>
+            <span class="row-avatar green">TM</span>
+            <div class="row-main">
+              <div class="row-top">
+                <div>
+                  <strong>Thiago Martins</strong>
+                  <span>Mutirao da Praca</span>
+                </div>
+                <span class="pill green status-pill">Concluido</span>
+              </div>
+              <p>Ajudou a organizar o mutirao da praca e apoiou os lobinhos menores durante a atividade.</p>
+              <div class="row-meta">
+                <span>Paz e Desenvolvimento</span>
+                <span>Data: 23/05/2026</span>
+              </div>
+            </div>
+            <div class="row-actions">
+              <button class="btn-ghost" type="button" data-detail>Detalhes</button>
+            </div>
+          </article>
+
+          <article
+            class="activity-row card"
+            data-status="rejeitado"
+            data-eixo="saude"
+            data-lobinho="Lucas Rocha"
+            data-title="Circuito de Corrida"
+            data-date="22/05/2026"
+            data-description="Registro enviado sem data correta e sem descricao suficiente para validacao."
+          >
+            <label class="row-check-wrap">
+              <input class="row-check" type="checkbox" />
+              <span class="visually-hidden">Selecionar Lucas Rocha</span>
+            </label>
+            <span class="row-avatar red">LR</span>
+            <div class="row-main">
+              <div class="row-top">
+                <div>
+                  <strong>Lucas Rocha</strong>
+                  <span>Circuito de Corrida</span>
+                </div>
+                <span class="pill red status-pill">Rejeitado</span>
+              </div>
+              <p>Registro enviado sem data correta e sem descricao suficiente para validacao.</p>
+              <div class="row-meta">
+                <span>Saude e Bem-Estar</span>
+                <span>Data: 22/05/2026</span>
+              </div>
+            </div>
+            <div class="row-actions">
+              <button class="btn-ghost" type="button" data-detail>Detalhes</button>
+            </div>
+          </article>
+
+          <div class="empty-state" id="empty-state" hidden>Nenhuma atividade encontrada com esses filtros.</div>
+        </section>
+      </div>
+    </main>
+
+    <div class="modal" id="detail-modal" aria-hidden="true">
+      <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+        <div class="modal-head">
+          <h2 class="modal-title" id="detail-title">Detalhes da atividade</h2>
+          <button class="icon-button" type="button" data-close-modal title="Fechar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body detail-list">
+          <div><span>Lobinho</span><strong id="detail-lobinho"></strong></div>
+          <div><span>Atividade</span><strong id="detail-activity"></strong></div>
+          <div><span>Bloco</span><strong id="detail-axis"></strong></div>
+          <div><span>Data</span><strong id="detail-date"></strong></div>
+          <div class="detail-description"><span>Descricao</span><p id="detail-description"></p></div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn-outline" type="button" data-close-modal>Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="reject-modal" aria-hidden="true">
+      <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="reject-title">
+        <div class="modal-head">
+          <h2 class="modal-title" id="reject-title">Justificar rejeicao</h2>
+          <button class="icon-button" type="button" data-close-modal title="Fechar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <form id="reject-form">
+          <div class="modal-body">
+            <div class="field">
+              <label for="reject-reason">Justificativa</label>
+              <textarea id="reject-reason" required placeholder="Explique o motivo da rejeicao."></textarea>
+              <span class="field-error" id="reject-error"></span>
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button class="btn-outline" type="button" data-close-modal>Cancelar</button>
+            <button class="btn-danger" type="submit">Confirmar rejeicao</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="../shared.js"></script>
+    <script src="../shared-data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

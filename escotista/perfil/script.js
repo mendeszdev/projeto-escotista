@@ -1,173 +1,97 @@
-/* perfil.js */
-
-/**
- * Exibe um toast de notificação temporário.
- * @param {string} icon       - Emoji exibido à esquerda
- * @param {string} msg        - Texto da mensagem
- * @param {number} [duration] - Duração em ms (padrão: 3000)
- */
-function showToast(icon, msg, duration = 3000) {
-  const toast = document.getElementById("toast");
-  const toastIcon = document.getElementById("toast-icon");
-  const toastMsg = document.getElementById("toast-msg");
-
-  toastIcon.textContent = icon;
-  toastMsg.textContent = msg;
-  toast.classList.add("show");
-
-  clearTimeout(toast._timer);
-  toast._timer = setTimeout(() => toast.classList.remove("show"), duration);
+function setError(id, message) {
+  const target = document.querySelector(`[data-error-for="${id}"]`);
+  if (target) target.textContent = message;
 }
 
-/**
- * Aplica a classe .active ao link clicado na sidebar.
- */
-function initSidebarNav() {
-  document.querySelectorAll(".nav-link").forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      document
-        .querySelectorAll(".nav-link")
-        .forEach((l) => l.classList.remove("active"));
-      link.classList.add("active");
-    });
+function clearErrors() {
+  document.querySelectorAll(".field-error").forEach((error) => {
+    error.textContent = "";
   });
 }
 
-/**
- * Alterna modo de edição nos campos de informações básicas.
- */
-function initEditProfile() {
-  const btn = document.getElementById("btn-edit-profile");
-  if (!btn) return;
-
-  let editing = false;
-
-  btn.addEventListener("click", () => {
-    editing = !editing;
-
-    const fields = document.querySelectorAll(".info-value[data-editable]");
-    fields.forEach((field) => {
-      if (editing) {
-        // replace text with input
-        const input = document.createElement("input");
-        input.type = "text";
-        input.value = field.textContent.trim();
-        input.style.cssText = `
-          background: white;
-          border: 1.5px solid #feb300;
-          border-radius: 8px;
-          padding: 4px 10px;
-          font-family: 'Open Sans', sans-serif;
-          font-size: 16px;
-          font-weight: 600;
-          color: #393834;
-          width: 100%;
-          outline: none;
-        `;
-        input.dataset.original = field.textContent.trim();
-        field.replaceWith(input);
-      } else {
-        // save and revert
-        const input = document.querySelector(`input[data-original]`);
-      }
-    });
-
-    if (editing) {
-      // convert all .info-value[data-editable] to inputs
-      document
-        .querySelectorAll(".info-value[data-editable]")
-        .forEach((field) => {
-          if (
-            field.tagName === "P" ||
-            field.tagName === "SPAN" ||
-            field.tagName === "DIV"
-          ) {
-            const input = document.createElement("input");
-            input.type = "text";
-            input.value = field.textContent.trim();
-            input.className = "info-value-input";
-            input.style.cssText = [
-              "background:white",
-              "border:1.5px solid #feb300",
-              "border-radius:8px",
-              "padding:4px 10px",
-              "font-family:'Open Sans',sans-serif",
-              "font-size:16px",
-              "font-weight:600",
-              "color:#393834",
-              "width:100%",
-              "outline:none",
-            ].join(";");
-            field.replaceWith(input);
-          }
-        });
-
-      btn.innerHTML = `
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-             stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
-        Salvar Alterações
-      `;
-      showToast("✏️", "Modo de edição ativado.");
-    } else {
-      // revert inputs back to divs
-      document.querySelectorAll(".info-value-input").forEach((input) => {
-        const div = document.createElement("div");
-        div.className = "info-value";
-        div.setAttribute("data-editable", "");
-        div.textContent = input.value.trim();
-        input.replaceWith(div);
-      });
-
-      btn.innerHTML = `
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-             stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px">
-          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-        </svg>
-        Atualizar Informações
-      `;
-      showToast("✅", "Informações salvas com sucesso!", 3500);
-    }
-  });
+function isValidCpf(cpf) {
+  return /^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(cpf);
 }
 
-/**
- * Simula renovação de documento expirado.
- */
-function initDocActions() {
-  document.querySelectorAll(".btn-renew").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const docName =
-        btn
-          .closest(".doc-row")
-          ?.querySelector(".doc-name")
-          ?.textContent.trim() || "Documento";
-      showToast(
-        "📄",
-        `Solicitação de renovação de "${docName}" enviada!`,
-        4000,
-      );
-      btn.textContent = "Enviado!";
-      btn.disabled = true;
-      btn.style.opacity = "0.6";
-    });
-  });
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
 
-  /* Exam rows — click to open */
-  document.querySelectorAll(".exam-row").forEach((row) => {
-    row.style.cursor = "pointer";
-    row.addEventListener("click", () => {
-      const name = row.querySelector(".exam-name")?.textContent.trim();
-      showToast("📋", `Abrindo ${name || "exame"}…`);
-    });
-  });
+function validateProfile() {
+  clearErrors();
+  let valid = true;
+
+  const name = document.getElementById("edit-name").value.trim();
+  const cpf = document.getElementById("edit-cpf").value.trim();
+  const branch = document.getElementById("edit-branch").value.trim();
+  const email = document.getElementById("edit-email").value.trim();
+  const currentPassword = document.getElementById("current-password").value.trim();
+  const newPassword = document.getElementById("new-password").value.trim();
+
+  if (!name) {
+    setError("edit-name", "Nome nao pode estar vazio.");
+    valid = false;
+  }
+
+  if (!cpf) {
+    setError("edit-cpf", "CPF nao pode estar vazio.");
+    valid = false;
+  } else if (!isValidCpf(cpf)) {
+    setError("edit-cpf", "Use o formato 000.000.000-00.");
+    valid = false;
+  }
+
+  if (!branch) {
+    setError("edit-branch", "Ramo nao pode estar vazio.");
+    valid = false;
+  }
+
+  if (email && !isValidEmail(email)) {
+    setError("edit-email", "Informe um e-mail valido.");
+    valid = false;
+  }
+
+  if (newPassword && !currentPassword) {
+    setError("current-password", "Informe a senha atual para alterar a senha.");
+    valid = false;
+  }
+
+  return valid;
+}
+
+function saveProfile() {
+  const fullName = document.getElementById("edit-name").value.trim();
+  const shortName = fullName.split(" ").slice(0, 3).join(" ");
+  const cpf = document.getElementById("edit-cpf").value.trim();
+  const branch = document.getElementById("edit-branch").value.trim();
+  const email = document.getElementById("edit-email").value.trim();
+  const phone = document.getElementById("edit-phone").value.trim();
+
+  document.getElementById("profile-name").textContent = shortName || fullName;
+  document.getElementById("basic-name").textContent = fullName;
+  document.getElementById("basic-cpf").textContent = cpf;
+  document.getElementById("profile-branch").textContent = branch;
+  document.getElementById("basic-email").textContent = email || "Nao informado";
+  document.getElementById("basic-phone").textContent = phone || "Nao informado";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  initSidebarNav();
-  initEditProfile();
-  initDocActions();
+  document.getElementById("open-edit").addEventListener("click", () => {
+    clearErrors();
+    EscotistaApp.openModal("edit-modal");
+  });
+
+  document.getElementById("profile-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!validateProfile()) {
+      EscotistaApp.showToast("!", "Revise os dados do perfil.");
+      return;
+    }
+
+    saveProfile();
+    document.getElementById("current-password").value = "";
+    document.getElementById("new-password").value = "";
+    EscotistaApp.closeModal(document.getElementById("edit-modal"));
+    EscotistaApp.showToast("OK", "Perfil atualizado com sucesso.");
+  });
 });

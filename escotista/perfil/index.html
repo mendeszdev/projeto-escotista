@@ -1,425 +1,239 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Escotista – Perfil</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Open+Sans:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escotista - Perfil</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../shared.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle" type="button" title="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <a class="topbar-logo" href="../dashboard/index.html">Escotista</a>
+      </div>
+      <div class="topbar-right">
+        <a class="topbar-icon-btn" href="../../index.html" title="Sair">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <path d="m16 17 5-5-5-5M21 12H9" />
+          </svg>
+        </a>
+        <a class="topbar-avatar" href="../perfil/index.html" title="Meu perfil">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12Zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8Z" />
+          </svg>
+        </a>
+      </div>
+    </header>
 
-<header class="topbar">
-  <a class="topbar-logo" href="#">Escotista</a>
-  <div class="topbar-right">
-    <button class="topbar-icon-btn" title="Sair">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-        <polyline points="16 17 21 12 16 7"/>
-        <line x1="21" y1="12" x2="9" y2="12"/>
-      </svg>
-    </button>
-    <div class="topbar-avatar" title="Meu perfil">
-      <svg viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
-                 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
-                 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
-      </svg>
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-name">Sempre Alerta</div>
+        <div class="sidebar-brand-role">Escotista Ativo</div>
+      </div>
+      <nav class="sidebar-nav" aria-label="Navegacao principal">
+        <a class="nav-link" href="../dashboard/index.html">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+          Dashboard
+        </a>
+        <a class="nav-link" href="../eixo/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <path d="M14 2v6h6M16 13H8M16 17H8" />
+          </svg>
+          Atividades
+        </a>
+        <a class="nav-link" href="../matilha/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          Matilha
+        </a>
+        <a class="nav-link active" href="../perfil/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          Perfil
+        </a>
+      </nav>
+      <div class="sidebar-footer"></div>
+    </aside>
+
+    <main class="main">
+      <div class="content">
+        <section class="profile-hero">
+          <span class="profile-photo">AS</span>
+          <div class="profile-copy">
+            <h1 id="profile-name">Akela Silva Junior</h1>
+            <div class="profile-pills">
+              <span class="pill green">Escotista</span>
+              <span class="pill gold">Distrito Metropolitano</span>
+              <span class="pill teal" id="profile-branch">Ramo Lobinho</span>
+            </div>
+          </div>
+          <button class="btn-primary update-button" type="button" id="open-edit">Atualizar informacoes</button>
+        </section>
+
+        <section class="profile-grid">
+          <article class="info-card card card-pad">
+            <h2 class="card-title green-title">Informacoes Basicas</h2>
+            <dl class="info-list">
+              <div>
+                <dt>Nome completo</dt>
+                <dd id="basic-name">Akela Silva Junior do Nascimento</dd>
+              </div>
+              <div>
+                <dt>CPF</dt>
+                <dd id="basic-cpf">123.456.789-00</dd>
+              </div>
+              <div>
+                <dt>E-mail</dt>
+                <dd id="basic-email">akela.junior@escoteiros.org.br</dd>
+              </div>
+              <div>
+                <dt>Telefone</dt>
+                <dd id="basic-phone">(11) 98765-4321</dd>
+              </div>
+              <div>
+                <dt>Data de nascimento</dt>
+                <dd>14 de Outubro de 1985</dd>
+              </div>
+              <div>
+                <dt>Matricula</dt>
+                <dd>2026001</dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="medical-card card card-pad">
+            <h2 class="card-title red-title">Ficha Medica</h2>
+            <div class="medical-list">
+              <div><span>Tipo sanguineo</span><strong>O+</strong></div>
+              <div><span>Alergias</span><strong>Picada de abelha, amendoim</strong></div>
+              <div><span>Exames de saude</span><strong>Atualizado em 2024</strong></div>
+            </div>
+          </article>
+
+          <article class="formation-card card card-pad">
+            <h2 class="card-title gold-title">Formacao Escoteira</h2>
+            <ul class="timeline-list simple-list">
+              <li><strong>Insignia de Madeira</strong><span>Ramo Lobinho - Nivel Avancado</span></li>
+              <li><strong>Curso Basico</strong><span>Concluido em Julho/2021</span></li>
+              <li><strong>Curso Preliminar</strong><span>Concluido em Marco/2019</span></li>
+            </ul>
+          </article>
+
+          <article class="roles-card card card-pad">
+            <h2 class="card-title teal-title">Funcoes Exercidas</h2>
+            <ol class="timeline-list">
+              <li><strong>2022 - Atual</strong><span>Escotista Chefe da Alcateia - G.E. Arara Azul 45/SP</span></li>
+              <li><strong>2019 - 2022</strong><span>Assistente do Ramo Lobinho - G.E. Arara Azul 45/SP</span></li>
+              <li><strong>2018 - 2019</strong><span>Dirigente de Apoio - G.E. Arara Azul 45/SP</span></li>
+            </ol>
+          </article>
+
+          <article class="docs-card card card-pad">
+            <h2 class="card-title stone-title">Documentos</h2>
+            <div class="docs-list">
+              <div class="doc-item ok">
+                <strong>Certidao Negativa (Civil)</strong>
+                <span>Valido ate Jun/2025</span>
+              </div>
+              <div class="doc-item ok">
+                <strong>Certidao Negativa (Criminal)</strong>
+                <span>Valido ate Jun/2025</span>
+              </div>
+              <div class="doc-item warn">
+                <strong>Termo de Voluntariado</strong>
+                <span>Expirado</span>
+              </div>
+              <div class="doc-item ok">
+                <strong>Protecao Infantojuvenil</strong>
+                <span>Curso concluido</span>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+
+    <div class="modal" id="edit-modal" aria-hidden="true">
+      <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="edit-title">
+        <div class="modal-head">
+          <h2 class="modal-title" id="edit-title">Atualizar perfil</h2>
+          <button class="icon-button" type="button" data-close-modal title="Fechar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <form id="profile-form" novalidate>
+          <div class="modal-body form-grid">
+            <div class="field full">
+              <label for="edit-name">Nome completo</label>
+              <input id="edit-name" value="Akela Silva Junior do Nascimento" />
+              <span class="field-error" data-error-for="edit-name"></span>
+            </div>
+            <div class="field">
+              <label for="edit-cpf">CPF</label>
+              <input id="edit-cpf" value="123.456.789-00" />
+              <span class="field-error" data-error-for="edit-cpf"></span>
+            </div>
+            <div class="field">
+              <label for="edit-branch">Ramo</label>
+              <select id="edit-branch">
+                <option>Ramo Lobinho</option>
+                <option>Ramo Escoteiro</option>
+                <option>Ramo Senior</option>
+              </select>
+              <span class="field-error" data-error-for="edit-branch"></span>
+            </div>
+            <div class="field">
+              <label for="edit-email">E-mail</label>
+              <input id="edit-email" value="akela.junior@escoteiros.org.br" />
+              <span class="field-error" data-error-for="edit-email"></span>
+            </div>
+            <div class="field">
+              <label for="edit-phone">Telefone</label>
+              <input id="edit-phone" value="(11) 98765-4321" />
+            </div>
+            <div class="field">
+              <label for="current-password">Senha atual</label>
+              <input id="current-password" type="password" autocomplete="current-password" />
+              <span class="field-error" data-error-for="current-password"></span>
+            </div>
+            <div class="field">
+              <label for="new-password">Nova senha</label>
+              <input id="new-password" type="password" autocomplete="new-password" />
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button class="btn-outline" type="button" data-close-modal>Cancelar</button>
+            <button class="btn-primary" type="submit">Salvar alteracoes</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-</header>
-<aside class="sidebar">
-  <div class="sidebar-brand">
-    <div class="sidebar-brand-name">Sempre Alerta</div>
-    <div class="sidebar-brand-role">Escotista Ativo</div>
-  </div>
 
-  <nav class="sidebar-nav">
-    <a class="nav-link" href="#">
-      <svg viewBox="0 0 24 24" fill="currentColor">
-        <rect x="3" y="3" width="7" height="7" rx="1"/>
-        <rect x="14" y="3" width="7" height="7" rx="1"/>
-        <rect x="3" y="14" width="7" height="7" rx="1"/>
-        <rect x="14" y="14" width="7" height="7" rx="1"/>
-      </svg>
-      Dashboard
-    </a>
-    <a class="nav-link" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-        <polyline points="14 2 14 8 20 8"/>
-        <line x1="16" y1="13" x2="8" y2="13"/>
-        <line x1="16" y1="17" x2="8" y2="17"/>
-      </svg>
-      Atividades
-    </a>
-    <a class="nav-link" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-      </svg>
-      Matilhas
-    </a>
-    <a class="nav-link active" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
-      </svg>
-      Perfil
-    </a>
-  </nav>
-
-  <div class="sidebar-footer"></div>
-</aside>
-<main class="main">
-  <div class="content">
-
-    <!-- ══ PROFILE HEADER ══ -->
-    <section class="profile-header" aria-label="Cabeçalho do perfil">
-
-      <!-- Avatar -->
-      <div class="profile-avatar-wrap">
-        <div class="profile-avatar-frame">
-          <img
-            src="https://www.figma.com/api/mcp/asset/e9290bae-08f5-4c40-bedd-e3fa90f10d8a"
-            alt="Foto de Leonardo Silva Júnior"
-            loading="lazy"
-            onerror="this.style.display='none'"
-          />
-          <!-- SVG fallback -->
-          <svg viewBox="0 0 24 24" fill="#a8a29e" style="width:64px;height:64px;position:absolute">
-            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
-                     7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
-                     4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
-          </svg>
-        </div>
-        <!-- verified checkmark badge -->
-        <div class="profile-avatar-badge" aria-hidden="true">
-          <svg viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="16.5" cy="16" r="16" fill="#237329"/>
-            <polyline points="9,16 14,21 24,11" stroke="white" stroke-width="2.5"
-                      stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-      </div>
-
-      <!-- Identity -->
-      <div class="profile-identity">
-        <h1 class="profile-name">Leonardo Silva Júnior</h1>
-        <div class="profile-tags">
-          <span class="profile-tag tag-green">
-            <!-- wolf small icon -->
-            <svg viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="tag-icon">
-              <path d="M6 0L11 4 9 10H3L1 4Z" fill="white" opacity=".7"/>
-            </svg>
-            Escotista
-          </span>
-          <span class="profile-tag tag-muted">Distrito Metropolitano</span>
-          <span class="profile-tag tag-teal">Ramo Lobinho</span>
-        </div>
-      </div>
-
-      <!-- Edit button -->
-      <button class="btn-edit-profile" id="btn-edit-profile" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-             stroke-linecap="round" stroke-linejoin="round">
-          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-        </svg>
-        Atualizar Informações
-      </button>
-    </section>
-
-    <!-- ══ BENTO GRID ══ -->
-    <div class="bento-grid">
-
-      <!-- ── ROW 1, COL 1-2: Informações Básicas ── -->
-      <div class="bento-card card-cream basic-info">
-        <div class="card-header">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#237329" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-          <h2 class="card-title title-green">Informações Básicas</h2>
-        </div>
-
-        <div class="info-grid">
-          <div class="info-field">
-            <span class="info-label">Nome Completo</span>
-            <div class="info-value" data-editable>Akela Silva Júnior do Nascimento</div>
-          </div>
-          <div class="info-field">
-            <span class="info-label">CPF</span>
-            <div class="info-value" data-editable>123.456.789-00</div>
-          </div>
-          <div class="info-field">
-            <span class="info-label">E-mail</span>
-            <div class="info-value" data-editable>akela.junior@escoteiros.org.br</div>
-          </div>
-          <div class="info-field">
-            <span class="info-label">Telefone</span>
-            <div class="info-value" data-editable>(11) 98765-4321</div>
-          </div>
-          <div class="info-field">
-            <span class="info-label">Data de Nascimento</span>
-            <div class="info-value" data-editable>14 de Outubro de 1985</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── ROW 1, COL 3: Ficha Médica ── -->
-      <div class="bento-card card-red">
-        <div class="card-header">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#be2d06" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-          </svg>
-          <h2 class="card-title title-red">Ficha Médica</h2>
-        </div>
-
-        <!-- Blood type -->
-        <div class="blood-type-row">
-          <span class="blood-label">Tipo Sanguíneo</span>
-          <span class="blood-value">O+</span>
-        </div>
-
-        <!-- Allergies -->
-        <div class="allergy-section">
-          <span class="allergy-label">Alergias</span>
-          <div class="allergy-tags">
-            <span class="allergy-tag">Picada de Abelha</span>
-            <span class="allergy-tag">Amendoim</span>
-          </div>
-        </div>
-
-        <!-- Health exams -->
-        <div class="exams-section">
-          <span class="exams-label">Exames de Saúde</span>
-          <div class="exam-row exam-ok">
-            <span class="exam-name">Atestado 2024</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="#237329" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px">
-              <polyline points="20 6 9 17 4 12"/>
-            </svg>
-          </div>
-          <div class="exam-row exam-warn">
-            <span class="exam-name">Exame Toxicológico</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="12" y1="8" x2="12" y2="12"/>
-              <line x1="12" y1="16" x2="12.01" y2="16"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── ROW 2, COL 1: Formação Escoteira ── -->
-      <div class="bento-card card-stone">
-        <div class="card-header">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#865c00" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-          </svg>
-          <h2 class="card-title title-gold">Formação Escoteira</h2>
-        </div>
-
-        <div class="formation-list">
-          <!-- Insignia de Madeira -->
-          <div class="formation-item">
-            <div class="formation-icon" style="background:#feb300">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#523700" stroke-width="2.5"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-              </svg>
-            </div>
-            <div>
-              <div class="formation-name">Insígnia de Madeira</div>
-              <div class="formation-sub">Ramo Lobinho – Nível Avançado</div>
-            </div>
-          </div>
-
-          <!-- Curso Básico -->
-          <div class="formation-item">
-            <div class="formation-icon" style="background:#9df197">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#237329" stroke-width="2.5"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-            <div>
-              <div class="formation-name">Curso Básico</div>
-              <div class="formation-sub">Concluído em Julho/2021</div>
-            </div>
-          </div>
-
-          <!-- Curso Preliminar -->
-          <div class="formation-item">
-            <div class="formation-icon" style="background:#9df197">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#237329" stroke-width="2.5"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-            <div>
-              <div class="formation-name">Curso Preliminar</div>
-              <div class="formation-sub">Concluído em Março/2019</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── ROW 2, COL 2: Funções Exercidas ── -->
-      <div class="bento-card card-cream">
-        <div class="card-header">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#006f7d" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
-          <h2 class="card-title title-teal">Funções Exercidas</h2>
-        </div>
-
-        <div class="timeline">
-          <!-- 2022 - Atual -->
-          <div class="timeline-item">
-            <div class="timeline-dot dot-teal-dark"></div>
-            <div class="timeline-period period-active">2022 – Atual</div>
-            <div class="timeline-role">Escotista Chefe da Alcateia</div>
-            <div class="timeline-org">G.E. Arara Azul 45/SP</div>
-          </div>
-          <!-- 2019 - 2022 -->
-          <div class="timeline-item">
-            <div class="timeline-dot dot-teal"></div>
-            <div class="timeline-period period-past">2019 – 2022</div>
-            <div class="timeline-role">Assistente de Ramo Lobinho</div>
-            <div class="timeline-org">G.E. Arara Azul 45/SP</div>
-          </div>
-          <!-- 2018 - 2019 -->
-          <div class="timeline-item">
-            <div class="timeline-dot dot-teal"></div>
-            <div class="timeline-period period-past">2018 – 2019</div>
-            <div class="timeline-role">Dirigente de Apoio (Logística)</div>
-            <div class="timeline-org">G.E. Arara Azul 45/SP</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── ROW 2, COL 3: Documentos ── -->
-      <div class="bento-card card-offwhite">
-        <div class="card-header">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#393834" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-          </svg>
-          <h2 class="card-title title-dark">Documentos</h2>
-        </div>
-
-        <div class="doc-list">
-
-          <!-- Certidão Negativa (Civil) — válida -->
-          <div class="doc-row">
-            <div class="doc-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-              </svg>
-            </div>
-            <div class="doc-info">
-              <div class="doc-name">Certidão Negativa (Civil)</div>
-              <div class="doc-status-ok">Válido até Jun/2025</div>
-            </div>
-            <div class="doc-badge">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#237329" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-          </div>
-
-          <!-- Certidão Negativa (Criminal) — válida -->
-          <div class="doc-row">
-            <div class="doc-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-              </svg>
-            </div>
-            <div class="doc-info">
-              <div class="doc-name">Certidão Negativa (Criminal)</div>
-              <div class="doc-status-ok">Válido até Jun/2025</div>
-            </div>
-            <div class="doc-badge">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#237329" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-          </div>
-
-          <!-- Termo de Voluntariado — EXPIRADO -->
-          <div class="doc-row expired">
-            <div class="doc-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#be2d06" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                <line x1="12" y1="9" x2="12" y2="13"/>
-                <line x1="12" y1="17" x2="12.01" y2="17"/>
-              </svg>
-            </div>
-            <div class="doc-info">
-              <div class="doc-name">Termo de<br>Voluntariado</div>
-              <div class="doc-status-warn">Expirado</div>
-            </div>
-            <button class="btn-renew" type="button">Renovar</button>
-          </div>
-
-          <!-- Proteção Infanto-Juvenil — concluído (dimmed) -->
-          <div class="doc-row dimmed">
-            <div class="doc-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
-            <div class="doc-info">
-              <div class="doc-name">Proteção Infanto-Juvenil</div>
-              <div class="doc-status-normal">Curso concluído (Reciclagem em 2026)</div>
-            </div>
-            <div class="doc-badge">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#237329" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-          </div>
-
-        </div><!-- /doc-list -->
-      </div>
-
-    </div><!-- /bento-grid -->
-  </div><!-- /content -->
-</main>
-<div class="toast" id="toast" role="alert" aria-live="polite">
-  <span class="toast-icon" id="toast-icon"></span>
-  <span id="toast-msg"></span>
-</div>
-
-<script src="script.js"></script>
-</body>
+    <script src="../shared.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>

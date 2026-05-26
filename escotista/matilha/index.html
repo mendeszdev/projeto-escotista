@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escotista - Matilha</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../shared.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle" type="button" title="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <a class="topbar-logo" href="../dashboard/index.html">Escotista</a>
+      </div>
+      <div class="topbar-right">
+        <a class="topbar-icon-btn" href="../../index.html" title="Sair">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <path d="m16 17 5-5-5-5M21 12H9" />
+          </svg>
+        </a>
+        <a class="topbar-avatar" href="../perfil/index.html" title="Meu perfil">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12Zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8Z" />
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-name">Sempre Alerta</div>
+        <div class="sidebar-brand-role">Escotista Ativo</div>
+      </div>
+      <nav class="sidebar-nav" aria-label="Navegacao principal">
+        <a class="nav-link" href="../dashboard/index.html">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+          Dashboard
+        </a>
+        <a class="nav-link" href="../eixo/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <path d="M14 2v6h6M16 13H8M16 17H8" />
+          </svg>
+          Atividades
+        </a>
+        <a class="nav-link active" href="../matilha/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          Matilha
+        </a>
+        <a class="nav-link" href="../perfil/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          Perfil
+        </a>
+      </nav>
+      <div class="sidebar-footer"></div>
+    </aside>
+
+    <main class="main">
+      <div class="content">
+        <section class="matilha-filters card card-pad">
+          <div class="filters-grid">
+            <div class="field">
+              <label for="search-lobinho">Buscar Lobinho</label>
+              <input id="search-lobinho" type="search" placeholder="Nome do lobinho..." />
+            </div>
+            <div class="field">
+              <label for="status-lobinho">Status</label>
+              <select id="status-lobinho">
+                <option value="todos">Todos Status</option>
+                <option value="pendente">Com pendencias</option>
+                <option value="em-dia">Em dia</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="periodo-lobinho">Periodo</label>
+              <select id="periodo-lobinho">
+                <option>Ultimos 30 dias</option>
+                <option>Ultimos 90 dias</option>
+                <option>Este ano</option>
+              </select>
+            </div>
+            <button class="btn-secondary" type="button" id="filter-btn">Filtrar</button>
+          </div>
+        </section>
+
+        <div class="matilha-header">
+          <h1 class="page-title">Lobinhos</h1>
+          <a class="btn-link" href="../gestao-de-atividade/index.html">Ver todos</a>
+        </div>
+
+        <section class="lobinhos-grid" id="lobinhos-grid" aria-label="Lobinhos da matilha">
+          <article class="lobinho-card" data-name="Mowgli" data-status="pendente" data-progress="45">
+            <span class="pending-badge">2 pendentes</span>
+            <span class="portrait dark">MO</span>
+            <h2>Mowgli</h2>
+            <span class="pill blue">Pata-Tenra</span>
+            <div class="card-progress">
+              <span>Progresso</span><strong>45%</strong>
+              <div class="progress-track"><div class="progress-bar" style="width: 45%"></div></div>
+            </div>
+            <button class="card-link" type="button" data-open-lobinho>Ver detalhes</button>
+          </article>
+
+          <article class="lobinho-card" data-name="Bagheera" data-status="em-dia" data-progress="82">
+            <span class="portrait gold">BA</span>
+            <h2>Bagheera</h2>
+            <span class="pill green">Saltador</span>
+            <div class="card-progress">
+              <span>Progresso</span><strong>82%</strong>
+              <div class="progress-track"><div class="progress-bar" style="width: 82%"></div></div>
+            </div>
+            <button class="card-link" type="button" data-open-lobinho>Ver detalhes</button>
+          </article>
+
+          <article class="lobinho-card" data-name="Baloo" data-status="pendente" data-progress="20">
+            <span class="pending-badge">1 pendente</span>
+            <span class="portrait teal">BL</span>
+            <h2>Baloo</h2>
+            <span class="pill blue">Pata-Tenra</span>
+            <div class="card-progress">
+              <span>Progresso</span><strong>20%</strong>
+              <div class="progress-track"><div class="progress-bar" style="width: 20%"></div></div>
+            </div>
+            <button class="card-link" type="button" data-open-lobinho>Ver detalhes</button>
+          </article>
+
+          <article class="lobinho-card" data-name="Raksha" data-status="em-dia" data-progress="55">
+            <span class="portrait red">RA</span>
+            <h2>Raksha</h2>
+            <span class="pill gold">Rastreador</span>
+            <div class="card-progress">
+              <span>Progresso</span><strong>55%</strong>
+              <div class="progress-track"><div class="progress-bar" style="width: 55%"></div></div>
+            </div>
+            <button class="card-link" type="button" data-open-lobinho>Ver detalhes</button>
+          </article>
+        </section>
+
+        <section class="matilha-grid">
+          <div class="left-stack">
+            <section class="highlights">
+              <h2 class="section-title">Destaques da Matilha</h2>
+              <div class="podium">
+                <article class="podium-item first">
+                  <span>1o</span>
+                  <strong>Bagheera</strong>
+                  <small>8 atividades completas</small>
+                </article>
+                <article class="podium-item second">
+                  <span>2o</span>
+                  <strong>Mowgli</strong>
+                  <small>6 atividades completas</small>
+                </article>
+              </div>
+            </section>
+
+            <section class="reminder-card card">
+              <h2>Lembrete de Akela</h2>
+              <p>
+                A forca da alcateia e o lobo, e a forca do lobo e a alcateia.
+                Prepare a proxima Grande Cacada para o sabado.
+              </p>
+            </section>
+
+            <article class="pack-card card">
+              <span class="pack-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3Zm-8 0c1.66 0 3-1.34 3-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3Zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4Zm8 0c-.31 0-.66.02-1.03.05 1.16.84 2.03 1.96 2.03 3.45V19h7v-2c0-2.66-5.33-4-8-4Z" />
+                </svg>
+              </span>
+              <div>
+                <h2>Matilha Cinza</h2>
+                <p>4 lobinhos - Akela Ricardo Silva</p>
+                <div class="progress-row">
+                  <span>Progresso medio</span>
+                  <strong>72%</strong>
+                  <div class="progress-track"><div class="progress-bar" style="width: 72%"></div></div>
+                </div>
+              </div>
+              <a class="pack-action" href="../gestao-de-atividade/index.html" title="Abrir atividades">></a>
+            </article>
+          </div>
+
+          <aside class="actions-card">
+            <h2 class="section-title">Ultimas Acoes</h2>
+            <div class="actions-list">
+              <div class="action-item complete">
+                <span>OK</span>
+                <div>
+                  <strong>Progresso validado</strong>
+                  <p>Raksha completou "Noite Animais".</p>
+                  <small>Ha 2 horas</small>
+                </div>
+              </div>
+              <div class="action-item new">
+                <span>+</span>
+                <div>
+                  <strong>Nova Atividade</strong>
+                  <p>Postada: "O Ciclo da Agua na Selva".</p>
+                  <small>Ha 5 horas</small>
+                </div>
+              </div>
+              <div class="action-item">
+                <span>?</span>
+                <div>
+                  <strong>Novo Lobinho</strong>
+                  <p>Hathi se juntou a Alcateia.</p>
+                  <small>Ontem</small>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </section>
+      </div>
+    </main>
+
+    <div class="modal" id="lobinho-modal" aria-hidden="true">
+      <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="lobinho-title">
+        <div class="modal-head">
+          <h2 class="modal-title" id="lobinho-title">Detalhes do lobinho</h2>
+          <button class="icon-button" type="button" data-close-modal title="Fechar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body lobinho-detail">
+          <span class="portrait green" id="detail-avatar">LO</span>
+          <div>
+            <h3 id="detail-name"></h3>
+            <p id="detail-status"></p>
+            <div class="progress-track"><div class="progress-bar" id="detail-progress"></div></div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <a class="btn-primary" href="../gestao-de-atividade/index.html">Ver atividades</a>
+          <button class="btn-outline" type="button" data-close-modal>Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../shared.js"></script>
+    <script src="../shared-data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
