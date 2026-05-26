@@ -1,67 +1,428 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil do Dirigente - Dirigente</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trilha do Dirigente – Perfil do Dirigente</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Open+Sans:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="dashboard-container">
-        <div class="top-bar-dirigente">
-            <h2 class="top-bar-title">Trilha do Dirigente</h2>
-            <div class="top-bar-actions">
-                <button class="btn-icon">🔔</button>
-                <button class="btn-icon">⚙️</button>
-                <button class="btn-profile">👤</button>
-            </div>
-        </div>
 
-        <div class="main-wrapper">
-            <aside class="sidebar-dirigente">
-                <div class="sidebar-header-dirigente">
-                    <h3 class="sidebar-title-dirigente">A Grande Caçada</h3>
-                    <p class="sidebar-status-dirigente">GESTÃO DE ALCATEIA</p>
-                </div>
-                <nav class="sidebar-nav-dirigente">
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">📊</span>
-                        <span class="nav-label">Dashboard</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">👥</span>
-                        <span class="nav-label">Associados</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">🐾</span>
-                        <span class="nav-label">Alcatéias</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">👤</span>
-                        <span class="nav-label">Perfil</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">⚙️</span>
-                        <span class="nav-label">Sistema</span>
-                    </a>
-                </nav>
-            </aside>
-
-            <main class="main-content-dirigente">
-                <section class="header-section-dirigente">
-                    <h1 class="page-title-dirigente">Perfil do Dirigente</h1>
-                    <p class="page-description-dirigente">Tela em desenvolvimento - perfil-dirigente</p>
-                </section>
-                <div class="placeholder-content-dirigente">
-                    <p>Conteúdo específico da tela Perfil do Dirigente será renderizado aqui.</p>
-                </div>
-            </main>
-        </div>
+<!-- ══════════════════════════════════════
+     TOP BAR
+══════════════════════════════════════ -->
+<header class="topbar">
+  <a class="topbar-brand" href="#">Trilha do Dirigente</a>
+  <div class="topbar-right">
+    <button class="topbar-icon-btn" title="Notificações">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+      </svg>
+    </button>
+    <button class="topbar-icon-btn" title="Configurações">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06
+                 a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09
+                 A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83
+                 l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09
+                 A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83
+                 l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09
+                 a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83
+                 l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09
+                 a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </button>
+    <div class="topbar-avatar" title="Perfil do Dirigente">
+      <img
+        src="https://www.figma.com/api/mcp/asset/4c5d29f2-1c93-4d47-bfed-b7b567e6d6e0"
+        alt="Avatar do Dirigente"
+        onerror="this.style.display='none'"
+      />
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
+                 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+      </svg>
     </div>
+  </div>
+</header>
 
-    <script src="../../js/main.js"></script>
-    <script src="script.js"></script>
+<!-- ══════════════════════════════════════
+     SIDEBAR
+══════════════════════════════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-icon">
+      <svg viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="10" cy="12" rx="5.5" ry="6.5" fill="#065f46" opacity=".8"/>
+        <ellipse cx="3"  cy="7"  rx="2.5" ry="3.5" fill="#065f46" opacity=".8"/>
+        <ellipse cx="17" cy="7"  rx="2.5" ry="3.5" fill="#065f46" opacity=".8"/>
+        <ellipse cx="6"  cy="3"  rx="2"   ry="2.8" fill="#065f46" opacity=".8"/>
+        <ellipse cx="14" cy="3"  rx="2"   ry="2.8" fill="#065f46" opacity=".8"/>
+      </svg>
+    </div>
+    <div class="sidebar-brand-text">
+      <div class="sidebar-brand-name">A Grande<br>Caçada</div>
+      <div class="sidebar-brand-sub">Gestão de Alcateia</div>
+    </div>
+  </div>
+
+  <button class="sidebar-cta-btn" id="btn-nova-inscricao" type="button">
+    Nova Inscrição
+  </button>
+
+  <nav class="sidebar-nav">
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+        <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+      </svg>
+      Dashboard
+    </a>
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      Associados
+    </a>
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      Alcatéias
+    </a>
+    <a class="nav-link active" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      Perfil
+    </a>
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M2 12h2M20 12h2M12 2v2M12 20v2
+                 M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41
+                 M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+      Sistema
+    </a>
+  </nav>
+</aside>
+
+<!-- ══════════════════════════════════════
+     MAIN
+══════════════════════════════════════ -->
+<main class="main">
+  <div class="content">
+
+    <!-- ══ PROFILE HERO ══ -->
+    <section class="profile-hero" aria-label="Perfil do Dirigente">
+
+      <!-- Photo + badge -->
+      <div class="profile-photo-wrap">
+        <div class="profile-photo-frame">
+          <img
+            src="https://www.figma.com/api/mcp/asset/214c1560-e5bc-4765-895c-7b05178ad219"
+            alt="Foto de Ricardo Silveira"
+            onerror="this.style.display='none'"
+          />
+          <svg viewBox="0 0 24 24" fill="#a8a29e" style="position:absolute;inset:0;width:100%;height:100%;padding:16px">
+            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                     7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
+                     4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+          </svg>
+        </div>
+        <!-- verified badge -->
+        <div class="profile-photo-badge" aria-hidden="true">
+          <svg viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14.5" cy="14" r="14" fill="#f59e0b"/>
+            <polyline points="8,14 12.5,18.5 21,10" stroke="white" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Identity -->
+      <div class="profile-info">
+        <div class="profile-name-row">
+          <h1 class="profile-name">Ricardo<br>Silveira</h1>
+          <span class="profile-role-tag">Dirigente de<br>Unidade</span>
+        </div>
+        <p class="profile-group-info">
+          Membro do Grupo Escoteiro Jângal (042/SP) • Registro: 129.482-5
+        </p>
+
+        <div class="profile-contacts">
+          <div class="contact-pill" title="Copiar e-mail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <span class="contact-text">ricardo.silveira@escoteiros.org.br</span>
+          </div>
+          <div class="contact-pill phone" title="Copiar telefone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07
+                       19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1
+                       4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1
+                       -.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1
+                       2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span class="contact-text">(11) 98765-4321</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="profile-actions" role="group" aria-label="Ações do perfil">
+        <button class="btn-update" id="btn-update" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+          </svg>
+          Atualizar Informações
+        </button>
+        <button class="btn-export" id="btn-export" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9"/>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+            <rect x="6" y="14" width="12" height="8"/>
+          </svg>
+          Exportar Ficha
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ══ BENTO GRID ══ -->
+    <div class="bento-grid">
+
+      <!-- ── LEFT COLUMN ── -->
+      <div class="left-col">
+
+        <!-- Dados Pessoais -->
+        <div class="card-dados">
+          <div class="card-header">
+            <div class="card-header-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="15" fill="#f1ede6" stroke="#bcb9b3" stroke-width="1.5"/>
+                <circle cx="16" cy="11" r="5" fill="#78716c" opacity=".7"/>
+                <path d="M6 26c0-5.5 4.5-10 10-10s10 4.5 10 10"
+                      fill="#78716c" opacity=".7"/>
+              </svg>
+            </div>
+            <h2 class="card-title">Dados Pessoais</h2>
+          </div>
+
+          <div class="dados-grid">
+            <div class="data-field">
+              <span class="field-label">Nome Completo</span>
+              <span class="field-value">Ricardo Almeida Silveira</span>
+            </div>
+            <div class="data-field">
+              <span class="field-label">Data de Nascimento</span>
+              <span class="field-value">14 de Maio de 1982 (42 anos)</span>
+            </div>
+            <div class="data-field">
+              <span class="field-label">Gênero</span>
+              <span class="field-value">Masculino</span>
+            </div>
+            <div class="data-field">
+              <span class="field-label">Estado Civil</span>
+              <span class="field-value">Casado</span>
+            </div>
+            <div class="data-field full">
+              <span class="field-label">Endereço Residencial</span>
+              <span class="field-value">Rua das Acácias, 452 - Vila Mariana, São Paulo - SP</span>
+            </div>
+          </div>
+        </div><!-- /card-dados -->
+
+        <!-- Documentos de Identidade -->
+        <div class="card-docs">
+          <div class="card-header">
+            <div class="card-header-icon" aria-hidden="true">
+              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="6" width="32" height="24" rx="4" fill="#fdf9f2" stroke="#bcb9b3" stroke-width="1.5"/>
+                <line x1="7" y1="14" x2="22" y2="14" stroke="#a8a29e" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="7" y1="19" x2="18" y2="19" stroke="#a8a29e" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="28" cy="20" r="5" fill="#237329" opacity=".8"/>
+                <polyline points="25,20 27,22 31,18" stroke="white" stroke-width="1.5"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h2 class="card-title">Documentos de Identidade</h2>
+          </div>
+
+          <div class="docs-grid">
+            <div class="doc-item">
+              <span class="field-label">CPF</span>
+              <span class="doc-value"
+                    data-masked="234.***.***-90"
+                    data-revealed="234.567.890-90">234.***.***-90</span>
+            </div>
+            <div class="doc-item">
+              <span class="field-label">RG</span>
+              <span class="doc-value"
+                    data-masked="34.***.***-X"
+                    data-revealed="34.567.890-X">34.***.***-X</span>
+            </div>
+            <div class="doc-item">
+              <span class="field-label">Passaporte</span>
+              <span class="doc-value"
+                    data-masked="FP34***12"
+                    data-revealed="FP3456712">FP34***12</span>
+            </div>
+          </div>
+
+          <div class="docs-verified" role="status">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <polyline points="9 12 11 14 15 10"/>
+            </svg>
+            <span class="docs-verified-text">Documentos verificados pelo Escritório Regional</span>
+          </div>
+        </div><!-- /card-docs -->
+
+      </div><!-- /left-col -->
+
+      <!-- ── RIGHT COLUMN ── -->
+      <div class="right-col">
+
+        <!-- Funções no Grupo -->
+        <div class="card-funcoes">
+          <!-- Decorative org chart -->
+          <div class="funcoes-deco" aria-hidden="true">
+            <svg viewBox="0 0 82 77" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="30" y="2" width="22" height="16" rx="3" fill="#237329" opacity=".25"/>
+              <rect x="2"  y="32" width="22" height="16" rx="3" fill="#237329" opacity=".20"/>
+              <rect x="58" y="32" width="22" height="16" rx="3" fill="#237329" opacity=".20"/>
+              <line x1="41" y1="18" x2="41" y2="32" stroke="#237329" stroke-width="1.5" opacity=".25"/>
+              <line x1="41" y1="24" x2="13" y2="32" stroke="#237329" stroke-width="1.5" opacity=".25"/>
+              <line x1="41" y1="24" x2="69" y2="32" stroke="#237329" stroke-width="1.5" opacity=".25"/>
+              <rect x="2"  y="58" width="22" height="16" rx="3" fill="#237329" opacity=".15"/>
+              <rect x="58" y="58" width="22" height="16" rx="3" fill="#237329" opacity=".15"/>
+              <line x1="13" y1="48" x2="13" y2="58" stroke="#237329" stroke-width="1.5" opacity=".2"/>
+              <line x1="69" y1="48" x2="69" y2="58" stroke="#237329" stroke-width="1.5" opacity=".2"/>
+            </svg>
+          </div>
+
+          <div class="card-header">
+            <div class="card-header-icon" aria-hidden="true">
+              <svg viewBox="0 0 34 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="30" height="32" rx="5" fill="#d1fae5" stroke="#237329" stroke-width="1.5"/>
+                <line x1="9" y1="12" x2="25" y2="12" stroke="#237329" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="9" y1="18" x2="25" y2="18" stroke="#237329" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="9" y1="24" x2="18" y2="24" stroke="#237329" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h2 class="card-title">Funções no Grupo</h2>
+          </div>
+
+          <div class="funcoes-list">
+            <!-- Diretor Administrativo -->
+            <div class="funcao-item border-green">
+              <div class="funcao-info">
+                <div class="funcao-name">Diretor Administrativo</div>
+                <div class="funcao-sub">Nomeação em 10/01/2023</div>
+              </div>
+              <span class="status-badge badge-green">Ativo</span>
+            </div>
+
+            <!-- Chefe de Alcateia -->
+            <div class="funcao-item border-amber">
+              <div class="funcao-info">
+                <div class="funcao-name">Chefe de Alcateia (Suplente)</div>
+                <div class="funcao-sub">Alcateia Waingunga</div>
+              </div>
+              <span class="status-badge badge-amber">Ativo</span>
+            </div>
+          </div>
+        </div><!-- /card-funcoes -->
+
+        <!-- Formação Escoteira -->
+        <div class="card-formacao">
+          <div class="card-header-row">
+            <div class="card-header-left">
+              <div class="card-header-icon2" aria-hidden="true">
+                <svg viewBox="0 0 38 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M19 2L35 10.5 19 19 3 10.5z" fill="#a8a29e" stroke="#78716c" stroke-width="1.5"/>
+                  <path d="M6 13v8c0 3 5.8 7 13 7s13-4 13-7v-8"
+                        stroke="#78716c" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="35" y1="10.5" x2="35" y2="20.5" stroke="#78716c" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h2 class="card-title">Formação</h2>
+            </div>
+            <span class="status-badge badge-teal" style="background:#006f7d">280 Horas</span>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:24px">
+            <!-- Timeline -->
+            <div class="formacao-timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot dot-solid"></div>
+                <div class="timeline-name">Nível Avançado (Linha Dirigente)</div>
+                <div class="timeline-sub">Concluído em Julho/2022</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot dot-faded"></div>
+                <div class="timeline-name">Nível Intermediário</div>
+                <div class="timeline-sub">Concluído em Março/2021</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot dot-faded"></div>
+                <div class="timeline-name">Curso Preliminar</div>
+                <div class="timeline-sub">Concluído em Outubro/2019</div>
+              </div>
+            </div>
+
+            <!-- Eligibility -->
+            <div class="eligibility-pill" role="status">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              <span class="eligibility-text">Elegível para Nomeação de Formador em 2025</span>
+            </div>
+          </div>
+        </div><!-- /card-formacao -->
+
+      </div><!-- /right-col -->
+
+    </div><!-- /bento-grid -->
+
+  </div><!-- /content -->
+</main>
+
+<!-- ══════════════════════════════════════
+     TOAST
+══════════════════════════════════════ -->
+<div class="toast" id="toast" role="alert" aria-live="polite">
+  <span class="toast-icon" id="toast-icon"></span>
+  <span id="toast-msg"></span>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
