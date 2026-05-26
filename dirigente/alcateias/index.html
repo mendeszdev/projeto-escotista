@@ -1,67 +1,438 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Alcatéias - Dirigente</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trilha do Dirigente – Gestão de Alcatéias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Open+Sans:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="dashboard-container">
-        <div class="top-bar-dirigente">
-            <h2 class="top-bar-title">Trilha do Dirigente</h2>
-            <div class="top-bar-actions">
-                <button class="btn-icon">🔔</button>
-                <button class="btn-icon">⚙️</button>
-                <button class="btn-profile">👤</button>
-            </div>
-        </div>
 
-        <div class="main-wrapper">
-            <aside class="sidebar-dirigente">
-                <div class="sidebar-header-dirigente">
-                    <h3 class="sidebar-title-dirigente">A Grande Caçada</h3>
-                    <p class="sidebar-status-dirigente">GESTÃO DE ALCATEIA</p>
-                </div>
-                <nav class="sidebar-nav-dirigente">
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">📊</span>
-                        <span class="nav-label">Dashboard</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">👥</span>
-                        <span class="nav-label">Associados</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">🐾</span>
-                        <span class="nav-label">Alcatéias</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">👤</span>
-                        <span class="nav-label">Perfil</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">⚙️</span>
-                        <span class="nav-label">Sistema</span>
-                    </a>
-                </nav>
-            </aside>
+<!-- ══════════════════════════════════════
+     TOP BAR
+══════════════════════════════════════ -->
+<header class="topbar">
+  <a class="topbar-brand" href="#">Trilha do Dirigente</a>
+  <div class="topbar-right">
+    <button class="topbar-icon-btn" title="Notificações">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+      </svg>
+    </button>
+    <button class="topbar-icon-btn" title="Configurações">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06
+                 a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09
+                 A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83
+                 l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09
+                 A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83
+                 l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09
+                 a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83
+                 l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09
+                 a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </button>
+    <div class="topbar-avatar" title="Perfil do Dirigente">
+      <img
+        src="https://www.figma.com/api/mcp/asset/be8014a5-9a8b-440f-92d3-3cc2bfec6671"
+        alt="Avatar do Dirigente"
+        onerror="this.style.display='none'"
+      />
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
+                 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+      </svg>
+    </div>
+  </div>
+</header>
 
-            <main class="main-content-dirigente">
-                <section class="header-section-dirigente">
-                    <h1 class="page-title-dirigente">Gestão de Alcatéias</h1>
-                    <p class="page-description-dirigente">Tela em desenvolvimento - gestao-alcateias-dirigente</p>
-                </section>
-                <div class="placeholder-content-dirigente">
-                    <p>Conteúdo específico da tela Gestão de Alcatéias será renderizado aqui.</p>
-                </div>
-            </main>
-        </div>
+<!-- ══════════════════════════════════════
+     SIDEBAR
+══════════════════════════════════════ -->
+<aside class="sidebar">
+  <!-- Brand -->
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-icon">
+      <svg viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="10" cy="12" rx="5.5" ry="6.5" fill="white" opacity=".9"/>
+        <ellipse cx="3"  cy="7"  rx="2.5" ry="3.5" fill="white" opacity=".9"/>
+        <ellipse cx="17" cy="7"  rx="2.5" ry="3.5" fill="white" opacity=".9"/>
+        <ellipse cx="6"  cy="3"  rx="2"   ry="2.8" fill="white" opacity=".9"/>
+        <ellipse cx="14" cy="3"  rx="2"   ry="2.8" fill="white" opacity=".9"/>
+      </svg>
+    </div>
+    <div class="sidebar-brand-text">
+      <div class="sidebar-brand-name">A Grande<br>Caçada</div>
+      <div class="sidebar-brand-sub">Gestão de Alcateia</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <button class="sidebar-cta-btn" id="btn-nova-inscricao" type="button">
+    Nova Inscrição
+  </button>
+
+  <!-- Nav -->
+  <nav class="sidebar-nav">
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+        <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+      </svg>
+      Dashboard
+    </a>
+
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      Associados
+    </a>
+
+    <a class="nav-link active" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      Alcatéia
+    </a>
+
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      Perfil
+    </a>
+
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M2 12h2M20 12h2M12 2v2M12 20v2
+                 M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41
+                 M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+      Sistema
+    </a>
+  </nav>
+</aside>
+
+<!-- ══════════════════════════════════════
+     MAIN
+══════════════════════════════════════ -->
+<main class="main">
+  <div class="content">
+
+    <!-- ── PAGE HEADER ── -->
+    <div class="page-header">
+      <nav class="breadcrumb" aria-label="Localização">
+        <span class="bread-active">Alcatéia</span>
+        <span class="bread-sep">
+          <svg viewBox="0 0 4 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1l2 2-2 2" stroke="#a8a29e" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="bread-cur">Gestão de Matilhas</span>
+      </nav>
+      <h1 class="page-title">Caminho das Matilhas</h1>
+      <p class="page-desc">
+        Acompanhe o crescimento e as conquistas dos nossos pequenos lobos em
+        sua jornada pela Jângal.
+      </p>
     </div>
 
-    <script src="../../js/main.js"></script>
-    <script src="script.js"></script>
+    <!-- ── CONTENT GRID ── -->
+    <div class="content-grid">
+
+      <!-- LEFT: Matilha list -->
+      <div class="matilha-list">
+
+        <!-- ─ Matilha Cinza ─ -->
+        <div class="matilha-card card-cinza" role="button" tabindex="0"
+             aria-label="Matilha Cinza — 72% de progresso">
+          <div class="matilha-icon icon-cinza">
+            <!-- paw icon white -->
+            <svg viewBox="0 0 40 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="20" cy="26" rx="11" ry="12" fill="white" opacity=".85"/>
+              <ellipse cx="8"  cy="16" rx="5"  ry="6.5" fill="white" opacity=".85"/>
+              <ellipse cx="32" cy="16" rx="5"  ry="6.5" fill="white" opacity=".85"/>
+              <ellipse cx="13" cy="8"  rx="4"  ry="5" fill="white" opacity=".85"/>
+              <ellipse cx="27" cy="8"  rx="4"  ry="5" fill="white" opacity=".85"/>
+            </svg>
+            <span class="matilha-sub-badge">Cinza</span>
+          </div>
+
+          <div class="matilha-info">
+            <div class="matilha-name">Matilha Cinza</div>
+            <div class="matilha-meta">
+              <div class="meta-item">
+                <svg viewBox="0 0 14 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 6c0-2.2 1.8-4 4-4h4c2.2 0 4 1.8 4 4"
+                        stroke="#a8a29e" stroke-width="1.5" stroke-linecap="round"/>
+                  <circle cx="5.5" cy="2.5" r="2" stroke="#a8a29e" stroke-width="1.5"/>
+                  <circle cx="8.5" cy="2.5" r="2" stroke="#a8a29e" stroke-width="1.5"/>
+                </svg>
+                <strong>08</strong><span>Lobinhos</span>
+              </div>
+              <div class="meta-item">
+                <svg class="svg-person" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="5" cy="3.5" r="2.5" stroke="#a8a29e" stroke-width="1.2"/>
+                  <path d="M1 9.5c0-2.2 1.8-4 4-4s4 1.8 4 4"
+                        stroke="#a8a29e" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+                <span>Akela</span><strong>Ricardo Silva</strong>
+              </div>
+            </div>
+            <div class="matilha-progress">
+              <div class="progress-header">
+                <span class="progress-label">Progresso Médio</span>
+                <span class="progress-pct">72%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" data-width="72%" data-delay="0"></div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-detail" type="button" aria-label="Ver detalhes Matilha Cinza">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- ─ Matilha Branca ─ -->
+        <div class="matilha-card card-branca" role="button" tabindex="0"
+             aria-label="Matilha Branca — 45% de progresso">
+          <div class="matilha-icon icon-branca">
+            <svg viewBox="0 0 40 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="20" cy="26" rx="11" ry="12" fill="#a8a29e" opacity=".6"/>
+              <ellipse cx="8"  cy="16" rx="5"  ry="6.5" fill="#a8a29e" opacity=".6"/>
+              <ellipse cx="32" cy="16" rx="5"  ry="6.5" fill="#a8a29e" opacity=".6"/>
+              <ellipse cx="13" cy="8"  rx="4"  ry="5" fill="#a8a29e" opacity=".6"/>
+              <ellipse cx="27" cy="8"  rx="4"  ry="5" fill="#a8a29e" opacity=".6"/>
+            </svg>
+            <span class="matilha-sub-badge">Branca</span>
+          </div>
+
+          <div class="matilha-info">
+            <div class="matilha-name">Matilha Branca</div>
+            <div class="matilha-meta">
+              <div class="meta-item">
+                <svg viewBox="0 0 14 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 6c0-2.2 1.8-4 4-4h4c2.2 0 4 1.8 4 4"
+                        stroke="#a8a29e" stroke-width="1.5" stroke-linecap="round"/>
+                  <circle cx="5.5" cy="2.5" r="2" stroke="#a8a29e" stroke-width="1.5"/>
+                  <circle cx="8.5" cy="2.5" r="2" stroke="#a8a29e" stroke-width="1.5"/>
+                </svg>
+                <strong>06</strong><span>Lobinhos</span>
+              </div>
+              <div class="meta-item">
+                <svg class="svg-person" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="5" cy="3.5" r="2.5" stroke="#a8a29e" stroke-width="1.2"/>
+                  <path d="M1 9.5c0-2.2 1.8-4 4-4s4 1.8 4 4"
+                        stroke="#a8a29e" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+                <span>Baloo</span><strong>Mariana Costa</strong>
+              </div>
+            </div>
+            <div class="matilha-progress">
+              <div class="progress-header">
+                <span class="progress-label">Progresso Médio</span>
+                <span class="progress-pct">45%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" data-width="45%" data-delay="120"></div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-detail" type="button" aria-label="Ver detalhes Matilha Branca">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- ─ Matilha Preta ─ -->
+        <div class="matilha-card card-preta" role="button" tabindex="0"
+             aria-label="Matilha Preta — 88% de progresso">
+          <div class="matilha-icon icon-preta">
+            <svg viewBox="0 0 40 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="20" cy="26" rx="11" ry="12" fill="white" opacity=".85"/>
+              <ellipse cx="8"  cy="16" rx="5"  ry="6.5" fill="white" opacity=".85"/>
+              <ellipse cx="32" cy="16" rx="5"  ry="6.5" fill="white" opacity=".85"/>
+              <ellipse cx="13" cy="8"  rx="4"  ry="5" fill="white" opacity=".85"/>
+              <ellipse cx="27" cy="8"  rx="4"  ry="5" fill="white" opacity=".85"/>
+            </svg>
+            <span class="matilha-sub-badge">Preta</span>
+          </div>
+
+          <div class="matilha-info">
+            <div class="matilha-name">Matilha Preta</div>
+            <div class="matilha-meta">
+              <div class="meta-item">
+                <svg viewBox="0 0 14 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 6c0-2.2 1.8-4 4-4h4c2.2 0 4 1.8 4 4"
+                        stroke="#a8a29e" stroke-width="1.5" stroke-linecap="round"/>
+                  <circle cx="5.5" cy="2.5" r="2" stroke="#a8a29e" stroke-width="1.5"/>
+                  <circle cx="8.5" cy="2.5" r="2" stroke="#a8a29e" stroke-width="1.5"/>
+                </svg>
+                <strong>10</strong><span>Lobinhos</span>
+              </div>
+              <div class="meta-item">
+                <svg class="svg-person" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="5" cy="3.5" r="2.5" stroke="#a8a29e" stroke-width="1.2"/>
+                  <path d="M1 9.5c0-2.2 1.8-4 4-4s4 1.8 4 4"
+                        stroke="#a8a29e" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+                <span>Bagheera</span><strong>João Pedro</strong>
+              </div>
+            </div>
+            <div class="matilha-progress">
+              <div class="progress-header">
+                <span class="progress-label">Progresso Médio</span>
+                <span class="progress-pct">88%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" data-width="88%" data-delay="240"></div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-detail" type="button" aria-label="Ver detalhes Matilha Preta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </button>
+        </div>
+
+      </div><!-- /matilha-list -->
+
+      <!-- RIGHT COLUMN -->
+      <div class="right-col">
+
+        <!-- ── Mapa da Jângal ── -->
+        <div class="mapa-card">
+          <div class="mapa-header">
+            <!-- map icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
+              <line x1="8" y1="2" x2="8" y2="18"/>
+              <line x1="16" y1="6" x2="16" y2="22"/>
+            </svg>
+            <h2 class="mapa-title">Mapa da Jângal</h2>
+          </div>
+
+          <!-- Map visual with markers -->
+          <div class="mapa-visual" role="img" aria-label="Mapa tático da alcateia">
+            <img
+              class="mapa-img"
+              src="https://www.figma.com/api/mcp/asset/4bd0113c-726a-4a0e-93e6-a817de596b7e"
+              alt="Mapa tático"
+              loading="lazy"
+              onerror="this.style.display='none'"
+            />
+
+            <!-- Connector lines -->
+            <svg class="mapa-lines" viewBox="0 0 260 240" fill="none"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- dashed lines between markers -->
+              <line x1="86" y1="96" x2="174" y2="127"
+                    stroke="#865c00" stroke-width="1.5" stroke-dasharray="5 4"/>
+              <line x1="86" y1="96" x2="135" y2="139"
+                    stroke="#865c00" stroke-width="1.5" stroke-dasharray="5 4"/>
+              <line x1="135" y1="139" x2="174" y2="127"
+                    stroke="#865c00" stroke-width="1.5" stroke-dasharray="5 4"/>
+            </svg>
+
+            <div class="mapa-markers" aria-hidden="true">
+              <div class="map-marker marker-cinza"  title="Matilha Cinza">C</div>
+              <div class="map-marker marker-branca" title="Matilha Branca">B</div>
+              <div class="map-marker marker-preta"  title="Matilha Preta">P</div>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="mapa-stats">
+            <div class="mapa-stat-row">
+              <span class="mapa-stat-label">Total de Lobinhos</span>
+              <span class="mapa-stat-badge badge-gold">24</span>
+            </div>
+            <div class="mapa-stat-row">
+              <span class="mapa-stat-label">Chefia Ativa</span>
+              <span class="mapa-stat-badge badge-green">04</span>
+            </div>
+          </div>
+        </div><!-- /mapa-card -->
+
+        <!-- ── Próxima Grande Caçada ── -->
+        <div class="cacada-card">
+          <!-- decorative -->
+          <div class="cacada-deco" aria-hidden="true">
+            <svg viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="48" cy="62" rx="28" ry="30" fill="#004d57" opacity=".3"/>
+              <ellipse cx="18" cy="32" rx="12" ry="16" fill="#004d57" opacity=".25"/>
+              <ellipse cx="78" cy="32" rx="12" ry="16" fill="#004d57" opacity=".25"/>
+              <ellipse cx="32" cy="16" rx="10" ry="13" fill="#004d57" opacity=".2"/>
+              <ellipse cx="64" cy="16" rx="10" ry="13" fill="#004d57" opacity=".2"/>
+            </svg>
+          </div>
+
+          <div class="cacada-label">Próxima Grande Caçada</div>
+          <div class="cacada-title">
+            Acantonamento Regional<br>de Alcatéias
+          </div>
+          <div class="cacada-date">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <span>15 de Outubro</span>
+          </div>
+          <button class="btn-cacada" id="btn-cacada" type="button">
+            Ver Detalhes
+          </button>
+        </div><!-- /cacada-card -->
+
+      </div><!-- /right-col -->
+
+    </div><!-- /content-grid -->
+
+  </div><!-- /content -->
+</main>
+
+<!-- ══════════════════════════════════════
+     TOAST
+══════════════════════════════════════ -->
+<div class="toast" id="toast" role="alert" aria-live="polite">
+  <span class="toast-icon" id="toast-icon"></span>
+  <span id="toast-msg"></span>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
