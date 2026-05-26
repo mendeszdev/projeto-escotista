@@ -1,406 +1,227 @@
 /* ============================================
    LOGIN - SCRIPT.JS
-   Lógica de autenticação e validação
-   Pronto para integração com API backend
+   Integrado com POST /api/auth/login
    ============================================ */
 
-/**
- * Objeto para armazenar dados de autenticação
- * @type {Object}
- */
 const authState = {
-    isLoading: false,
-    error: null,
-    token: localStorage.getItem('auth_token') || null,
+  isLoading: false,
+  token: localStorage.getItem('auth_token') || null,
 };
 
-/**
- * Inicializa os event listeners da tela de login
- * Executado quando o DOM está pronto
- */
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🔐 Tela de Login inicializada');
-    
-    // Obter referências dos elementos
-    const loginForm = document.getElementById('loginForm');
-    const matriculaInput = document.getElementById('matricula');
-    const senhaInput = document.getElementById('senha');
-    
-    // Adicionar listeners de eventos
-    if (loginForm) {
-        loginForm.addEventListener('submit', handleLoginSubmit);
-    }
-    
-    // Adicionar listeners para validação em tempo real
-    if (matriculaInput) {
-        matriculaInput.addEventListener('blur', validateMatricula);
-        matriculaInput.addEventListener('input', formatMatricula);
-    }
-    
-    if (senhaInput) {
-        senhaInput.addEventListener('blur', validateSenha);
-    }
-    
-    // Adicionar listeners para links
-    const forgotPasswordLink = document.querySelector('.forgot-password-link');
-    const signupLink = document.querySelector('.signup-link');
-    
-    if (forgotPasswordLink) {
-        forgotPasswordLink.addEventListener('click', handleForgotPassword);
-    }
-    
-    if (signupLink) {
-        signupLink.addEventListener('click', handleSignup);
-    }
-    
-    // Restaurar sessão se existir token
-    if (authState.token) {
-        console.log('✅ Token encontrado, restaurando sessão...');
-        restoreSession();
-    }
+  const loginForm     = document.getElementById('loginForm');
+  const matriculaInput = document.getElementById('matricula');
+  const senhaInput    = document.getElementById('senha');
+
+  if (loginForm) loginForm.addEventListener('submit', handleLoginSubmit);
+  if (matriculaInput) {
+    matriculaInput.addEventListener('blur',  validateMatriculaField);
+    matriculaInput.addEventListener('input', formatMatricula);
+  }
+  if (senhaInput) senhaInput.addEventListener('blur', validateSenha);
+
+  document.querySelector('.forgot-password-link')
+    ?.addEventListener('click', handleForgotPassword);
+
+  // Se já há sessão, redireciona direto
+  if (authState.token) restoreSession();
 });
 
-/**
- * Manipula o envio do formulário de login
- * @param {Event} event - Evento do formulário
- */
+/* ─── SUBMIT ──────────────────────────────────────────────── */
+
 async function handleLoginSubmit(event) {
-    event.preventDefault();
-    console.log('📝 Formulário de login enviado');
-    
-    // Obter valores dos inputs
-    const matricula = document.getElementById('matricula').value.trim();
-    const senha = document.getElementById('senha').value.trim();
-    
-    // Validar campos
-    if (!validateMatricula() || !validateSenha()) {
-        console.warn('⚠️ Validação falhou');
-        showError('Por favor, preencha todos os campos corretamente');
-        return;
+  event.preventDefault();
+
+  const matricula = document.getElementById('matricula').value.trim();
+  const senha     = document.getElementById('senha').value.trim();
+
+  if (!validateMatriculaField() || !validateSenha()) {
+    showError('Por favor, preencha todos os campos corretamente');
+    return;
+  }
+
+  setLoadingState(true);
+
+  try {
+    const response = await authenticateUser(matricula, senha);
+
+    if (response.success) {
+      // Salvar sessão
+      authState.token = response.token;
+      localStorage.setItem('auth_token', response.token);
+      localStorage.setItem('user_data',  JSON.stringify(response.user));
+
+      showSuccess('Login realizado com sucesso!');
+
+      setTimeout(() => redirectToDashboard(response.user.role), 800);
+    } else {
+      showError(response.message || 'Matrícula ou senha incorretos');
     }
-    
-    // Iniciar carregamento
-    setLoadingState(true);
-    
-    try {
-        // Chamar função de autenticação
-        const response = await authenticateUser(matricula, senha);
-        
-        if (response.success) {
-            console.log('✅ Autenticação bem-sucedida');
-            
-            // Armazenar token
-            authState.token = response.token;
-            localStorage.setItem('auth_token', response.token);
-            localStorage.setItem('user_data', JSON.stringify(response.user));
-            
-            // Mostrar mensagem de sucesso
-            showSuccess('Login realizado com sucesso!');
-            
-            // Redirecionar após 1 segundo
-            setTimeout(() => {
-                redirectToDashboard(response.user.role);
-            }, 1000);
-        } else {
-            console.error('❌ Erro na autenticação:', response.message);
-            showError(response.message || 'Matrícula ou senha incorretos');
-        }
-    } catch (error) {
-        console.error('❌ Erro na requisição:', error);
-        showError('Erro ao conectar com o servidor. Tente novamente.');
-    } finally {
-        setLoadingState(false);
+
+  } catch (error) {
+    // Se o backend estiver fora do ar, cai aqui
+    console.error('Erro na requisição:', error);
+
+    // MOCK apenas para desenvolvimento — remover em produção
+    if (isDevMode()) {
+      console.warn('⚠️ Backend indisponível — usando MOCK');
+      const mock = mockAuthenticate(matricula, senha);
+      authState.token = mock.token;
+      localStorage.setItem('auth_token', mock.token);
+      localStorage.setItem('user_data',  JSON.stringify(mock.user));
+      setTimeout(() => redirectToDashboard(mock.user.role), 800);
+    } else {
+      showError('Erro ao conectar com o servidor. Verifique se a API está rodando em localhost:8080');
     }
+  } finally {
+    setLoadingState(false);
+  }
 }
 
+/* ─── CHAMADA À API ───────────────────────────────────────── */
+
 /**
- * Autentica o usuário com a API backend
- * @param {string} matricula - Número de matrícula
- * @param {string} senha - Senha do usuário
- * @returns {Promise<Object>} Resposta da autenticação
+ * Envia matrícula + senha para POST /api/auth/login
+ * O backend (LoginServlet.java) retorna:
+ * { success, token, user: { id, name, matricula, role, email, fotoUrl } }
  */
 async function authenticateUser(matricula, senha) {
-    console.log('🔄 Enviando credenciais para autenticação...');
-    
-    // TODO: Substituir URL com endpoint real da API
-    const API_URL = 'https://api.escoteiros.com/auth/login';
-    
-    try {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                matricula: matricula,
-                senha: senha,
-            }),
-        });
-        
-        // Verificar se a resposta é válida
-        if (!response.ok) {
-            throw new Error(`Erro HTTP: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        return data;
-        
-    } catch (error) {
-        console.error('Erro na requisição de autenticação:', error);
-        
-        // MOCK: Retornar dados fictícios para desenvolvimento
-        console.log('⚠️ Usando dados MOCK para desenvolvimento');
-        return mockAuthenticate(matricula, senha);
-    }
+  // ────────────────────────────────────────────────────────────
+  //  URL DO BACKEND — ajuste se o Tomcat rodar em outra porta
+  const API_URL = 'http://localhost:8080/api/auth/login';
+  // ────────────────────────────────────────────────────────────
+
+  const response = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ matricula, senha }),
+  });
+
+  if (!response.ok) {
+    // Erros 4xx/5xx → tentar ler mensagem do backend
+    const err = await response.json().catch(() => ({}));
+    return { success: false, message: err.erro || `Erro ${response.status}` };
+  }
+
+  return response.json();
 }
 
-/**
- * MOCK de autenticação para desenvolvimento
- * Remove quando integrar com API real
- * @param {string} matricula - Número de matrícula
- * @param {string} senha - Senha do usuário
- * @returns {Object} Dados fictícios de autenticação
- */
+/* ─── MOCK (só para desenvolvimento) ─────────────────────── */
+
+function isDevMode() {
+  // Ativa o mock apenas em localhost; em produção nunca usa mock
+  return window.location.hostname === 'localhost' ||
+         window.location.hostname === '127.0.0.1';
+}
+
 function mockAuthenticate(matricula, senha) {
-    // Aceitar qualquer matrícula e senha para teste
-    if (matricula && senha) {
-        return {
-            success: true,
-            token: 'mock_token_' + Date.now(),
-            user: {
-                id: '123',
-                name: 'Usuário Teste',
-                matricula: matricula,
-                role: 'lobinho', // Pode ser: 'lobinho', 'escotista', 'dirigente'
-                email: 'usuario@escoteiros.com',
-            },
-        };
-    }
-    
-    return {
-        success: false,
-        message: 'Credenciais inválidas',
-    };
+  // Simula perfis diferentes por matrícula para facilitar testes:
+  // 001.001-1 → dirigente | 001.001-2 → escotista | qualquer outro → lobinho
+  let role = 'lobinho';
+  if (matricula === '001.001-1') role = 'dirigente';
+  if (matricula === '001.001-2') role = 'escotista';
+
+  return {
+    success: true,
+    token: 'mock_token_' + Date.now(),
+    user: {
+      id:       'mock-id-123',
+      name:     'Usuário Teste',
+      matricula: matricula,
+      role:      role,
+      email:    'teste@escoteiros.com',
+      fotoUrl:  null,
+    },
+  };
 }
 
-/**
- * Restaura a sessão do usuário a partir do token armazenado
- * Verifica se o token ainda é válido
- */
-async function restoreSession() {
-    console.log('🔄 Restaurando sessão...');
-    
-    // TODO: Implementar validação de token com API
-    // Por enquanto, apenas verificar se o token existe
-    
-    if (authState.token) {
-        console.log('✅ Sessão restaurada');
-        // Redirecionar para dashboard
-        const userData = JSON.parse(localStorage.getItem('user_data') || '{}');
-        redirectToDashboard(userData.role || 'lobinho');
-    }
+/* ─── RESTAURAR SESSÃO ────────────────────────────────────── */
+
+function restoreSession() {
+  const userData = JSON.parse(localStorage.getItem('user_data') || '{}');
+  if (userData?.role) {
+    redirectToDashboard(userData.role);
+  }
 }
 
-/**
- * Valida o formato do número de matrícula
- * Formato esperado: XXX.XXX-X
- * @returns {boolean} True se válido
- */
-function validateMatricula() {
-    const matriculaInput = document.getElementById('matricula');
-    const matricula = matriculaInput.value.trim();
-    
-    // Regex para validar formato XXX.XXX-X
-    const regex = /^\d{3}\.\d{3}-\d{1}$/;
-    
-    if (!regex.test(matricula)) {
-        console.warn('⚠️ Matrícula inválida');
-        matriculaInput.classList.add('error');
-        return false;
-    }
-    
-    matriculaInput.classList.remove('error');
-    return true;
-}
+/* ─── REDIRECIONAMENTO ────────────────────────────────────── */
 
-/**
- * Valida o campo de senha
- * Mínimo 6 caracteres
- * @returns {boolean} True se válido
- */
-function validateSenha() {
-    const senhaInput = document.getElementById('senha');
-    const senha = senhaInput.value.trim();
-    
-    if (senha.length < 6) {
-        console.warn('⚠️ Senha muito curta');
-        senhaInput.classList.add('error');
-        return false;
-    }
-    
-    senhaInput.classList.remove('error');
-    return true;
-}
-
-/**
- * Formata o número de matrícula enquanto o usuário digita
- * Formato: XXX.XXX-X
- */
-function formatMatricula() {
-    const input = document.getElementById('matricula');
-    let value = input.value.replace(/\D/g, ''); // Remove não-dígitos
-    
-    if (value.length > 7) {
-        value = value.slice(0, 7);
-    }
-    
-    // Aplicar formatação
-    if (value.length <= 3) {
-        input.value = value;
-    } else if (value.length <= 6) {
-        input.value = value.slice(0, 3) + '.' + value.slice(3);
-    } else {
-        input.value = value.slice(0, 3) + '.' + value.slice(3, 6) + '-' + value.slice(6);
-    }
-}
-
-/**
- * Manipula o clique no link "Esqueci minha senha"
- * @param {Event} event - Evento do clique
- */
-function handleForgotPassword(event) {
-    event.preventDefault();
-    console.log('🔑 Usuário clicou em "Esqueci minha senha"');
-    
-    // TODO: Implementar modal ou página de recuperação de senha
-    alert('Funcionalidade de recuperação de senha em desenvolvimento');
-    
-    // Exemplo de redirecionamento:
-    // window.location.href = '/recuperar-senha';
-}
-
-/**
- * Manipula o clique no link "Cadastre-se"
- * @param {Event} event - Evento do clique
- */
-function handleSignup(event) {
-    event.preventDefault();
-    console.log('📝 Usuário clicou em "Cadastre-se"');
-    
-    // TODO: Implementar modal ou página de cadastro
-    alert('Funcionalidade de cadastro em desenvolvimento');
-    
-    // Exemplo de redirecionamento:
-    // window.location.href = '/cadastro';
-}
-
-/**
- * Define o estado de carregamento do formulário
- * @param {boolean} isLoading - True se está carregando
- */
-function setLoadingState(isLoading) {
-    const button = document.querySelector('.action-button');
-    const form = document.getElementById('loginForm');
-    
-    authState.isLoading = isLoading;
-    
-    if (isLoading) {
-        button.disabled = true;
-        button.textContent = 'Carregando...';
-        form.style.opacity = '0.6';
-        form.style.pointerEvents = 'none';
-    } else {
-        button.disabled = false;
-        button.innerHTML = '<span class="button-text">Entrar</span><img src="assets/3-62.svg" alt="Seta" class="button-icon">';
-        form.style.opacity = '1';
-        form.style.pointerEvents = 'auto';
-    }
-}
-
-/**
- * Exibe mensagem de erro
- * @param {string} message - Mensagem de erro
- */
-function showError(message) {
-    console.error('❌ Erro:', message);
-    
-    // TODO: Implementar toast/notificação visual
-    // Por enquanto, usar alert
-    alert('❌ ' + message);
-    
-    // Exemplo com notificação customizada:
-    // createNotification('error', message);
-}
-
-/**
- * Exibe mensagem de sucesso
- * @param {string} message - Mensagem de sucesso
- */
-function showSuccess(message) {
-    console.log('✅ Sucesso:', message);
-    
-    // TODO: Implementar toast/notificação visual
-    // Por enquanto, usar alert
-    alert('✅ ' + message);
-    
-    // Exemplo com notificação customizada:
-    // createNotification('success', message);
-}
-
-/**
- * Redireciona para o dashboard apropriado baseado no role do usuário
- * @param {string} role - Role do usuário (lobinho, escotista, dirigente)
- */
 function redirectToDashboard(role) {
-    console.log('🔄 Redirecionando para dashboard:', role);
-    
-    const dashboardPaths = {
-        'lobinho': '/lobinho/dashboard/',
-        'escotista': '/escotista/dashboard/',
-        'dirigente': '/dirigente/dashboard/',
-    };
-    
-    const path = dashboardPaths[role] || '/lobinho/dashboard/';
-    window.location.href = path;
+  const paths = {
+    lobinho:   '/lobinho/dashboard/',
+    escotista: '/escotista/dashboard/',
+    dirigente: '/dirigente/dashboard/',
+  };
+  window.location.href = paths[role] || '/lobinho/dashboard/';
 }
 
-/**
- * Faz logout do usuário
- * Remove token e dados do localStorage
- */
+/* ─── VALIDAÇÕES ──────────────────────────────────────────── */
+function validateMatriculaField()  {
+  const input    = document.getElementById('matricula');
+  const matricula = input?.value.trim();
+  const ok = /^\d{3}\.\d{3}-\d{1}$/.test(matricula);
+  input?.classList.toggle('error', !ok);
+  return ok;
+}
+
+function validateSenha() {
+  const input = document.getElementById('senha');
+  const ok = (input?.value.trim().length ?? 0) >= 6;
+  input?.classList.toggle('error', !ok);
+  return ok;
+}
+
+function formatMatricula() {
+  const input = document.getElementById('matricula');
+  let v = input.value.replace(/\D/g, '').slice(0, 7);
+  if      (v.length <= 3) input.value = v;
+  else if (v.length <= 6) input.value = v.slice(0,3) + '.' + v.slice(3);
+  else                    input.value = v.slice(0,3) + '.' + v.slice(3,6) + '-' + v.slice(6);
+}
+
+/* ─── UI ──────────────────────────────────────────────────── */
+
+function setLoadingState(isLoading) {
+  const button = document.querySelector('.action-button');
+  const form   = document.getElementById('loginForm');
+  authState.isLoading = isLoading;
+
+  if (button) {
+    button.disabled = isLoading;
+    button.innerHTML = isLoading
+      ? 'Carregando...'
+      : '<span class="button-text">Entrar</span><img src="assets/3-62.svg" alt="Seta" class="button-icon">';
+  }
+  if (form) {
+    form.style.opacity       = isLoading ? '0.6' : '1';
+    form.style.pointerEvents = isLoading ? 'none' : 'auto';
+  }
+}
+
+function showError(message) {
+  console.error('❌', message);
+  // TODO: Substituir alert por toast visual
+  alert('❌ ' + message);
+}
+
+function showSuccess(message) {
+  console.log('✅', message);
+  // TODO: Substituir alert por toast visual
+  alert('✅ ' + message);
+}
+
+function handleForgotPassword(event) {
+  event.preventDefault();
+  alert('Funcionalidade de recuperação de senha em desenvolvimento');
+}
+
+/* ─── LOGOUT (chamado por outras telas) ───────────────────── */
+
 function logout() {
-    console.log('🚪 Fazendo logout...');
-    
-    // Limpar dados de autenticação
-    authState.token = null;
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('user_data');
-    
-    // Redirecionar para login
-    window.location.href = '/login/';
+  authState.token = null;
+  localStorage.removeItem('auth_token');
+  localStorage.removeItem('user_data');
+  window.location.href = '/login/';
 }
 
-/**
- * Obtém os dados do usuário armazenado
- * @returns {Object} Dados do usuário
- */
-function getUserData() {
-    const userData = localStorage.getItem('user_data');
-    return userData ? JSON.parse(userData) : null;
-}
-
-/**
- * Verifica se o usuário está autenticado
- * @returns {boolean} True se autenticado
- */
-function isAuthenticated() {
-    return !!authState.token;
-}
-
-// Exportar funções para uso global
-window.authModule = {
-    logout,
-    getUserData,
-    isAuthenticated,
-    authenticateUser,
-};
+window.authModule = { logout, isAuthenticated: () => !!authState.token };
