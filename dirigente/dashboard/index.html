@@ -1,67 +1,605 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Estratégico - Dirigente</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="dashboard-container">
-        <div class="top-bar-dirigente">
-            <h2 class="top-bar-title">Trilha do Dirigente</h2>
-            <div class="top-bar-actions">
-                <button class="btn-icon">🔔</button>
-                <button class="btn-icon">⚙️</button>
-                <button class="btn-profile">👤</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trilha do Dirigente – Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Open+Sans:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dashboard-dirigente.css" />
+  </head>
+  <body>
+    <!-- ══════════════════════════════════════
+     TOP BAR  (âmbar — identidade Dirigente)
+══════════════════════════════════════ -->
+    <header class="topbar">
+      <a class="topbar-brand" href="#">Trilha do Dirigente</a>
+      <div class="topbar-right">
+        <!-- Bell -->
+        <button class="topbar-icon-btn" title="Notificações">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+        </button>
+        <!-- Settings -->
+        <button class="topbar-icon-btn" title="Configurações">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+            />
+          </svg>
+        </button>
+        <!-- Avatar -->
+        <div class="topbar-avatar" title="Perfil do Dirigente">
+          <img
+            src="https://www.figma.com/api/mcp/asset/adcadf26-c7d1-4c06-8b58-2f6585f8feda"
+            alt="Avatar do Dirigente"
+            onerror="this.style.display = 'none'"
+          />
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
+                 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
+            />
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════
+     SIDEBAR
+══════════════════════════════════════ -->
+    <aside class="sidebar">
+      <!-- Brand -->
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">
+          <!-- paw / alcateia icon -->
+          <svg
+            viewBox="0 0 20 19"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <ellipse
+              cx="10"
+              cy="12"
+              rx="5.5"
+              ry="6.5"
+              fill="white"
+              opacity=".9"
+            />
+            <ellipse
+              cx="3"
+              cy="7"
+              rx="2.5"
+              ry="3.5"
+              fill="white"
+              opacity=".9"
+            />
+            <ellipse
+              cx="17"
+              cy="7"
+              rx="2.5"
+              ry="3.5"
+              fill="white"
+              opacity=".9"
+            />
+            <ellipse cx="6" cy="3" rx="2" ry="2.8" fill="white" opacity=".9" />
+            <ellipse cx="14" cy="3" rx="2" ry="2.8" fill="white" opacity=".9" />
+          </svg>
+        </div>
+        <div class="sidebar-brand-info">
+          <div class="sidebar-brand-name">A Grande Caçada</div>
+          <div class="sidebar-brand-sub">Gestão de Alcateia</div>
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <nav class="sidebar-nav">
+        <a class="nav-link active" href="#">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <rect x="3" y="3" width="7" height="7" rx="1.5" />
+            <rect x="14" y="3" width="7" height="7" rx="1.5" />
+            <rect x="3" y="14" width="7" height="7" rx="1.5" />
+            <rect x="14" y="14" width="7" height="7" rx="1.5" />
+          </svg>
+          Dashboard
+        </a>
+
+        <a class="nav-link" href="#">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          Associados
+        </a>
+
+        <a class="nav-link" href="#">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+          </svg>
+          Alcatéias
+        </a>
+
+        <a class="nav-link" href="#">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          Perfil
+        </a>
+
+        <a class="nav-link" href="#">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M2 12h2M20 12h2M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+            />
+          </svg>
+          Sistema
+        </a>
+      </nav>
+
+      <!-- CTA -->
+      <div class="sidebar-cta">
+        <button
+          class="btn-nova-inscricao"
+          id="btn-nova-inscricao"
+          type="button"
+        >
+          <svg
+            viewBox="0 0 24 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <line
+              x1="12"
+              y1="1"
+              x2="12"
+              y2="15"
+              stroke="#92400e"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            />
+            <line
+              x1="5"
+              y1="8"
+              x2="19"
+              y2="8"
+              stroke="#92400e"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            />
+          </svg>
+          Nova Inscrição
+        </button>
+      </div>
+    </aside>
+
+    <!-- ══════════════════════════════════════
+     MAIN
+══════════════════════════════════════ -->
+    <main class="main">
+      <div class="content">
+        <!-- ── PAGE HEADER ── -->
+        <div class="page-header">
+          <h1 class="page-title">Sempre Alerta, Dirigente!</h1>
+          <div class="page-sub">
+            <span class="page-sub-text"
+              >Bem-vindo à sua central de comando da alcateia.</span
+            >
+            <span class="badge-ouro">
+              <svg
+                viewBox="0 0 13 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <polygon
+                  points="6.5,1 8.2,4.5 12,5 9.3,7.5 10,11.5 6.5,9.7 3,11.5 3.7,7.5 1,5 4.8,4.5"
+                  fill="#92400e"
+                />
+              </svg>
+              Grupo Ouro 2024
+            </span>
+          </div>
+        </div>
+
+        <!-- ── STATS ROW ── -->
+        <div class="stats-row">
+          <!-- Total Associados -->
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon">
+                <svg
+                  viewBox="0 0 44 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="16" cy="13" r="8" fill="#d1fae5" />
+                  <circle cx="28" cy="13" r="8" fill="#a7f3d0" />
+                  <ellipse cx="10" cy="34" rx="10" ry="6" fill="#d1fae5" />
+                  <ellipse cx="34" cy="34" rx="10" ry="6" fill="#a7f3d0" />
+                </svg>
+              </div>
+              <span class="stat-badge-green">+5%</span>
             </div>
-        </div>
+            <div class="stat-bottom">
+              <span class="stat-label">Total Associados</span>
+              <span class="stat-value">142</span>
+            </div>
+          </div>
 
-        <div class="main-wrapper">
-            <aside class="sidebar-dirigente">
-                <div class="sidebar-header-dirigente">
-                    <h3 class="sidebar-title-dirigente">A Grande Caçada</h3>
-                    <p class="sidebar-status-dirigente">GESTÃO DE ALCATEIA</p>
-                </div>
-                <nav class="sidebar-nav-dirigente">
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">📊</span>
-                        <span class="nav-label">Dashboard</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">👥</span>
-                        <span class="nav-label">Associados</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">🐾</span>
-                        <span class="nav-label">Alcatéias</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">👤</span>
-                        <span class="nav-label">Perfil</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">⚙️</span>
-                        <span class="nav-label">Sistema</span>
-                    </a>
-                </nav>
-            </aside>
+          <!-- Saúde do Grupo -->
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon">
+                <svg
+                  viewBox="0 0 44 43"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M22 38S8 28 8 18a9 9 0 0 1 14-7.5A9 9 0 0 1 36 18c0 10-14 20-14 20z"
+                    fill="#dbeafe"
+                    stroke="#3b82f6"
+                    stroke-width="2"
+                  />
+                </svg>
+              </div>
+              <span class="stat-badge-blue">Saúde</span>
+            </div>
+            <div class="stat-bottom">
+              <span class="stat-label">Saúde do Grupo</span>
+              <span class="stat-value">88%</span>
+            </div>
+          </div>
 
-            <main class="main-content-dirigente">
-                <section class="header-section-dirigente">
-                    <h1 class="page-title-dirigente">Dashboard Estratégico</h1>
-                    <p class="page-description-dirigente">Tela em desenvolvimento - dashboard-dirigente</p>
-                </section>
-                <div class="placeholder-content-dirigente">
-                    <p>Conteúdo específico da tela Dashboard Estratégico será renderizado aqui.</p>
-                </div>
-            </main>
+          <!-- Atividades Recentes -->
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon">
+                <svg
+                  viewBox="0 0 42 44"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="3"
+                    y="5"
+                    width="36"
+                    height="36"
+                    rx="6"
+                    fill="#fef9c3"
+                    stroke="#f59e0b"
+                    stroke-width="2"
+                  />
+                  <line
+                    x1="14"
+                    y1="2"
+                    x2="14"
+                    y2="10"
+                    stroke="#f59e0b"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                  />
+                  <line
+                    x1="28"
+                    y1="2"
+                    x2="28"
+                    y2="10"
+                    stroke="#f59e0b"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                  />
+                  <line
+                    x1="3"
+                    y1="18"
+                    x2="39"
+                    y2="18"
+                    stroke="#f59e0b"
+                    stroke-width="2"
+                  />
+                  <polyline
+                    points="14,27 18,31 28,21"
+                    stroke="#f59e0b"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="stat-bottom">
+              <span class="stat-label">Atividades Recentes</span>
+              <span class="stat-value">12</span>
+            </div>
+          </div>
+
+          <!-- Alcatéias / Matilhas -->
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon">
+                <svg
+                  viewBox="0 0 44 43"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <ellipse cx="22" cy="28" rx="11" ry="12" fill="#e9d5ff" />
+                  <ellipse cx="8" cy="16" rx="5" ry="7" fill="#e9d5ff" />
+                  <ellipse cx="36" cy="16" rx="5" ry="7" fill="#e9d5ff" />
+                  <ellipse cx="13" cy="7" rx="4" ry="5.5" fill="#e9d5ff" />
+                  <ellipse cx="31" cy="7" rx="4" ry="5.5" fill="#e9d5ff" />
+                </svg>
+              </div>
+            </div>
+            <div class="stat-bottom">
+              <span class="stat-label">Alcatéias / Matilhas</span>
+              <span class="stat-value">04/12</span>
+            </div>
+          </div>
         </div>
+        <!-- /stats-row -->
+
+        <!-- ── BENTO GRID ── -->
+        <div class="bento-grid">
+          <!-- LEFT: Alertas da Jângal -->
+          <div class="alertas-card">
+            <!-- decorative paw -->
+            <div class="alertas-deco" aria-hidden="true">
+              <svg
+                viewBox="0 0 192 160"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <ellipse cx="96" cy="104" rx="42" ry="48" fill="white" />
+                <ellipse cx="32" cy="56" rx="18" ry="24" fill="white" />
+                <ellipse cx="160" cy="56" rx="18" ry="24" fill="white" />
+                <ellipse cx="58" cy="22" rx="15" ry="20" fill="white" />
+                <ellipse cx="134" cy="22" rx="15" ry="20" fill="white" />
+              </svg>
+            </div>
+
+            <div class="alertas-header">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#f59e0b"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+                />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+              <h2 class="alertas-title">Alertas da Jângal</h2>
+            </div>
+
+            <div class="alerta-list">
+              <!-- Alerta 1 -->
+              <div class="alerta-item">
+                <div class="alerta-name">Registros Pendentes</div>
+                <div class="alerta-desc">
+                  15 lobinhos precisam renovar o registro este mês.
+                </div>
+                <button class="alerta-action" id="btn-resolver" type="button">
+                  Resolver agora
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Alerta 2 -->
+              <div class="alerta-item">
+                <div class="alerta-name">Promessas Agendadas</div>
+                <div class="alerta-desc">
+                  Cerimônia de Passagem no próximo sábado (14:00).
+                </div>
+              </div>
+
+              <!-- Alerta 3 -->
+              <div class="alerta-item">
+                <div class="alerta-name">Livro de Caça</div>
+                <div class="alerta-desc">
+                  A matilha Branca não atualizou o progresso semanal.
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /alertas-card -->
+
+          <!-- RIGHT: Trilha de Progresso + Próximos Passos -->
+          <div class="progress-card">
+            <!-- Header with period tabs -->
+            <div class="progress-header">
+              <h2 class="progress-title">Trilha de Progresso</h2>
+              <div class="period-tabs">
+                <button class="tab-btn" type="button">Semanal</button>
+                <button class="tab-btn active" type="button">Mensal</button>
+              </div>
+            </div>
+
+            <!-- Progress bars -->
+            <div class="progress-bars">
+              <div class="progress-item">
+                <div class="progress-row">
+                  <div class="progress-info">
+                    <div class="progress-dot dot-amber"></div>
+                    <span class="progress-name">Renovação de Registros</span>
+                  </div>
+                  <span class="progress-pct">92%</span>
+                </div>
+                <div class="progress-track">
+                  <div
+                    class="progress-fill fill-amber"
+                    data-width="92%"
+                    data-delay="0"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="progress-item">
+                <div class="progress-row">
+                  <div class="progress-info">
+                    <div class="progress-dot dot-green"></div>
+                    <span class="progress-name">Frequência nas Atividades</span>
+                  </div>
+                  <span class="progress-pct">85%</span>
+                </div>
+                <div class="progress-track">
+                  <div
+                    class="progress-fill fill-green"
+                    data-width="85%"
+                    data-delay="120"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="progress-item">
+                <div class="progress-row">
+                  <div class="progress-info">
+                    <div class="progress-dot dot-blue"></div>
+                    <span class="progress-name">Progressão de Etapas</span>
+                  </div>
+                  <span class="progress-pct">64%</span>
+                </div>
+                <div class="progress-track">
+                  <div
+                    class="progress-fill fill-blue"
+                    data-width="64%"
+                    data-delay="240"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Próximos passos -->
+            <div class="proximos-section">
+              <h3 class="proximos-title">Próximos Passos na Trilha</h3>
+              <div class="proximos-grid">
+                <!-- Passo 1 — âmbar -->
+                <div class="passo-card amber-card">
+                  <div class="passo-icon icon-amber-bg">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#92400e"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 0 0 1 1h3m10-11l2 2m-2-2v10a1 1 0 0 1-1 1h-3m-6 0a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1m-6 0h6"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="passo-name">Acantonamento de Primavera</div>
+                    <div class="passo-desc">
+                      Confirmar alimentação e logística.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Passo 2 — verde -->
+                <div class="passo-card green-card">
+                  <div class="passo-icon icon-green-bg">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#14532d"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                      <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="passo-name">Especialidades Técnicas</div>
+                    <div class="passo-desc">
+                      Lançar certificados no sistema m.UI.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /progress-card -->
+        </div>
+        <!-- /bento-grid -->
+      </div>
+      <!-- /content -->
+    </main>
+
+    <!-- ══════════════════════════════════════
+     TOAST
+══════════════════════════════════════ -->
+    <div class="toast" id="toast" role="alert" aria-live="polite">
+      <span class="toast-icon" id="toast-icon"></span>
+      <span id="toast-msg"></span>
     </div>
 
-    <script src="../../js/main.js"></script>
-    <script src="script.js"></script>
-</body>
+    <script src="dashboard-dirigente.js"></script>
+  </body>
 </html>
