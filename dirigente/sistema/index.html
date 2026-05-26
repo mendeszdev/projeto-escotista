@@ -1,67 +1,460 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurações do Sistema - Dirigente</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trilha do Dirigente – Configurações do Sistema</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Open+Sans:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="dashboard-container">
-        <div class="top-bar-dirigente">
-            <h2 class="top-bar-title">Trilha do Dirigente</h2>
-            <div class="top-bar-actions">
-                <button class="btn-icon">🔔</button>
-                <button class="btn-icon">⚙️</button>
-                <button class="btn-profile">👤</button>
-            </div>
-        </div>
 
-        <div class="main-wrapper">
-            <aside class="sidebar-dirigente">
-                <div class="sidebar-header-dirigente">
-                    <h3 class="sidebar-title-dirigente">A Grande Caçada</h3>
-                    <p class="sidebar-status-dirigente">GESTÃO DE ALCATEIA</p>
-                </div>
-                <nav class="sidebar-nav-dirigente">
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">📊</span>
-                        <span class="nav-label">Dashboard</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">👥</span>
-                        <span class="nav-label">Associados</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">🐾</span>
-                        <span class="nav-label">Alcatéias</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">👤</span>
-                        <span class="nav-label">Perfil</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">⚙️</span>
-                        <span class="nav-label">Sistema</span>
-                    </a>
-                </nav>
-            </aside>
+<!-- ══════════════════════════════════════
+     TOP BAR
+══════════════════════════════════════ -->
+<header class="topbar">
+  <a class="topbar-brand" href="#">Trilha do Dirigente</a>
+  <div class="topbar-right">
+    <!-- Search -->
+    <div class="topbar-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" id="topbar-search" placeholder="Buscar configurações..."
+             autocomplete="off" />
+    </div>
+    <!-- Bell -->
+    <button class="topbar-icon-btn" title="Notificações">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+      </svg>
+    </button>
+    <!-- Settings -->
+    <button class="topbar-icon-btn" title="Configurações">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06
+                 a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09
+                 A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83
+                 l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09
+                 A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83
+                 l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09
+                 a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83
+                 l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09
+                 a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </button>
+    <!-- Avatar -->
+    <div class="topbar-avatar" title="Perfil">
+      <img src="https://www.figma.com/api/mcp/asset/7976810a-ec4f-410d-a94e-a5cea64c6a3f"
+           alt="Avatar" onerror="this.style.display='none'" />
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
+                 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+      </svg>
+    </div>
+  </div>
+</header>
 
-            <main class="main-content-dirigente">
-                <section class="header-section-dirigente">
-                    <h1 class="page-title-dirigente">Configurações do Sistema</h1>
-                    <p class="page-description-dirigente">Tela em desenvolvimento - configuracoes-sistema</p>
-                </section>
-                <div class="placeholder-content-dirigente">
-                    <p>Conteúdo específico da tela Configurações do Sistema será renderizado aqui.</p>
-                </div>
-            </main>
-        </div>
+<!-- ══════════════════════════════════════
+     SIDEBAR
+══════════════════════════════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-name">A Grande Caçada</div>
+    <div class="sidebar-brand-sub">Gestão de Alcateia</div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+        <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+      </svg>
+      Dashboard
+    </a>
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      Associados
+    </a>
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      Alcatéias
+    </a>
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      Perfil
+    </a>
+    <a class="nav-link active" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M2 12h2M20 12h2M12 2v2M12 20v2
+                 M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41
+                 M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+      Sistema
+    </a>
+  </nav>
+</aside>
+
+<!-- ══════════════════════════════════════
+     MAIN
+══════════════════════════════════════ -->
+<main class="main">
+  <div class="content">
+
+    <!-- ── PAGE HEADER ── -->
+    <div class="page-header">
+      <h1 class="page-title">Sistema</h1>
+      <p class="page-desc">Personalize a experiência da sua alcateia e gerencie os bastidores da Grande Caçada.</p>
     </div>
 
-    <script src="../../js/main.js"></script>
-    <script src="script.js"></script>
+    <!-- ══ BENTO GRID ══ -->
+    <div class="bento-grid">
+
+      <!-- ──────────────────────────────────
+           ROW 1, COL 1-8 — Identidade Visual
+      ─────────────────────────────────────── -->
+      <div class="card card-identidade card-radius">
+        <div class="card-header">
+          <div class="card-icon icon-amber">
+            <!-- palette icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="#523700" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <circle cx="9" cy="10" r="1.5" fill="#523700"/>
+              <circle cx="15" cy="10" r="1.5" fill="#523700"/>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+            </svg>
+          </div>
+          <h2 class="card-title">Identidade Visual</h2>
+        </div>
+
+        <div class="identity-grid">
+          <!-- Left: Logo upload -->
+          <div>
+            <div class="identity-section-label">Logo da Unidade</div>
+            <div class="upload-zone" id="logo-upload-zone" role="button"
+                 tabindex="0" aria-label="Área de upload do logo">
+              <svg viewBox="0 0 24 30" fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="12" y1="18" x2="12" y2="12"/>
+                <polyline points="9 15 12 12 15 15"/>
+              </svg>
+              <span class="upload-zone-label">Arraste o emblema aqui</span>
+            </div>
+            <input type="file" id="logo-file-input" accept="image/*"
+                   style="display:none" aria-label="Upload do logo" />
+          </div>
+
+          <!-- Right: Color palette + Save -->
+          <div>
+            <div class="identity-section-label">Paleta de Cores da Selva</div>
+            <div class="palette-row">
+              <!-- Gold (selected) -->
+              <div class="color-swatch selected"
+                   style="background:#865c00"
+                   data-color="#865c00"
+                   data-name="Ouro Escoteiro"
+                   title="Ouro Escoteiro"
+                   tabindex="0"
+                   role="button"
+                   aria-label="Cor: Ouro Escoteiro"></div>
+              <!-- Forest green -->
+              <div class="color-swatch"
+                   style="background:#237329"
+                   data-color="#237329"
+                   data-name="Verde Floresta"
+                   title="Verde Floresta"
+                   tabindex="0"
+                   role="button"
+                   aria-label="Cor: Verde Floresta"></div>
+              <!-- Teal -->
+              <div class="color-swatch"
+                   style="background:#006f7d"
+                   data-color="#006f7d"
+                   data-name="Teal Jângal"
+                   title="Teal Jângal"
+                   tabindex="0"
+                   role="button"
+                   aria-label="Cor: Teal Jângal"></div>
+              <!-- Red -->
+              <div class="color-swatch"
+                   style="background:#be2d06"
+                   data-color="#be2d06"
+                   data-name="Vermelho Alerta"
+                   title="Vermelho Alerta"
+                   tabindex="0"
+                   role="button"
+                   aria-label="Cor: Vermelho Alerta"></div>
+              <!-- Add -->
+              <button class="color-add" id="btn-add-color" type="button"
+                      title="Adicionar cor personalizada" aria-label="Adicionar cor">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </button>
+            </div>
+
+            <button class="btn-save-identity" id="btn-save-identity" type="button">
+              Salvar Alterações
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div><!-- /card-identidade -->
+
+      <!-- ──────────────────────────────────
+           ROW 1, COL 9-12 — Backup (Teal)
+      ─────────────────────────────────────── -->
+      <div class="card card-backup card-radius">
+        <!-- Icon -->
+        <div>
+          <div class="backup-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 7 16 7 16 14"/>
+              <path d="M20.5 3.5a9.5 9.5 0 1 0 0 17"/>
+            </svg>
+          </div>
+          <h2 class="backup-title">Resgate na Selva</h2>
+          <p class="backup-desc">
+            Mantenha os registros da sua alcateia seguros. Backups automáticos
+            ocorrem a cada 24 horas.
+          </p>
+        </div>
+
+        <div class="backup-actions">
+          <button class="btn-export-data" id="btn-export-data" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Exportar Dados
+          </button>
+          <p class="backup-timestamp">Último backup: Hoje, 04:20 AM</p>
+        </div>
+      </div><!-- /card-backup -->
+
+      <!-- ──────────────────────────────────
+           ROW 2, COL 1-6 — Hierarquia de Perfis
+      ─────────────────────────────────────── -->
+      <div class="card card-perfis card-radius">
+        <div class="card-perfis-header">
+          <div class="card-header" style="margin-bottom:0">
+            <div class="card-icon icon-green">
+              <!-- shield icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="#064e3b" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h2 class="card-title">Hierarquia de Perfis</h2>
+          </div>
+          <button class="btn-novo-perfil" id="btn-novo-perfil" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="16"/>
+              <line x1="8" y1="12" x2="16" y2="12"/>
+            </svg>
+            Novo Perfil
+          </button>
+        </div>
+
+        <div class="role-list">
+          <!-- Dirigente -->
+          <div class="role-row">
+            <div class="role-left">
+              <div class="role-icon role-icon-dirigente">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#92400e" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </div>
+              <div>
+                <div class="role-name">Dirigente</div>
+                <div class="role-desc">Acesso Total ao Sistema</div>
+              </div>
+            </div>
+            <button class="role-menu-btn" type="button" aria-label="Menu do perfil Dirigente">
+              <svg viewBox="0 0 4 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="2" cy="2"  r="1.5"/>
+                <circle cx="2" cy="8"  r="1.5"/>
+                <circle cx="2" cy="14" r="1.5"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Escotista -->
+          <div class="role-row">
+            <div class="role-left">
+              <div class="role-icon role-icon-escotista">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#065f46" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <polyline points="9 12 11 14 15 10"/>
+                </svg>
+              </div>
+              <div>
+                <div class="role-name">Escotista</div>
+                <div class="role-desc">Gestão de Alcatéias e Atividades</div>
+              </div>
+            </div>
+            <button class="role-menu-btn" type="button" aria-label="Menu do perfil Escotista">
+              <svg viewBox="0 0 4 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="2" cy="2"  r="1.5"/>
+                <circle cx="2" cy="8"  r="1.5"/>
+                <circle cx="2" cy="14" r="1.5"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Observador -->
+          <div class="role-row">
+            <div class="role-left">
+              <div class="role-icon role-icon-observador">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#78716c" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </div>
+              <div>
+                <div class="role-name">Observador</div>
+                <div class="role-desc">Apenas leitura e relatórios</div>
+              </div>
+            </div>
+            <button class="role-menu-btn" type="button" aria-label="Menu do perfil Observador">
+              <svg viewBox="0 0 4 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="2" cy="2"  r="1.5"/>
+                <circle cx="2" cy="8"  r="1.5"/>
+                <circle cx="2" cy="14" r="1.5"/>
+              </svg>
+            </button>
+          </div>
+        </div><!-- /role-list -->
+      </div><!-- /card-perfis -->
+
+      <!-- ──────────────────────────────────
+           ROW 2, COL 7-12 — Alertas da Jângal
+      ─────────────────────────────────────── -->
+      <div class="card card-alertas card-radius">
+        <div class="card-header" style="margin-bottom:0">
+          <div class="card-icon icon-yellow">
+            <!-- bell icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="#92400e" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+          </div>
+          <h2 class="card-title">Alertas da Jângal</h2>
+        </div>
+
+        <div class="notif-list">
+
+          <!-- Toggle 1: Email semanal — ON -->
+          <div class="notif-row">
+            <div class="notif-info">
+              <div class="notif-name">E-mail Semanal de Progresso</div>
+              <div class="notif-desc">Resumo do desenvolvimento dos lobinhos.</div>
+            </div>
+            <div class="toggle-wrap">
+              <label class="toggle" aria-label="E-mail Semanal de Progresso">
+                <input type="checkbox" checked />
+                <span class="toggle-track"></span>
+                <span class="toggle-thumb"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Toggle 2: Push notifications — OFF -->
+          <div class="notif-row dimmed">
+            <div class="notif-info">
+              <div class="notif-name">Notificações Push (App)</div>
+              <div class="notif-desc">Alertas em tempo real sobre novas inscrições.</div>
+            </div>
+            <div class="toggle-wrap">
+              <label class="toggle" aria-label="Notificações Push">
+                <input type="checkbox" />
+                <span class="toggle-track"></span>
+                <span class="toggle-thumb"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Toggle 3: Alertas de prazo — ON -->
+          <div class="notif-row">
+            <div class="notif-info">
+              <div class="notif-name">Alertas de Prazos de Matrícula</div>
+              <div class="notif-desc">Lembretes sobre renovações de anuidade.</div>
+            </div>
+            <div class="toggle-wrap">
+              <label class="toggle" aria-label="Alertas de Prazos de Matrícula">
+                <input type="checkbox" checked />
+                <span class="toggle-track"></span>
+                <span class="toggle-thumb"></span>
+              </label>
+            </div>
+          </div>
+
+        </div><!-- /notif-list -->
+
+        <div class="alertas-footer">
+          Configurações de canal global. Alterações afetam todos os usuários administrativos.
+        </div>
+      </div><!-- /card-alertas -->
+
+    </div><!-- /bento-grid -->
+  </div><!-- /content -->
+</main>
+
+<!-- Global card border-radius helper -->
+<style>
+  .card-radius { border-radius: var(--radius-lg); }
+</style>
+
+<!-- ══════════════════════════════════════
+     TOAST
+══════════════════════════════════════ -->
+<div class="toast" id="toast" role="alert" aria-live="polite">
+  <span class="toast-icon" id="toast-icon"></span>
+  <span id="toast-msg"></span>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
