@@ -137,6 +137,46 @@ function initCTA() {
 }
 
 /* ─────────────────────────────────────────
+   LOAD ALCATEIAS — atualiza dados dos cards com dados da API
+───────────────────────────────────────── */
+async function loadAlcateias() {
+  if (typeof API === "undefined") return;
+
+  try {
+    const lista = await API.alcateias.list();
+    if (!lista || lista.length === 0) return;
+
+    lista.forEach(alcateia => {
+      if (!alcateia.matilhas) return;
+
+      alcateia.matilhas.forEach(matilha => {
+        const nome = (matilha.nome || "").toLowerCase();
+        const card = [...document.querySelectorAll(".matilha-card")].find(
+          c => c.querySelector(".matilha-name")?.textContent.toLowerCase().includes(nome)
+        );
+        if (!card) return;
+
+        const pctEl  = card.querySelector(".progress-pct");
+        const barEl  = card.querySelector(".progress-fill");
+        const lobEl  = card.querySelector(".meta-item strong");
+        const chefEl = card.querySelector(".meta-item:last-child strong");
+
+        if (pctEl && matilha.progressoMedio != null) {
+          const pct = `${Math.round(matilha.progressoMedio)}%`;
+          pctEl.textContent = pct;
+          if (barEl) { barEl.dataset.width = pct; barEl.style.width = pct; }
+        }
+        if (lobEl  && matilha.totalLobinhos != null) lobEl.textContent = String(matilha.totalLobinhos).padStart(2, "0");
+        if (chefEl && matilha.chefe)                 chefEl.textContent = matilha.chefe;
+      });
+    });
+
+  } catch (err) {
+    console.error("[Alcateias] Erro ao carregar:", err);
+  }
+}
+
+/* ─────────────────────────────────────────
    BOOTSTRAP
 ───────────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", () => {
@@ -146,4 +186,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initMapMarkers();
   initCacada();
   initCTA();
+  loadAlcateias();
 });
