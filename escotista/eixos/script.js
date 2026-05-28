@@ -1,3 +1,5 @@
+requireAuth('escotista');
+
 /* eixos-escotista.js */
 
 /**
@@ -45,20 +47,6 @@ function initProgressBars() {
   });
 }
 
-/**
- * Inicializa o destaque de navegação da sidebar.
- */
-function initSidebarNav() {
-  const links = document.querySelectorAll(".nav-link");
-
-  links.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      links.forEach((l) => l.classList.remove("active"));
-      link.classList.add("active");
-    });
-  });
-}
 
 /**
  * Adiciona feedback de clique nos cards de eixo.
@@ -76,7 +64,6 @@ function initAxisCards() {
 
 /* ── Bootstrap ── */
 document.addEventListener("DOMContentLoaded", () => {
-  initSidebarNav();
   initProgressBars();
   initAxisCards();
 });

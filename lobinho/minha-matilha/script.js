@@ -1,3 +1,5 @@
+requireAuth('lobinho');
+
 /* minha-matilha.js */
 
 /* ─────────────────────────────────────────

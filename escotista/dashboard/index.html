@@ -15,7 +15,7 @@
     <header class="topbar">
       <a class="topbar-logo" href="#">Escotista</a>
       <div class="topbar-right">
-        <button class="topbar-icon-btn" title="Sair">
+        <button class="topbar-icon-btn" data-action="logout" title="Sair">
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -46,7 +46,7 @@
         <div class="sidebar-brand-role">Escotista Ativo</div>
       </div>
       <nav class="sidebar-nav">
-        <a class="nav-link active" href="#">
+        <a class="nav-link" href="../dashboard/">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <rect x="3" y="3" width="7" height="7" rx="1" />
             <rect x="14" y="3" width="7" height="7" rx="1" />
@@ -55,7 +55,7 @@
           </svg>
           Dashboard
         </a>
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="../gestao-atividades/">
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -74,7 +74,7 @@
           </svg>
           Atividades
         </a>
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="../matilhas/">
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -90,7 +90,7 @@
           </svg>
           Matilha
         </a>
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="../perfil/">
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -104,7 +104,7 @@
           </svg>
           Perfil
         </a>
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="../eixos/">
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -627,6 +627,7 @@
       <span id="toast-msg"></span>
     </div>
 
+    <script src="../../js/main.js"></script>
     <script src="../../js/services.js"></script>
     <script src="script.js"></script>
   </body>

@@ -1,3 +1,5 @@
+requireAuth('dirigente');
+
 /* gestao-associados.js */
 
 /* ─────────────────────────────────────────
@@ -16,18 +18,6 @@ function showToast(icon, msg, duration = 3000) {
   toast._timer = setTimeout(() => toast.classList.remove('show'), duration);
 }
 
-/* ─────────────────────────────────────────
-   SIDEBAR NAV
-───────────────────────────────────────── */
-function initSidebarNav() {
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
-    });
-  });
-}
 
 /* ─────────────────────────────────────────
    RENDER — constrói uma linha da tabela a partir dos dados do associado
@@ -273,7 +263,6 @@ function initAddButtons() {
    BOOTSTRAP
 ───────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-  initSidebarNav();
   initSearch();
   initProfileFilter();
   initMatilhaFilter();

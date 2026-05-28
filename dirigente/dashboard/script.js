@@ -1,3 +1,5 @@
+requireAuth('dirigente');
+
 /* dashboard-dirigente.js */
 
 /* ─────────────────────────────────────────
@@ -22,23 +24,6 @@ function showToast(icon, msg, duration = 3000) {
   toast._timer = setTimeout(() => toast.classList.remove("show"), duration);
 }
 
-/* ─────────────────────────────────────────
-   SIDEBAR NAV
-───────────────────────────────────────── */
-/**
- * Aplica .active ao link clicado na sidebar.
- */
-function initSidebarNav() {
-  document.querySelectorAll(".nav-link").forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      document
-        .querySelectorAll(".nav-link")
-        .forEach((l) => l.classList.remove("active"));
-      link.classList.add("active");
-    });
-  });
-}
 
 /* ─────────────────────────────────────────
    PROGRESS BARS — IntersectionObserver
@@ -138,7 +123,6 @@ function initNovaInscricao() {
    BOOTSTRAP
 ───────────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", () => {
-  initSidebarNav();
   initProgressBars();
   initPeriodTabs();
   initAlertas();

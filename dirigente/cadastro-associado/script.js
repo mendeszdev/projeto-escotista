@@ -1,3 +1,5 @@
+requireAuth('dirigente');
+
 /* cadastro-associado.js */
 
 /* ─────────────────────────────────────────

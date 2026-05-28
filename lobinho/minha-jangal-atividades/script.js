@@ -1,3 +1,5 @@
+requireAuth('lobinho');
+
 /**
  * MINHA JÂNGAL - ATIVIDADES E EIXOS
  * Script para gerenciar a tela de eixos de progressão do Lobinho

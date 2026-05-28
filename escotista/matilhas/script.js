@@ -1,3 +1,5 @@
+requireAuth('escotista');
+
 /* matilha.js */
 
 /**
@@ -19,20 +21,6 @@ function showToast(icon, msg, duration = 3000) {
   toast._timer = setTimeout(() => toast.classList.remove("show"), duration);
 }
 
-/**
- * Aplica a classe .active ao link clicado na sidebar.
- */
-function initSidebarNav() {
-  document.querySelectorAll(".nav-link").forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      document
-        .querySelectorAll(".nav-link")
-        .forEach((l) => l.classList.remove("active"));
-      link.classList.add("active");
-    });
-  });
-}
 
 /**
  * Anima as barras de progresso ao entrarem na viewport.
@@ -121,7 +109,6 @@ function initMatilhaCard() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  initSidebarNav();
   initProgressBars();
   initLobinhoCards();
   initMatilhaCard();

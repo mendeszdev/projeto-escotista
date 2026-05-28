@@ -4,8 +4,9 @@
    ============================================ */
 
 const authState = {
-  isLoading: false,
-  token: localStorage.getItem('auth_token') || null,
+  isLoading:    false,
+  accessToken:  localStorage.getItem('accessToken')  || null,
+  refreshToken: localStorage.getItem('refreshToken') || null,
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('.forgot-password-link')
     ?.addEventListener('click', handleForgotPassword);
 
-  // Se já há sessão, redireciona direto
-  if (authState.token) restoreSession();
+  // Se já há sessão válida, redireciona direto
+  if (authState.accessToken) restoreSession();
 });
 
 /* ─── SUBMIT ──────────────────────────────────────────────── */
@@ -46,10 +47,12 @@ async function handleLoginSubmit(event) {
     const response = await authenticateUser(matricula, senha);
 
     if (response.success) {
-      // Salvar sessão
-      authState.token = response.token;
-      localStorage.setItem('auth_token', response.token);
-      localStorage.setItem('user_data',  JSON.stringify(response.user));
+      authState.accessToken  = response.accessToken;
+      authState.refreshToken = response.refreshToken;
+      localStorage.setItem('accessToken',  response.accessToken);
+      localStorage.setItem('refreshToken', response.refreshToken);
+      localStorage.setItem('user', JSON.stringify(response.user));
+      localStorage.removeItem('token'); // remove chave legada
 
       showSuccess('Login realizado com sucesso!');
 
@@ -66,9 +69,12 @@ async function handleLoginSubmit(event) {
     if (isDevMode()) {
       console.warn('⚠️ Backend indisponível — usando MOCK');
       const mock = mockAuthenticate(matricula, senha);
-      authState.token = mock.token;
-      localStorage.setItem('auth_token', mock.token);
-      localStorage.setItem('user_data',  JSON.stringify(mock.user));
+      authState.accessToken  = mock.accessToken;
+      authState.refreshToken = mock.refreshToken;
+      localStorage.setItem('accessToken',  mock.accessToken);
+      localStorage.setItem('refreshToken', mock.refreshToken);
+      localStorage.setItem('user', JSON.stringify(mock.user));
+      localStorage.removeItem('token');
       setTimeout(() => redirectToDashboard(mock.user.role), 800);
     } else {
       showError('Erro ao conectar com o servidor. Verifique se a API está rodando em localhost:8080');
@@ -82,13 +88,12 @@ async function handleLoginSubmit(event) {
 
 /**
  * Envia matrícula + senha para POST /api/auth/login
- * O backend (LoginServlet.java) retorna:
- * { success, token, user: { id, name, matricula, role, email, fotoUrl } }
+ * Retorna: { success, accessToken, refreshToken, expiresIn, user }
  */
 async function authenticateUser(matricula, senha) {
   // ────────────────────────────────────────────────────────────
   //  URL DO BACKEND — ajuste se o Tomcat rodar em outra porta
-  const API_URL = 'http://localhost:8080/api/auth/login';
+  const API_URL = 'http://localhost:8080/escoteiros-api/api/auth/login';
   // ────────────────────────────────────────────────────────────
 
   const response = await fetch(API_URL, {
@@ -115,22 +120,28 @@ function isDevMode() {
 }
 
 function mockAuthenticate(matricula, senha) {
-  // Simula perfis diferentes por matrícula para facilitar testes:
-  // 001.001-1 → dirigente | 001.001-2 → escotista | qualquer outro → lobinho
-  let role = 'lobinho';
-  if (matricula === '001.001-1') role = 'dirigente';
-  if (matricula === '001.001-2') role = 'escotista';
+  const usuarios = {
+    'LB.2024-001': { role: 'lobinho',   name: 'Pedro Henrique Santos Oliveira', nomeEscoteiro: 'Falcão Veloz',   email: 'pedro.santos.teste@email.com' },
+    'ES.2024-001': { role: 'escotista', name: 'Ana Carolina Ferreira Lima',     nomeEscoteiro: 'Lince Ágil',     email: 'ana.ferreira.teste@email.com' },
+    'DG.2024-001': { role: 'dirigente', name: 'Carlos Eduardo Mendes Costa',    nomeEscoteiro: 'Urso Sábio',     email: 'carlos.mendes.teste@email.com' },
+  };
+
+  const u = usuarios[matricula] || { role: 'lobinho', name: 'Usuário Teste', nomeEscoteiro: 'Teste', email: 'teste@escoteiros.com' };
 
   return {
-    success: true,
-    token: 'mock_token_' + Date.now(),
+    success:      true,
+    accessToken:  'mock-access-'  + crypto.randomUUID(),
+    refreshToken: 'mock-refresh-' + crypto.randomUUID(),
+    expiresIn:    1800,
     user: {
-      id:       'mock-id-123',
-      name:     'Usuário Teste',
-      matricula: matricula,
-      role:      role,
-      email:    'teste@escoteiros.com',
-      fotoUrl:  null,
+      id:           'mock-id-' + Date.now(),
+      name:          u.name,
+      nomeEscoteiro: u.nomeEscoteiro,
+      matricula,
+      role:          u.role,
+      email:         u.email,
+      fotoUrl:       null,
+      grupoId:       null,
     },
   };
 }
@@ -138,8 +149,9 @@ function mockAuthenticate(matricula, senha) {
 /* ─── RESTAURAR SESSÃO ────────────────────────────────────── */
 
 function restoreSession() {
-  const userData = JSON.parse(localStorage.getItem('user_data') || '{}');
-  if (userData?.role) {
+  const accessToken = localStorage.getItem('accessToken');
+  const userData    = JSON.parse(localStorage.getItem('user') || '{}');
+  if (accessToken && userData?.role) {
     redirectToDashboard(userData.role);
   }
 }
@@ -156,10 +168,11 @@ function redirectToDashboard(role) {
 }
 
 /* ─── VALIDAÇÕES ──────────────────────────────────────────── */
-function validateMatriculaField()  {
-  const input    = document.getElementById('matricula');
+function validateMatriculaField() {
+  const input = document.getElementById('matricula');
   const matricula = input?.value.trim();
-  const ok = /^\d{3}\.\d{3}-\d{1}$/.test(matricula);
+  // Formato: XX.AAAA-NNN (ex: LB.2024-001, ES.2024-001, DG.2024-001)
+  const ok = /^[A-Za-z]{2}\.\d{4}-\d{3}$/.test(matricula);
   input?.classList.toggle('error', !ok);
   return ok;
 }
@@ -172,11 +185,7 @@ function validateSenha() {
 }
 
 function formatMatricula() {
-  const input = document.getElementById('matricula');
-  let v = input.value.replace(/\D/g, '').slice(0, 7);
-  if      (v.length <= 3) input.value = v;
-  else if (v.length <= 6) input.value = v.slice(0,3) + '.' + v.slice(3);
-  else                    input.value = v.slice(0,3) + '.' + v.slice(3,6) + '-' + v.slice(6);
+  // Formato livre — não formata automaticamente pois inclui letras (ex: LB.2024-001)
 }
 
 /* ─── UI ──────────────────────────────────────────────────── */
@@ -218,10 +227,13 @@ function handleForgotPassword(event) {
 /* ─── LOGOUT (chamado por outras telas) ───────────────────── */
 
 function logout() {
-  authState.token = null;
-  localStorage.removeItem('auth_token');
-  localStorage.removeItem('user_data');
-  window.location.href = '/login/';
+  authState.accessToken  = null;
+  authState.refreshToken = null;
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
+  localStorage.removeItem('user');
+  localStorage.removeItem('token'); // remove chave legada
+  window.location.replace('/login/');
 }
 
-window.authModule = { logout, isAuthenticated: () => !!authState.token };
+window.authModule = { logout, isAuthenticated: () => !!authState.accessToken };

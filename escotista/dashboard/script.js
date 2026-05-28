@@ -1,3 +1,5 @@
+requireAuth('escotista');
+
 /* dashboard-escotista.js */
 
 /**
@@ -44,19 +46,4 @@ function handleAction(btn, action) {
  * Inicializa o destaque de navegação da sidebar:
  * ao clicar em um link, remove .active dos demais e aplica no clicado.
  */
-function initSidebarNav() {
-  const links = document.querySelectorAll(".nav-link");
-
-  links.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      links.forEach((l) => l.classList.remove("active"));
-      link.classList.add("active");
-    });
-  });
-}
-
 /* ── Bootstrap ── */
-document.addEventListener("DOMContentLoaded", () => {
-  initSidebarNav();
-});

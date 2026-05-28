@@ -1,3 +1,5 @@
+requireAuth('escotista');
+
 /* gestao-atividades.js */
 
 /* ─────────────────────────────────────────
@@ -16,18 +18,6 @@ function showToast(icon, msg, duration = 3000) {
   toast._timer = setTimeout(() => toast.classList.remove('show'), duration);
 }
 
-/* ─────────────────────────────────────────
-   SIDEBAR NAV
-───────────────────────────────────────── */
-function initSidebarNav() {
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
-    });
-  });
-}
 
 /* ─────────────────────────────────────────
    RENDER — constrói uma linha de atividade a partir dos dados da API
@@ -259,7 +249,6 @@ function batchValidate() {
    BOOTSTRAP
 ───────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-  initSidebarNav();
   initTableEvents();
 
   document.getElementById('btn-filter')?.addEventListener('click', applyFilters);

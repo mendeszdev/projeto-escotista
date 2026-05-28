@@ -1,3 +1,5 @@
+requireAuth('escotista');
+
 /* criacao-atividade.js */
 
 /* ─────────────────────────────────────────

@@ -1,3 +1,5 @@
+requireAuth('lobinho');
+
 /**
  * DETALHES DO BLOCO FÍSICO - SCRIPT
  * =====================================

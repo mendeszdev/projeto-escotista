@@ -1,3 +1,5 @@
+requireAuth('dirigente');
+
 /* configuracoes-sistema.js */
 
 /* ─────────────────────────────────────────
