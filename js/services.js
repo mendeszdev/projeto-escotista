@@ -30,7 +30,14 @@ const API = (() => {
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
-        throw new Error(err.erro || err.message || `Erro ${res.status}`);
+        /* O backend retorna { "erros": [...] } no 400 e { "erro": "..." } no 500 */
+        const msg = (Array.isArray(err.erros) && err.erros.length)
+          ? err.erros.join(', ')
+          : (err.erro || err.message || `Erro ${res.status}`);
+        const e = new Error(msg);
+        e.status = res.status;
+        e.raw    = err;
+        throw e;
       }
 
       const text = await res.text();
@@ -77,6 +84,12 @@ const API = (() => {
        * GET /api/associados/:id
        */
       getById: (id)          => req('GET',    `/api/associados/${id}`),
+
+      /**
+       * GET /api/associados/proxima-matricula?perfil=lobinho
+       * @returns {{ matricula: string }}
+       */
+      proximaMatricula: (perfil) => req('GET', `/api/associados/proxima-matricula?perfil=${perfil}`),
 
       /**
        * POST /api/associados
@@ -150,9 +163,15 @@ const API = (() => {
 
     documentos: {
       /** GET /api/documentos */
-      list:    ()   => req('GET', '/api/documentos'),
+      list:            ()     => req('GET',    '/api/documentos'),
+      /** GET /api/documentos?associado={uuid} */
+      listByAssociado: (id)   => req('GET',    `/api/documentos?associado=${id}`),
       /** GET /api/documentos/:id */
-      getById: (id) => req('GET', `/api/documentos/${id}`),
+      getById:         (id)   => req('GET',    `/api/documentos/${id}`),
+      /** POST /api/documentos */
+      create:          (data) => req('POST',   '/api/documentos', data),
+      /** DELETE /api/documentos/:id — remove apenas o registro do banco */
+      delete:          (id)   => req('DELETE', `/api/documentos/${id}`),
     },
 
     fichasMedicas: {
@@ -164,9 +183,17 @@ const API = (() => {
 
     responsaveis: {
       /** GET /api/responsaveis */
-      list:    ()   => req('GET', '/api/responsaveis'),
+      list:            ()          => req('GET',    '/api/responsaveis'),
+      /** GET /api/responsaveis?associado={uuid} */
+      listByAssociado: (assocId)   => req('GET',    `/api/responsaveis?associado=${assocId}`),
       /** GET /api/responsaveis/:id */
-      getById: (id) => req('GET', `/api/responsaveis/${id}`),
+      getById:         (id)        => req('GET',    `/api/responsaveis/${id}`),
+      /** POST /api/responsaveis */
+      create:          (data)      => req('POST',   '/api/responsaveis', data),
+      /** PUT /api/responsaveis/:id — enviar objeto completo para evitar null */
+      update:          (id, data)  => req('PUT',    `/api/responsaveis/${id}`, data),
+      /** DELETE /api/responsaveis/:id */
+      delete:          (id)        => req('DELETE', `/api/responsaveis/${id}`),
     },
 
     acoesEducativas: {

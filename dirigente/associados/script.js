@@ -57,14 +57,15 @@ const ACTION_BTNS = `
   </button>`;
 
 function renderRow(assoc) {
-  const perfil  = PERFIL_LABELS[assoc.perfil]  || { label: assoc.perfil,  cls: ''               };
-  const status  = STATUS_LABELS[assoc.status]  || { label: assoc.status,  cls: 'status-active'  };
+  const nome    = assoc.nomeCompleto || assoc.nome || '—';
+  const perfil  = PERFIL_LABELS[assoc.perfil]  || { label: assoc.perfil,  cls: '' };
+  const status  = STATUS_LABELS[assoc.status]  || { label: assoc.status,  cls: 'status-active' };
   const squad   = assoc.matilha ? `Matilha ${assoc.matilha}` : '';
 
   const row = document.createElement('div');
   row.className = 'table-row';
   row.dataset.id        = assoc.id;
-  row.dataset.name      = assoc.nome;
+  row.dataset.name      = nome;
   row.dataset.matricula = assoc.matricula;
   row.dataset.perfil    = assoc.perfil;
   row.dataset.matilha   = assoc.matilha || '';
@@ -75,11 +76,11 @@ function renderRow(assoc) {
       <div class="member-cell">
         <div class="member-avatar avatar-green">
           ${assoc.fotoUrl
-            ? `<img src="${assoc.fotoUrl}" alt="${assoc.nome}" onerror="this.style.display='none'">`
+            ? `<img src="${assoc.fotoUrl}" alt="${nome}" onerror="this.style.display='none'">`
             : AVATAR_SVG}
         </div>
         <div>
-          <div class="member-name">${assoc.nome}</div>
+          <div class="member-name">${nome}</div>
           <div class="member-squad">${squad}</div>
         </div>
       </div>
@@ -98,32 +99,162 @@ function renderRow(assoc) {
 }
 
 /* ─────────────────────────────────────────
-   LOAD ASSOCIADOS — busca da API e re-renderiza a tabela
+   PAGINAÇÃO — estado global
 ───────────────────────────────────────── */
-async function loadAssociados(filtros = {}) {
+const PAGE_SIZE = 10;
+let _allRecords      = [];
+let _filteredRecords = [];
+let _currentPage     = 1;
+let _searchQuery     = '';
+let _filterPerfil    = 'all';
+let _filterMatilha   = 'all';
+
+function applyFiltersAndRender() {
+  const q = _searchQuery;
+  _filteredRecords = _allRecords.filter(a => {
+    const nome      = (a.nomeCompleto || a.nome || '').toLowerCase();
+    const matricula = (a.matricula || '').toLowerCase();
+    const matchQ = !q || nome.includes(q) || matricula.includes(q);
+    const matchP = _filterPerfil  === 'all' || a.perfil  === _filterPerfil;
+    const matchM = _filterMatilha === 'all' || a.matilha === _filterMatilha;
+    return matchQ && matchP && matchM;
+  });
+  renderPage(1);
+}
+
+function renderPage(page) {
+  _currentPage = page;
   const tbody = document.getElementById('table-body');
   if (!tbody) return;
 
-  tbody.innerHTML = '<div style="padding:24px;color:#78716c">Carregando associados…</div>';
+  const start = (page - 1) * PAGE_SIZE;
+  const slice = _filteredRecords.slice(start, start + PAGE_SIZE);
+
+  if (slice.length === 0) {
+    tbody.innerHTML = '<div style="padding:24px;color:#78716c">Nenhum associado encontrado.</div>';
+  } else {
+    tbody.innerHTML = '';
+    slice.forEach(a => tbody.appendChild(renderRow(a)));
+  }
+  updatePaginationUI(_filteredRecords.length, page, PAGE_SIZE);
+}
+
+function getPageRange(cur, total) {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  if (cur <= 4)         return [1, 2, 3, 4, 5, '…', total];
+  if (cur >= total - 3) return [1, '…', total-4, total-3, total-2, total-1, total];
+  return [1, '…', cur-1, cur, cur+1, '…', total];
+}
+
+function updatePaginationUI(total, page, pageSize) {
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const start = total === 0 ? 0 : (page - 1) * pageSize + 1;
+  const end   = Math.min(page * pageSize, total);
+
+  const info = document.getElementById('pagination-info');
+  if (info) info.textContent = total === 0
+    ? 'Nenhum associado encontrado'
+    : `Mostrando ${start}–${end} de ${total} associado(s)`;
+
+  const prevBtn = document.getElementById('btn-prev');
+  const nextBtn = document.getElementById('btn-next');
+  if (prevBtn) prevBtn.disabled = page <= 1;
+  if (nextBtn) nextBtn.disabled = page >= totalPages;
+
+  const container = document.getElementById('page-numbers');
+  if (!container) return;
+  container.innerHTML = '';
+
+  getPageRange(page, totalPages).forEach(p => {
+    if (p === '…') {
+      const s = document.createElement('span');
+      s.className = 'page-ellipsis';
+      s.textContent = '…';
+      container.appendChild(s);
+    } else {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'page-btn' + (p === page ? ' active' : '');
+      btn.textContent = p;
+      btn.addEventListener('click', () => renderPage(p));
+      container.appendChild(btn);
+    }
+  });
+}
+
+/* ─────────────────────────────────────────
+   LOAD ASSOCIADOS — busca da API e popula _allRecords
+───────────────────────────────────────── */
+async function loadAssociados(filtros = {}) {
+  const tbody = document.getElementById('table-body');
+  if (tbody) tbody.innerHTML = '<div style="padding:24px;color:#78716c">Carregando associados…</div>';
 
   try {
     const lista = await API.associados.list(filtros);
-
-    if (!lista || lista.length === 0) {
-      tbody.innerHTML = '<div style="padding:24px;color:#78716c">Nenhum associado encontrado.</div>';
-      return;
-    }
-
-    tbody.innerHTML = '';
-    lista.forEach(assoc => tbody.appendChild(renderRow(assoc)));
-
-    const info = document.getElementById('pagination-info');
-    if (info) info.textContent = `Mostrando ${lista.length} associado(s)`;
-
+    _allRecords = Array.isArray(lista) ? lista : [];
+    applyFiltersAndRender();
   } catch (err) {
     console.error('[Associados] Erro ao carregar:', err);
-    tbody.innerHTML = '<div style="padding:24px;color:#dc2626">Erro ao carregar associados. Verifique se a API está disponível.</div>';
+    if (tbody) tbody.innerHTML = '<div style="padding:24px;color:#dc2626">Erro ao carregar associados. Verifique se a API está disponível.</div>';
   }
+}
+
+/* ─────────────────────────────────────────
+   MODAL VER — exibe ficha completa do associado
+───────────────────────────────────────── */
+function openViewModal(data) {
+  const modal = document.getElementById('modal-ver');
+  if (!modal) return;
+
+  const set = (id, val) => {
+    const el = modal.querySelector(`[data-field="${id}"]`);
+    if (el) el.textContent = val || '—';
+  };
+
+  const PERFIL_PT  = { lobinho: 'Lobinho', escotista: 'Escotista', dirigente: 'Dirigente' };
+  const STATUS_PT  = { ativo: 'Ativo', inativo: 'Inativo', pendente: 'Pendente' };
+  const GENERO_PT  = { M: 'Masculino', F: 'Feminino' };
+  const EC_PT      = { solteiro: 'Solteiro(a)', casado: 'Casado(a)', divorciado: 'Divorciado(a)', 'viúvo': 'Viúvo(a)' };
+
+  const fmt = (d) => d ? new Date(d + 'T00:00:00').toLocaleDateString('pt-BR') : '—';
+
+  /* Foto + nome no header */
+  const foto = document.getElementById('mver-foto');
+  const svg  = document.querySelector('#mver-avatar svg');
+  if (data.fotoUrl && foto) {
+    foto.src = data.fotoUrl; foto.style.display = 'block';
+    if (svg) svg.style.display = 'none';
+  } else if (foto) {
+    foto.style.display = 'none';
+    if (svg) svg.style.display = '';
+  }
+  const nomeTitle = document.getElementById('mver-nome-titulo');
+  if (nomeTitle) nomeTitle.textContent = data.nomeCompleto || 'Ficha do Associado';
+  const badge = document.getElementById('mver-matricula-badge');
+  if (badge) badge.textContent = data.matricula || '';
+
+  set('nome',         data.nomeCompleto);
+  set('nomeEscoteiro',data.nomeEscoteiro);
+  set('matricula',    data.matricula);
+  set('perfil',       PERFIL_PT[data.perfil] || data.perfil);
+  set('status',       STATUS_PT[data.status]  || data.status);
+  set('nascimento',   fmt(data.dataNascimento));
+  set('cpf',          data.cpf);
+  set('rg',           data.rg);
+  set('genero',       GENERO_PT[data.genero]);
+  set('estadoCivil',  EC_PT[data.estadoCivil] || data.estadoCivil);
+  set('email',        data.email);
+  set('telefone',     data.telefone);
+  set('cep',          data.cep);
+  set('logradouro',   data.logradouro ? `${data.logradouro}${data.numeroEnd ? ', ' + data.numeroEnd : ''}` : null);
+  set('bairro',       data.bairro);
+  set('cidade',       data.cidade ? `${data.cidade}${data.estado ? ' / ' + data.estado : ''}` : null);
+
+  modal.classList.add('open');
+}
+
+function closeViewModal() {
+  document.getElementById('modal-ver')?.classList.remove('open');
 }
 
 /* ─────────────────────────────────────────
@@ -139,17 +270,31 @@ function initTableEvents() {
     const name = row.dataset.name || 'Associado';
     const id   = row.dataset.id;
 
+    /* ── Ver ficha completa ── */
     if (e.target.closest('.btn-view')) {
-      showToast('👁️', `Visualizando ficha de ${name}`);
+      if (!id || typeof API === 'undefined') {
+        showToast('ℹ️', `Visualizando ${name} (API indisponível).`);
+        return;
+      }
+      try {
+        const data = await API.associados.getById(id);
+        openViewModal(data);
+      } catch (err) {
+        showToast('❌', `Erro ao carregar dados: ${err.message}`);
+      }
+      return;
     }
 
+    /* ── Editar: navega para cadastro com ID na sessionStorage ── */
     if (e.target.closest('.btn-edit')) {
-      showToast('✏️', `Editando cadastro de ${name}`);
+      sessionStorage.setItem('edit-associado-id', id);
+      window.location.href = '../cadastro-associado/';
+      return;
     }
 
+    /* ── Remover ── */
     if (e.target.closest('.btn-delete')) {
       if (!confirm(`Deseja realmente remover ${name}?`)) return;
-
       try {
         if (id && typeof API !== 'undefined') {
           await API.associados.delete(id);
@@ -160,11 +305,16 @@ function initTableEvents() {
         setTimeout(() => { row.remove(); applyFilterInfo(); }, 320);
         showToast('🗑️', `${name} removido com sucesso.`);
       } catch (err) {
-        console.error('[Associados] Erro ao remover:', err);
         showToast('❌', `Erro ao remover ${name}: ${err.message}`);
       }
     }
   });
+
+  /* fechar modal ao clicar no overlay ou no X */
+  document.getElementById('modal-ver')?.addEventListener('click', e => {
+    if (e.target === e.currentTarget || e.target.closest('.modal-ver-close')) closeViewModal();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeViewModal(); });
 }
 
 /* ─────────────────────────────────────────
@@ -173,23 +323,9 @@ function initTableEvents() {
 function initSearch() {
   const input = document.getElementById('search-input');
   if (!input) return;
-
   input.addEventListener('input', () => {
-    const query = input.value.toLowerCase().trim();
-    let visible = 0;
-
-    document.querySelectorAll('.table-row[data-name]').forEach(row => {
-      const name      = (row.dataset.name      || '').toLowerCase();
-      const matricula = (row.dataset.matricula || '').toLowerCase();
-      const match = !query || name.includes(query) || matricula.includes(query);
-      row.style.display = match ? '' : 'none';
-      if (match) visible++;
-    });
-
-    const info = document.getElementById('pagination-info');
-    if (info) info.textContent = query
-      ? `Mostrando ${visible} resultado(s) para "${input.value}"`
-      : `Mostrando ${visible} associado(s)`;
+    _searchQuery = input.value.toLowerCase().trim();
+    applyFiltersAndRender();
   });
 }
 
@@ -199,52 +335,34 @@ function initSearch() {
 function initProfileFilter() {
   const select = document.getElementById('filter-profile');
   if (!select) return;
-
   select.addEventListener('change', () => {
-    const val = select.value;
-    document.querySelectorAll('.table-row[data-perfil]').forEach(row => {
-      const match = !val || val === 'all' || row.dataset.perfil === val;
-      row.style.display = match ? '' : 'none';
-    });
-    applyFilterInfo();
+    _filterPerfil = select.value || 'all';
+    applyFiltersAndRender();
   });
 }
 
 function initMatilhaFilter() {
   const select = document.getElementById('filter-matilha');
   if (!select) return;
-
   select.addEventListener('change', () => {
-    const val = select.value;
-    document.querySelectorAll('.table-row[data-matilha]').forEach(row => {
-      const match = !val || val === 'all' || row.dataset.matilha === val;
-      row.style.display = match ? '' : 'none';
-    });
-    applyFilterInfo();
+    _filterMatilha = select.value || 'all';
+    applyFiltersAndRender();
   });
 }
 
-function applyFilterInfo() {
-  const visible = [...document.querySelectorAll('.table-row[data-name]')]
-    .filter(r => r.style.display !== 'none').length;
-  const info = document.getElementById('pagination-info');
-  if (info) info.textContent = `Mostrando ${visible} associado(s)`;
-}
+function applyFilterInfo() { /* substituído por updatePaginationUI */ }
 
 /* ─────────────────────────────────────────
-   PAGINATION
+   PAGINATION EVENTS — prev / next
 ───────────────────────────────────────── */
 function initPagination() {
-  document.querySelectorAll('.page-btn[data-page]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.page-btn[data-page]').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      showToast('📄', `Página ${btn.textContent.trim()} carregada`);
-    });
+  document.getElementById('btn-prev')?.addEventListener('click', () => {
+    if (_currentPage > 1) renderPage(_currentPage - 1);
   });
-
-  document.getElementById('btn-prev')?.addEventListener('click', () => showToast('◀️', 'Página anterior'));
-  document.getElementById('btn-next')?.addEventListener('click', () => showToast('▶️', 'Próxima página'));
+  document.getElementById('btn-next')?.addEventListener('click', () => {
+    const totalPages = Math.ceil(_filteredRecords.length / PAGE_SIZE);
+    if (_currentPage < totalPages) renderPage(_currentPage + 1);
+  });
 }
 
 /* ─────────────────────────────────────────
@@ -255,7 +373,7 @@ function initAddButtons() {
     window.location.href = '../cadastro-associado/';
   });
   document.getElementById('btn-nova-inscricao')?.addEventListener('click', () => {
-    showToast('✅', 'Formulário de nova inscrição aberto.');
+    window.location.href = '../cadastro-associado/';
   });
 }
 

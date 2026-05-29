@@ -69,6 +69,13 @@
             />
           </svg>
         </div>
+        <button class="topbar-icon-btn" data-action="logout" title="Sair">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </button>
       </div>
     </header>
 
@@ -206,15 +213,6 @@
           Sistema
         </a>
       </nav>
-
-      <button class="nav-link nav-logout" data-action="logout" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-          <polyline points="16 17 21 12 16 7"/>
-          <line x1="21" y1="12" x2="9" y2="12"/>
-        </svg>
-        Sair
-      </button>
 
       <!-- CTA -->
       <div class="sidebar-cta">
@@ -387,424 +385,13 @@
 
           <!-- Table body -->
           <div class="table-body" id="table-body" role="rowgroup">
-            <!-- Row 1 — Artur Pimenta / Lobinho / Ativo -->
-            <div
-              class="table-row"
-              data-name="Artur Pimenta"
-              data-matricula="BR-2023-4412"
-              data-perfil="lobinho"
-              data-matilha="cinza"
-              role="row"
-            >
-              <div class="td-name">
-                <div class="member-cell">
-                  <div class="member-avatar avatar-green">
-                    <img
-                      src="https://www.figma.com/api/mcp/asset/de97de76-93c6-4f9c-847e-69172f6d0b70"
-                      alt="Artur Pimenta"
-                      onerror="this.style.display = 'none'"
-                    />
-                    <svg viewBox="0 0 24 24" fill="#065f46">
-                      <path
-                        d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <div class="member-name">Artur Pimenta</div>
-                    <div class="member-squad">Matilha Cinza</div>
-                  </div>
-                </div>
-              </div>
-              <div class="td">
-                <span class="profile-tag tag-lobinho">Lobinho</span>
-              </div>
-              <div class="td">
-                <span class="matricula">BR-2023-4412</span>
-              </div>
-              <div class="td">
-                <div class="status-cell status-active">
-                  <div class="status-dot"></div>
-                  <span class="status-label">Ativo</span>
-                </div>
-              </div>
-              <div class="td-right">
-                <button
-                  class="row-action-btn btn-view"
-                  title="Visualizar"
-                  type="button"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                </button>
-                <button
-                  class="row-action-btn btn-edit"
-                  title="Editar"
-                  type="button"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path
-                      d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
-                    />
-                    <path
-                      d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  class="row-action-btn btn-delete"
-                  title="Remover"
-                  type="button"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="3 6 5 6 21 6" />
-                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
-                    <path d="M10 11v6M14 11v6" />
-                    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <!-- /row 1 -->
-
-            <!-- Row 2 — Mariana Silva / Dirigente / Ativo -->
-            <div
-              class="table-row"
-              data-name="Mariana Silva"
-              data-matricula="BR-2018-0922"
-              data-perfil="dirigente"
-              data-matilha="coord"
-              role="row"
-            >
-              <div class="td-name">
-                <div class="member-cell">
-                  <div class="member-avatar avatar-amber">
-                    <img
-                      src="https://www.figma.com/api/mcp/asset/e0f1d9f9-0f04-44b7-ac86-371639af0236"
-                      alt="Mariana Silva"
-                      onerror="this.style.display = 'none'"
-                    />
-                    <svg viewBox="0 0 24 24" fill="#523700">
-                      <path
-                        d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <div class="member-name">Mariana Silva</div>
-                    <div class="member-squad">Coordenação Geral</div>
-                  </div>
-                </div>
-              </div>
-              <div class="td">
-                <span class="profile-tag tag-dirigente">Dirigente</span>
-              </div>
-              <div class="td">
-                <span class="matricula">BR-2018-0922</span>
-              </div>
-              <div class="td">
-                <div class="status-cell status-active">
-                  <div class="status-dot"></div>
-                  <span class="status-label">Ativo</span>
-                </div>
-              </div>
-              <div class="td-right">
-                <button
-                  class="row-action-btn btn-view"
-                  title="Visualizar"
-                  type="button"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                </button>
-                <button
-                  class="row-action-btn btn-edit"
-                  title="Editar"
-                  type="button"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path
-                      d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
-                    />
-                    <path
-                      d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  class="row-action-btn btn-delete"
-                  title="Remover"
-                  type="button"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="3 6 5 6 21 6" />
-                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
-                    <path d="M10 11v6M14 11v6" />
-                    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <!-- /row 2 -->
-
-            <!-- Row 3 — Lucas Oliveira / Escotista / Pendente -->
-            <div
-              class="table-row"
-              data-name="Lucas Oliveira"
-              data-matricula="BR-2021-3310"
-              data-perfil="escotista"
-              data-matilha="vermelha"
-              role="row"
-            >
-              <div class="td-name">
-                <div class="member-cell">
-                  <div class="member-avatar avatar-green">
-                    <img
-                      src="https://www.figma.com/api/mcp/asset/5873e218-5bb9-4005-b9c3-34a95eca3a1a"
-                      alt="Lucas Oliveira"
-                      onerror="this.style.display = 'none'"
-                    />
-                    <svg viewBox="0 0 24 24" fill="#064e3b">
-                      <path
-                        d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <div class="member-name">Lucas Oliveira</div>
-                    <div class="member-squad">Matilha Vermelha</div>
-                  </div>
-                </div>
-              </div>
-              <div class="td">
-                <span class="profile-tag tag-escotista">Escotista</span>
-              </div>
-              <div class="td">
-                <span class="matricula">BR-2021-3310</span>
-              </div>
-              <div class="td">
-                <div class="status-cell status-pending">
-                  <div class="status-dot"></div>
-                  <span class="status-label">Pendente</span>
-                </div>
-              </div>
-              <div class="td-right">
-                <button
-                  class="row-action-btn btn-view"
-                  title="Visualizar"
-                  type="button"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                </button>
-                <button
-                  class="row-action-btn btn-edit"
-                  title="Editar"
-                  type="button"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path
-                      d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
-                    />
-                    <path
-                      d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  class="row-action-btn btn-delete"
-                  title="Remover"
-                  type="button"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="3 6 5 6 21 6" />
-                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
-                    <path d="M10 11v6M14 11v6" />
-                    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <!-- /row 3 -->
-
-            <!-- Row 4 — Beatriz Amaral / Lobinho / Ativo -->
-            <div
-              class="table-row"
-              data-name="Beatriz Amaral"
-              data-matricula="BR-2023-8871"
-              data-perfil="lobinho"
-              data-matilha="branca"
-              role="row"
-            >
-              <div class="td-name">
-                <div class="member-cell">
-                  <div class="member-avatar avatar-teal">
-                    <img
-                      src="https://www.figma.com/api/mcp/asset/98b75646-0128-4974-82ba-1c2ba5539233"
-                      alt="Beatriz Amaral"
-                      onerror="this.style.display = 'none'"
-                    />
-                    <svg viewBox="0 0 24 24" fill="#004d57">
-                      <path
-                        d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <div class="member-name">Beatriz Amaral</div>
-                    <div class="member-squad">Matilha Branca</div>
-                  </div>
-                </div>
-              </div>
-              <div class="td">
-                <span class="profile-tag tag-lobinho">Lobinho</span>
-              </div>
-              <div class="td">
-                <span class="matricula">BR-2023-8871</span>
-              </div>
-              <div class="td">
-                <div class="status-cell status-active">
-                  <div class="status-dot"></div>
-                  <span class="status-label">Ativo</span>
-                </div>
-              </div>
-              <div class="td-right">
-                <button
-                  class="row-action-btn btn-view"
-                  title="Visualizar"
-                  type="button"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                </button>
-                <button
-                  class="row-action-btn btn-edit"
-                  title="Editar"
-                  type="button"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path
-                      d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
-                    />
-                    <path
-                      d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  class="row-action-btn btn-delete"
-                  title="Remover"
-                  type="button"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="3 6 5 6 21 6" />
-                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
-                    <path d="M10 11v6M14 11v6" />
-                    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <!-- /row 4 -->
           </div>
           <!-- /table-body -->
 
           <!-- Pagination -->
           <div class="pagination">
             <span class="pagination-info" id="pagination-info"
-              >Mostrando 4 de 128 associados</span
+              >Carregando…</span
             >
             <div class="pagination-controls">
               <button
@@ -824,11 +411,7 @@
                   <polyline points="15 18 9 12 15 6" />
                 </svg>
               </button>
-              <button class="page-btn active" data-page="1" type="button">
-                1
-              </button>
-              <button class="page-btn" data-page="2" type="button">2</button>
-              <button class="page-btn" data-page="3" type="button">3</button>
+              <div id="page-numbers" class="page-numbers"></div>
               <button
                 class="page-btn"
                 id="btn-next"
@@ -860,6 +443,113 @@
     <div class="toast" id="toast" role="alert" aria-live="polite">
       <span class="toast-icon" id="toast-icon"></span>
       <span id="toast-msg"></span>
+    </div>
+
+    <!-- ══════════════════════════════════════
+     MODAL — VER ASSOCIADO
+══════════════════════════════════════ -->
+    <div class="modal-ver-overlay" id="modal-ver" role="dialog" aria-modal="true" aria-label="Ficha do Associado">
+      <div class="modal-ver-dialog">
+        <div class="modal-ver-header">
+          <div class="mver-avatar-wrap">
+            <div class="mver-avatar" id="mver-avatar">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+              </svg>
+              <img id="mver-foto" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+            </div>
+            <div>
+              <h2 class="modal-ver-title" id="mver-nome-titulo">Ficha do Associado</h2>
+              <span class="mver-matricula-badge" id="mver-matricula-badge"></span>
+            </div>
+          </div>
+          <button class="modal-ver-close" type="button" aria-label="Fechar">&#x2715;</button>
+        </div>
+        <div class="modal-ver-body">
+
+          <!-- Identificação -->
+          <div class="mver-section">
+            <h3 class="mver-section-title">Identificação</h3>
+            <div class="mver-grid">
+              <div class="mver-field mver-full">
+                <span class="mver-label">Nome Completo</span>
+                <span class="mver-value" data-field="nome"></span>
+              </div>
+              <div class="mver-field">
+                <span class="mver-label">Nome Escoteiro</span>
+                <span class="mver-value" data-field="nomeEscoteiro"></span>
+              </div>
+              <div class="mver-field">
+                <span class="mver-label">Matrícula</span>
+                <span class="mver-value" data-field="matricula"></span>
+              </div>
+              <div class="mver-field">
+                <span class="mver-label">Perfil</span>
+                <span class="mver-value" data-field="perfil"></span>
+              </div>
+              <div class="mver-field">
+                <span class="mver-label">Status</span>
+                <span class="mver-value" data-field="status"></span>
+              </div>
+              <div class="mver-field">
+                <span class="mver-label">Data de Nascimento</span>
+                <span class="mver-value" data-field="nascimento"></span>
+              </div>
+              <div class="mver-field">
+                <span class="mver-label">CPF</span>
+                <span class="mver-value" data-field="cpf"></span>
+              </div>
+              <div class="mver-field">
+                <span class="mver-label">RG</span>
+                <span class="mver-value" data-field="rg"></span>
+              </div>
+              <div class="mver-field">
+                <span class="mver-label">Gênero</span>
+                <span class="mver-value" data-field="genero"></span>
+              </div>
+              <div class="mver-field">
+                <span class="mver-label">Estado Civil</span>
+                <span class="mver-value" data-field="estadoCivil"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contato -->
+          <div class="mver-section">
+            <h3 class="mver-section-title">Contato e Endereço</h3>
+            <div class="mver-grid">
+              <div class="mver-field">
+                <span class="mver-label">E-mail</span>
+                <span class="mver-value" data-field="email"></span>
+              </div>
+              <div class="mver-field">
+                <span class="mver-label">Telefone</span>
+                <span class="mver-value" data-field="telefone"></span>
+              </div>
+              <div class="mver-field">
+                <span class="mver-label">CEP</span>
+                <span class="mver-value" data-field="cep"></span>
+              </div>
+              <div class="mver-field">
+                <span class="mver-label">Logradouro</span>
+                <span class="mver-value" data-field="logradouro"></span>
+              </div>
+              <div class="mver-field">
+                <span class="mver-label">Bairro</span>
+                <span class="mver-value" data-field="bairro"></span>
+              </div>
+              <div class="mver-field">
+                <span class="mver-label">Cidade / Estado</span>
+                <span class="mver-value" data-field="cidade"></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-ver-footer">
+          <button class="modal-ver-close btn-modal-outline" type="button">Fechar</button>
+        </div>
+      </div>
     </div>
 
     <script src="../../js/main.js"></script>

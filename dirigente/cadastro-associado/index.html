@@ -133,12 +133,29 @@
                 <h2 class="section-title">Dados Básicos</h2>
               </div>
 
+              <!-- Foto de perfil -->
+              <div class="foto-perfil-wrap">
+                <div class="foto-perfil-preview" id="foto-preview">
+                  <svg viewBox="0 0 24 24" fill="#a8a29e"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+                  <img id="foto-img" src="" alt="Foto de perfil" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+                </div>
+                <div class="foto-perfil-info">
+                  <label class="foto-upload-label" for="file-foto">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    Enviar Foto de Perfil
+                  </label>
+                  <input type="file" id="file-foto" accept="image/jpeg,image/png,image/webp" style="display:none;" />
+                  <p class="foto-upload-note">JPG, PNG ou WebP — máx. 2 MB <span class="field-optional">(opcional)</span></p>
+                  <p class="foto-upload-name" id="foto-nome"></p>
+                </div>
+              </div>
+
               <div class="dados-grid" style="margin-top: 0">
                 <!-- Nome Completo — col 8 -->
                 <div class="field-card col-8">
-                  <label class="field-label" for="field-nome"
-                    >Nome Completo</label
-                  >
+                  <label class="field-label" for="field-nome">Nome Completo</label>
                   <input
                     class="field-input"
                     id="field-nome"
@@ -146,24 +163,45 @@
                     placeholder="Ex: Mowgli do Menino Lobo"
                     autocomplete="name"
                   />
-                  <span class="field-error"
-                    >Nome deve ter ao menos 3 caracteres.</span
-                  >
+                  <span class="field-error">Nome deve ter ao menos 3 caracteres.</span>
                 </div>
 
-                <!-- Matrícula — col 4 -->
+                <!-- Matrícula — col 4 (read-only, gerada pela API) -->
                 <div class="field-card col-4">
-                  <label class="field-label" for="field-matricula"
-                    >Matrícula</label
-                  >
+                  <label class="field-label" for="field-matricula">Matrícula</label>
                   <input
                     class="field-input"
                     id="field-matricula"
                     type="text"
-                    placeholder="000.000-0"
+                    placeholder="Gerada automaticamente"
                     autocomplete="off"
+                    readonly
                   />
                   <span class="field-error">Matrícula inválida.</span>
+                </div>
+
+                <!-- Data de Nascimento — col 6 -->
+                <div class="field-card col-6">
+                  <label class="field-label" for="field-nascimento">Data de Nascimento</label>
+                  <input
+                    class="field-input"
+                    id="field-nascimento"
+                    type="date"
+                    autocomplete="bday"
+                  />
+                  <span class="field-error">Data inválida ou futura.</span>
+                </div>
+
+                <!-- Perfil na Alcatéia — col 6 -->
+                <div class="field-card col-6">
+                  <label class="field-label" for="field-perfil">Perfil na Alcatéia</label>
+                  <select class="field-select" id="field-perfil">
+                    <option value="">Selecione uma categoria...</option>
+                    <option value="lobinho">Lobinho</option>
+                    <option value="escotista">Escotista</option>
+                    <option value="dirigente">Dirigente</option>
+                  </select>
+                  <span class="field-error">Selecione um perfil na Alcatéia.</span>
                 </div>
 
                 <!-- CPF — col 6 -->
@@ -178,26 +216,53 @@
                     maxlength="14"
                     autocomplete="off"
                   />
-                  <span class="field-error"
-                    >CPF inválido. Use 000.000.000-00.</span
-                  >
+                  <span class="field-error">CPF inválido. Use 000.000.000-00.</span>
                 </div>
 
-                <!-- Perfil na Alcatéia — col 6 -->
+                <!-- RG — col 6 (opcional) -->
                 <div class="field-card col-6">
-                  <label class="field-label" for="field-perfil"
-                    >Perfil na Alcatéia</label
-                  >
-                  <select class="field-select" id="field-perfil">
-                    <option value="">Selecione uma categoria...</option>
-                    <option value="lobinho">Lobinho</option>
-                    <option value="escotista">Escotista</option>
-                    <option value="dirigente">Dirigente</option>
-                    <option value="apoio">Apoio / Voluntário</option>
+                  <label class="field-label" for="field-rg">RG <span class="field-optional">(opcional)</span></label>
+                  <input
+                    class="field-input"
+                    id="field-rg"
+                    type="text"
+                    placeholder="00.000.000-0"
+                    autocomplete="off"
+                  />
+                </div>
+
+                <!-- Nome Escoteiro — col 8 (opcional) -->
+                <div class="field-card col-8">
+                  <label class="field-label" for="field-nome-escoteiro">Nome Escoteiro <span class="field-optional">(opcional)</span></label>
+                  <input
+                    class="field-input"
+                    id="field-nome-escoteiro"
+                    type="text"
+                    placeholder="Ex: Falcão Veloz"
+                    autocomplete="off"
+                  />
+                </div>
+
+                <!-- Gênero — col 4 -->
+                <div class="field-card col-4">
+                  <label class="field-label" for="field-genero">Gênero <span class="field-optional">(opcional)</span></label>
+                  <select class="field-select" id="field-genero">
+                    <option value="">Selecione...</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
                   </select>
-                  <span class="field-error"
-                    >Selecione um perfil na Alcatéia.</span
-                  >
+                </div>
+
+                <!-- Estado Civil — col 6 (opcional) -->
+                <div class="field-card col-6">
+                  <label class="field-label" for="field-estado-civil">Estado Civil <span class="field-optional">(opcional)</span></label>
+                  <select class="field-select" id="field-estado-civil">
+                    <option value="">Selecione...</option>
+                    <option value="solteiro">Solteiro(a)</option>
+                    <option value="casado">Casado(a)</option>
+                    <option value="divorciado">Divorciado(a)</option>
+                    <option value="viúvo">Viúvo(a)</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -270,15 +335,7 @@
                 <div class="req-card" id="card-lobinho">
                   <div class="req-card-header">
                     <div class="req-icon icon-teal">
-                      <!-- people icon -->
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#004d57"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#004d57" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                         <circle cx="9" cy="7" r="4" />
                         <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
@@ -287,15 +344,47 @@
                     </div>
                     <h3 class="req-card-title">Responsáveis Legais</h3>
                   </div>
-                  <textarea
-                    class="field-textarea"
-                    id="field-responsaveis"
-                    placeholder="Nome e Telefone dos pais ou tutores..."
-                    rows="4"
-                  ></textarea>
-                  <p class="req-note">
-                    Obrigatório para membros menores de 18 anos.
-                  </p>
+
+                  <div class="resp-fields">
+                    <div class="resp-row">
+                      <div class="field-card resp-field-card">
+                        <label class="field-label" for="field-resp-nome">Nome Completo</label>
+                        <input class="field-input" id="field-resp-nome" type="text"
+                          placeholder="Ex: Maria da Silva" autocomplete="off" />
+                        <span class="field-error">Nome é obrigatório.</span>
+                      </div>
+                      <div class="field-card resp-field-card resp-field-sm">
+                        <label class="field-label" for="field-resp-parentesco">Parentesco</label>
+                        <input class="field-input" id="field-resp-parentesco" type="text"
+                          placeholder="Ex: mãe, pai, avó…" autocomplete="off" />
+                        <span class="field-error">Informe o parentesco.</span>
+                      </div>
+                    </div>
+                    <div class="resp-row">
+                      <div class="field-card resp-field-card">
+                        <label class="field-label" for="field-resp-telefone">Telefone</label>
+                        <input class="field-input" id="field-resp-telefone" type="text"
+                          placeholder="(00) 00000-0000" inputmode="numeric" maxlength="15" autocomplete="tel" />
+                        <span class="field-error">Telefone inválido (10 ou 11 dígitos).</span>
+                      </div>
+                      <div class="field-card resp-field-card">
+                        <label class="field-label" for="field-resp-cpf">CPF <span class="field-optional">(opcional)</span></label>
+                        <input class="field-input" id="field-resp-cpf" type="text"
+                          placeholder="000.000.000-00" inputmode="numeric" maxlength="14" autocomplete="off" />
+                        <span class="field-error">CPF inválido.</span>
+                      </div>
+                    </div>
+                    <div class="resp-row">
+                      <div class="resp-field-card resp-checkbox-wrap">
+                        <label class="resp-checkbox-label">
+                          <input type="checkbox" id="field-resp-financeiro" />
+                          <span>Responsável financeiro</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p class="req-note">Obrigatório para membros menores de 18 anos.</p>
                 </div>
 
                 <!-- Card: Certidão de Idoneidade (Adulto) — dimmed por padrão -->
@@ -322,14 +411,15 @@
                     <h3 class="req-card-title">Certidão de Idoneidade</h3>
                   </div>
 
-                  <!-- Upload zone -->
-                  <div
-                    class="upload-zone"
-                    id="upload-zone"
-                    role="button"
-                    tabindex="0"
-                    aria-label="Área de upload do PDF"
-                  >
+                  <!-- Upload zone — input cobre toda a área para click nativo -->
+                  <div class="upload-zone" id="upload-zone">
+                    <input
+                      type="file"
+                      id="file-input"
+                      accept="application/pdf"
+                      aria-label="Upload do arquivo PDF"
+                      style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;"
+                    />
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
@@ -340,19 +430,10 @@
                     >
                       <polyline points="16 16 12 12 8 16" />
                       <line x1="12" y1="12" x2="12" y2="21" />
-                      <path
-                        d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"
-                      />
+                      <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
                     </svg>
                     <span class="upload-label">Clique para enviar PDF</span>
                   </div>
-                  <input
-                    type="file"
-                    id="file-input"
-                    accept="application/pdf"
-                    style="display: none"
-                    aria-label="Upload do arquivo PDF"
-                  />
 
                   <p class="req-note">Exclusivo para voluntários adultos.</p>
                 </div>
@@ -425,15 +506,25 @@
 
                 <!-- Rua / Logradouro — col 2 -->
                 <div class="field-card col-2-3">
-                  <label class="field-label" for="field-rua"
-                    >Rua / Logradouro</label
-                  >
+                  <label class="field-label" for="field-rua">Rua / Logradouro</label>
                   <input
                     class="field-input"
                     id="field-rua"
                     type="text"
-                    placeholder="Nome da rua e número"
+                    placeholder="Nome da rua"
                     autocomplete="street-address"
+                    readonly
+                  />
+                </div>
+
+                <!-- Número -->
+                <div class="field-card">
+                  <label class="field-label" for="field-numero">Número</label>
+                  <input
+                    class="field-input"
+                    id="field-numero"
+                    type="text"
+                    placeholder="Ex: 100"
                   />
                 </div>
 
@@ -446,6 +537,32 @@
                     type="text"
                     placeholder="Seu bairro"
                     autocomplete="address-level2"
+                    readonly
+                  />
+                </div>
+
+                <!-- Cidade -->
+                <div class="field-card">
+                  <label class="field-label" for="field-cidade">Cidade</label>
+                  <input
+                    class="field-input"
+                    id="field-cidade"
+                    type="text"
+                    placeholder="Cidade"
+                    readonly
+                  />
+                </div>
+
+                <!-- Estado -->
+                <div class="field-card">
+                  <label class="field-label" for="field-estado">Estado</label>
+                  <input
+                    class="field-input"
+                    id="field-estado"
+                    type="text"
+                    placeholder="UF"
+                    maxlength="2"
+                    readonly
                   />
                 </div>
               </div>
@@ -490,6 +607,10 @@
       <span id="toast-msg"></span>
     </div>
 
+    <!-- Supabase SDK (UMD) — expõe window.supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <!-- Credenciais do projeto Supabase -->
+    <script src="../../js/supabase-config.js"></script>
     <script src="../../js/main.js"></script>
     <script src="../../js/services.js"></script>
     <script src="script.js"></script>
