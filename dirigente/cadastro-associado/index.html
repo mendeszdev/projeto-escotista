@@ -17,48 +17,386 @@
                 <button class="btn-icon">⚙️</button>
                 <button class="btn-profile">👤</button>
             </div>
-        </div>
+          </div>
+        </section>
 
-        <div class="main-wrapper">
-            <aside class="sidebar-dirigente">
-                <div class="sidebar-header-dirigente">
-                    <h3 class="sidebar-title-dirigente">A Grande Caçada</h3>
-                    <p class="sidebar-status-dirigente">GESTÃO DE ALCATEIA</p>
-                </div>
-                <nav class="sidebar-nav-dirigente">
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">📊</span>
-                        <span class="nav-label">Dashboard</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">👥</span>
-                        <span class="nav-label">Associados</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">🐾</span>
-                        <span class="nav-label">Alcatéias</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">👤</span>
-                        <span class="nav-label">Perfil</span>
-                    </a>
-                    <a href="#" class="nav-item-dirigente">
-                        <span class="nav-icon">⚙️</span>
-                        <span class="nav-label">Sistema</span>
-                    </a>
-                </nav>
-            </aside>
+        <!-- ══ FORM ══ -->
+        <form id="cadastro-form" novalidate>
+          <div class="form-body">
+            <!-- ───────────────────────────────
+             SECTION 1 — Dados Básicos
+        ─────────────────────────────────── -->
+            <div>
+              <div class="section-head">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#237329"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                <h2 class="section-title">Dados Básicos</h2>
+              </div>
 
-            <main class="main-content-dirigente">
-                <section class="header-section-dirigente">
-                    <h1 class="page-title-dirigente">Cadastro de Novo Associado</h1>
-                    <p class="page-description-dirigente">Tela em desenvolvimento - cadastro-associado-dirigente</p>
-                </section>
-                <div class="placeholder-content-dirigente">
-                    <p>Conteúdo específico da tela Cadastro de Novo Associado será renderizado aqui.</p>
+              <div class="dados-grid" style="margin-top: 0">
+                <!-- Nome Completo — col 8 -->
+                <div class="field-card col-8">
+                  <label class="field-label" for="field-nome"
+                    >Nome Completo</label
+                  >
+                  <input
+                    class="field-input"
+                    id="field-nome"
+                    type="text"
+                    placeholder="Ex: Mowgli do Menino Lobo"
+                    autocomplete="name"
+                  />
+                  <span class="field-error"
+                    >Nome deve ter ao menos 3 caracteres.</span
+                  >
                 </div>
-            </main>
-        </div>
+
+                <!-- Matrícula — col 4 -->
+                <div class="field-card col-4">
+                  <label class="field-label" for="field-matricula"
+                    >Matrícula</label
+                  >
+                  <input
+                    class="field-input"
+                    id="field-matricula"
+                    type="text"
+                    placeholder="000.000-0"
+                    autocomplete="off"
+                  />
+                  <span class="field-error">Matrícula inválida.</span>
+                </div>
+
+                <!-- CPF — col 6 -->
+                <div class="field-card col-6">
+                  <label class="field-label" for="field-cpf">CPF</label>
+                  <input
+                    class="field-input"
+                    id="field-cpf"
+                    type="text"
+                    placeholder="000.000.000-00"
+                    inputmode="numeric"
+                    maxlength="14"
+                    autocomplete="off"
+                  />
+                  <span class="field-error"
+                    >CPF inválido. Use 000.000.000-00.</span
+                  >
+                </div>
+
+                <!-- Perfil na Alcatéia — col 6 -->
+                <div class="field-card col-6">
+                  <label class="field-label" for="field-perfil"
+                    >Perfil na Alcatéia</label
+                  >
+                  <select class="field-select" id="field-perfil">
+                    <option value="">Selecione uma categoria...</option>
+                    <option value="lobinho">Lobinho</option>
+                    <option value="escotista">Escotista</option>
+                    <option value="dirigente">Dirigente</option>
+                    <option value="apoio">Apoio / Voluntário</option>
+                  </select>
+                  <span class="field-error"
+                    >Selecione um perfil na Alcatéia.</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- ───────────────────────────────
+             SECTION 2 — Requisitos do Perfil
+        ─────────────────────────────────── -->
+            <div class="requisitos-section">
+              <!-- Decorative trees SVG -->
+              <div class="requisitos-deco" aria-hidden="true">
+                <svg
+                  viewBox="0 0 171 165"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <!-- big tree -->
+                  <polygon
+                    points="85,10 150,100 20,100"
+                    fill="#237329"
+                    opacity=".25"
+                  />
+                  <polygon
+                    points="85,40 145,130 25,130"
+                    fill="#237329"
+                    opacity=".18"
+                  />
+                  <rect
+                    x="78"
+                    y="128"
+                    width="14"
+                    height="28"
+                    rx="3"
+                    fill="#237329"
+                    opacity=".2"
+                  />
+                  <!-- small tree -->
+                  <polygon
+                    points="140,40 165,90 115,90"
+                    fill="#237329"
+                    opacity=".15"
+                  />
+                  <rect
+                    x="136"
+                    y="88"
+                    width="8"
+                    height="16"
+                    rx="2"
+                    fill="#237329"
+                    opacity=".12"
+                  />
+                </svg>
+              </div>
+
+              <div class="section-head">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#237329"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+                <h2 class="section-title">Requisitos do Perfil</h2>
+              </div>
+
+              <div class="requisitos-grid">
+                <!-- Card: Responsáveis Legais (Lobinho) — ativo por padrão -->
+                <div class="req-card" id="card-lobinho">
+                  <div class="req-card-header">
+                    <div class="req-icon icon-teal">
+                      <!-- people icon -->
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#004d57"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                      </svg>
+                    </div>
+                    <h3 class="req-card-title">Responsáveis Legais</h3>
+                  </div>
+                  <textarea
+                    class="field-textarea"
+                    id="field-responsaveis"
+                    placeholder="Nome e Telefone dos pais ou tutores..."
+                    rows="4"
+                  ></textarea>
+                  <p class="req-note">
+                    Obrigatório para membros menores de 18 anos.
+                  </p>
+                </div>
+
+                <!-- Card: Certidão de Idoneidade (Adulto) — dimmed por padrão -->
+                <div
+                  class="req-card dimmed"
+                  id="card-adulto"
+                  style="pointer-events: none"
+                >
+                  <div class="req-card-header">
+                    <div class="req-icon icon-green">
+                      <!-- shield-check icon -->
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#064e3b"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        <polyline points="9 12 11 14 15 10" />
+                      </svg>
+                    </div>
+                    <h3 class="req-card-title">Certidão de Idoneidade</h3>
+                  </div>
+
+                  <!-- Upload zone -->
+                  <div
+                    class="upload-zone"
+                    id="upload-zone"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Área de upload do PDF"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="16 16 12 12 8 16" />
+                      <line x1="12" y1="12" x2="12" y2="21" />
+                      <path
+                        d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"
+                      />
+                    </svg>
+                    <span class="upload-label">Clique para enviar PDF</span>
+                  </div>
+                  <input
+                    type="file"
+                    id="file-input"
+                    accept="application/pdf"
+                    style="display: none"
+                    aria-label="Upload do arquivo PDF"
+                  />
+
+                  <p class="req-note">Exclusivo para voluntários adultos.</p>
+                </div>
+              </div>
+              <!-- /requisitos-grid -->
+            </div>
+            <!-- /requisitos-section -->
+
+            <!-- ───────────────────────────────
+             SECTION 3 — Contato e Endereço
+        ─────────────────────────────────── -->
+            <div>
+              <div class="section-head">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#237329"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <h2 class="section-title">Contato e Endereço</h2>
+              </div>
+
+              <div class="contato-grid">
+                <!-- E-mail -->
+                <div class="field-card">
+                  <label class="field-label" for="field-email">E-mail</label>
+                  <input
+                    class="field-input"
+                    id="field-email"
+                    type="email"
+                    placeholder="exemplo@jangal.com"
+                    autocomplete="email"
+                  />
+                  <span class="field-error">E-mail inválido.</span>
+                </div>
+
+                <!-- Telefone -->
+                <div class="field-card">
+                  <label class="field-label" for="field-tel">Telefone</label>
+                  <input
+                    class="field-input"
+                    id="field-tel"
+                    type="tel"
+                    placeholder="(00) 00000-0000"
+                    inputmode="numeric"
+                    autocomplete="tel"
+                  />
+                  <span class="field-error">Telefone inválido.</span>
+                </div>
+
+                <!-- CEP -->
+                <div class="field-card">
+                  <label class="field-label" for="field-cep">CEP</label>
+                  <input
+                    class="field-input"
+                    id="field-cep"
+                    type="text"
+                    placeholder="00000-000"
+                    inputmode="numeric"
+                    maxlength="9"
+                    autocomplete="postal-code"
+                  />
+                  <span class="field-error">CEP deve ter 8 dígitos.</span>
+                </div>
+
+                <!-- Rua / Logradouro — col 2 -->
+                <div class="field-card col-2-3">
+                  <label class="field-label" for="field-rua"
+                    >Rua / Logradouro</label
+                  >
+                  <input
+                    class="field-input"
+                    id="field-rua"
+                    type="text"
+                    placeholder="Nome da rua e número"
+                    autocomplete="street-address"
+                  />
+                </div>
+
+                <!-- Bairro -->
+                <div class="field-card">
+                  <label class="field-label" for="field-bairro">Bairro</label>
+                  <input
+                    class="field-input"
+                    id="field-bairro"
+                    type="text"
+                    placeholder="Seu bairro"
+                    autocomplete="address-level2"
+                  />
+                </div>
+              </div>
+              <!-- /contato-grid -->
+            </div>
+
+            <!-- ── ACTIONS ── -->
+            <div class="form-actions">
+              <button class="btn-discard" id="btn-discard" type="button">
+                Descartar Alterações
+              </button>
+              <button class="btn-save" id="btn-save" type="submit">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"
+                  />
+                  <polyline points="17 21 17 13 7 13 7 21" />
+                  <polyline points="7 3 7 8 15 8" />
+                </svg>
+                Salvar Cadastro
+              </button>
+            </div>
+          </div>
+          <!-- /form-body -->
+        </form>
+      </div>
+      <!-- /content -->
+    </main>
+
+    <!-- ══════════════════════════════════════
+     TOAST
+══════════════════════════════════════ -->
+    <div class="toast" id="toast" role="alert" aria-live="polite">
+      <span class="toast-icon" id="toast-icon"></span>
+      <span id="toast-msg"></span>
     </div>
 
     <script src="../../js/main.js"></script>
