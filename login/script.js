@@ -148,9 +148,9 @@ function restoreSession() {
 
 function redirectToDashboard(role) {
   const paths = {
-    lobinho:   '/lobinho/dashboard/',
-    escotista: '/escotista/dashboard/',
-    dirigente: '/dirigente/dashboard/',
+    lobinho:   '../lobinho/dashboard/',
+    escotista: '../escotista/dashboard/',
+    dirigente: '../dirigente/dashboard/',
   };
   window.location.href = paths[role] || '/lobinho/dashboard/';
 }
@@ -221,7 +221,7 @@ function logout() {
   authState.token = null;
   localStorage.removeItem('auth_token');
   localStorage.removeItem('user_data');
-  window.location.href = '/login/';
+  window.location.href = '../login/';
 }
 
 window.authModule = { logout, isAuthenticated: () => !!authState.token };

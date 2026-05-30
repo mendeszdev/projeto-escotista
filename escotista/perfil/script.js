@@ -25,7 +25,7 @@ function showToast(icon, msg, duration = 3000) {
 function initSidebarNav() {
   document.querySelectorAll(".nav-link").forEach((link) => {
     link.addEventListener("click", (e) => {
-      e.preventDefault();
+      if (link.getAttribute("href") === "#") e.preventDefault();
       document
         .querySelectorAll(".nav-link")
         .forEach((l) => l.classList.remove("active"));

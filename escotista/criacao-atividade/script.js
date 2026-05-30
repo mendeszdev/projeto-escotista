@@ -131,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-select-all')?.addEventListener('click', toggleSelectAll);
   document.getElementById('create-form')?.addEventListener('submit', handleSubmit);
   document.getElementById('btn-cancel')?.addEventListener('click', () => {
+    window.location.href = '../gestao-atividades/'; return;
     showToast('↩️', 'Criação de atividade cancelada.');
   });
 });

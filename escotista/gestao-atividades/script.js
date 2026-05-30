@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* New activity */
   document.getElementById('btn-new-activity')?.addEventListener('click', () => {
-    showToast('➕', 'Formulário de nova atividade aberto.');
+    window.location.href = '../criacao-atividade/';
   });
 
   /* Export */
@@ -185,6 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* Create activity (sidebar CTA) */
   document.getElementById('btn-create')?.addEventListener('click', () => {
-    showToast('➕', 'Formulário de nova atividade aberto.');
+    window.location.href = '../criacao-atividade/';
   });
 });

@@ -50,7 +50,7 @@
 
       <nav class="sidebar-nav">
         <!-- Dashboard -->
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="../dashboard/">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <rect x="3" y="3" width="7" height="7" rx="1" />
             <rect x="14" y="3" width="7" height="7" rx="1" />
@@ -61,7 +61,7 @@
         </a>
 
         <!-- Atividades (ativo nesta tela) -->
-        <a class="nav-link active" href="#">
+        <a class="nav-link active" href="../gestao-atividades/">
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -81,7 +81,7 @@
         </a>
 
         <!-- Matilha -->
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="../matilhas/">
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -99,7 +99,7 @@
         </a>
 
         <!-- Perfil -->
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="../perfil/">
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -410,5 +410,14 @@
     </div>
 
     <script src="script.js"></script>
-  </body>
+  
+<script>
+// Logout handler
+document.querySelector('.topbar-icon-btn[title="Sair"]')?.addEventListener('click', () => {
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('user_data');
+    window.location.href = '../../login/';
+});
+</script>
+</body>
 </html>
