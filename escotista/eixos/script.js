@@ -53,7 +53,7 @@ function initSidebarNav() {
 
   links.forEach((link) => {
     link.addEventListener("click", (e) => {
-      if (link.getAttribute("href") === "#") e.preventDefault();
+      e.preventDefault();
       links.forEach((l) => l.classList.remove("active"));
       link.classList.add("active");
     });

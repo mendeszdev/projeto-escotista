@@ -258,13 +258,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('status-select')?.addEventListener('change', applyFilters);
   document.getElementById('btn-batch')?.addEventListener('click', batchValidate);
   document.getElementById('btn-new-activity')?.addEventListener('click', () => {
-    window.location.href = '../criacao-atividade/';
+    showToast('➕', 'Formulário de nova atividade aberto.');
   });
   document.getElementById('btn-export')?.addEventListener('click', () => {
     showToast('📥', 'Exportação de relatório iniciada.');
   });
   document.getElementById('btn-create')?.addEventListener('click', () => {
-    window.location.href = '../criacao-atividade/';
+    showToast('➕', 'Formulário de nova atividade aberto.');
   });
 
   if (typeof API !== 'undefined') {

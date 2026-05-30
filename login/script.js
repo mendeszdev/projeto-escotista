@@ -160,9 +160,9 @@ function restoreSession() {
 
 function redirectToDashboard(role) {
   const paths = {
-    lobinho:   '../lobinho/dashboard/',
-    escotista: '../escotista/dashboard/',
-    dirigente: '../dirigente/dashboard/',
+    lobinho:   '/lobinho/dashboard/',
+    escotista: '/escotista/dashboard/',
+    dirigente: '/dirigente/dashboard/',
   };
   window.location.href = paths[role] || '/lobinho/dashboard/';
 }

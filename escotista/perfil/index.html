@@ -36,7 +36,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="nav-link" href="../dashboard/">
+    <a class="nav-link" href="#">
       <svg viewBox="0 0 24 24" fill="currentColor">
         <rect x="3" y="3" width="7" height="7" rx="1"/>
         <rect x="14" y="3" width="7" height="7" rx="1"/>
@@ -45,7 +45,7 @@
       </svg>
       Dashboard
     </a>
-    <a class="nav-link" href="../gestao-atividades/">
+    <a class="nav-link" href="#">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
            stroke-linecap="round" stroke-linejoin="round">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -55,7 +55,7 @@
       </svg>
       Atividades
     </a>
-    <a class="nav-link" href="../matilhas/">
+    <a class="nav-link" href="#">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
            stroke-linecap="round" stroke-linejoin="round">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -65,7 +65,7 @@
       </svg>
       Matilhas
     </a>
-    <a class="nav-link active" href="../perfil/">
+    <a class="nav-link active" href="#">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
            stroke-linecap="round" stroke-linejoin="round">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -421,14 +421,5 @@
 </div>
 
 <script src="script.js"></script>
-
-<script>
-// Logout handler
-document.querySelector('.topbar-icon-btn[title="Sair"]')?.addEventListener('click', () => {
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('user_data');
-    window.location.href = '../../login/';
-});
-</script>
 </body>
 </html>
