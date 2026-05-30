@@ -596,3 +596,10 @@ body {
         display: none;
     }
 }
+
+/* ── REFACTORED FROM INLINE STYLES ── */
+.icon-logout-svg { width: 20px; height: 20px; }
+.trilha-card .progress-fill { width: 60%; }
+.block-icon--green  { background-color: #9df197; }
+.block-icon--yellow { background-color: #feb300; }
+.block-icon--blue   { background-color: #5fe0f6; }

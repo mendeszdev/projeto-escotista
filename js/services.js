@@ -1,10 +1,9 @@
-
 const API = (() => {
-  const BASE    = 'http://localhost:8080';
+  const BASE    = 'http://localhost:8080/escoteiros-api';
   const TIMEOUT = 10000;
 
   function token() {
-    return localStorage.getItem('auth_token') || '';
+    return localStorage.getItem('accessToken') || '';
   }
 
   async function req(method, path, body = null) {
@@ -30,7 +29,6 @@ const API = (() => {
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
-        /* O backend retorna { "erros": [...] } no 400 e { "erro": "..." } no 500 */
         const msg = (Array.isArray(err.erros) && err.erros.length)
           ? err.erros.join(', ')
           : (err.erro || err.message || `Erro ${res.status}`);
@@ -60,155 +58,128 @@ const API = (() => {
   return {
 
     auth: {
-      /**
-       * POST /api/auth/login
-       * @returns {{ success, token, user: { id, name, matricula, role, email, fotoUrl } }}
-       */
       login: (matricula, senha) => req('POST', '/api/auth/login', { matricula, senha }),
 
       logout() {
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('user_data');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
         window.location.href = '/login/';
       },
     },
 
     associados: {
-      /**
-       * GET /api/associados[?perfil=&grupo=&matilha=]
-       * @returns {Array<{ id, nome, matricula, perfil, matilha, status, email, fotoUrl }>}
-       */
       list:    (params = {}) => req('GET',    '/api/associados' + qs(params)),
-
-      /**
-       * GET /api/associados/:id
-       */
       getById: (id)          => req('GET',    `/api/associados/${id}`),
-
-      /**
-       * GET /api/associados/proxima-matricula?perfil=lobinho
-       * @returns {{ matricula: string }}
-       */
-      proximaMatricula: (perfil) => req('GET', `/api/associados/proxima-matricula?perfil=${perfil}`),
-
-      /**
-       * POST /api/associados
-       * @param {{ nome, cpf, dataNascimento, perfil, email, telefone, cep, rua, bairro, responsaveis }} data
-       */
       create:  (data)        => req('POST',   '/api/associados', data),
-
-      /**
-       * PUT /api/associados/:id
-       */
       update:  (id, data)    => req('PUT',    `/api/associados/${id}`, data),
-
-      /**
-       * DELETE /api/associados/:id
-       */
       delete:  (id)          => req('DELETE', `/api/associados/${id}`),
     },
 
     atividades: {
-      /**
-       * GET /api/atividades[?status=&associadoId=&matilhaId=]
-       * @returns {Array<{ id, titulo, descricao, bloco, area, dataLimite, status, associadoId, matilhaId }>}
-       */
       list:    (params = {}) => req('GET',    '/api/atividades' + qs(params)),
-
-      /**
-       * POST /api/atividades
-       * @param {{ titulo, descricao, bloco, area, dataLimite, lobinhosIds }} data
-       */
       create:  (data)        => req('POST',   '/api/atividades', data),
-
-      /**
-       * PUT /api/atividades/:id
-       * @param {{ status }} data  – 'aprovado' | 'rejeitado' | 'pendente'
-       */
       update:  (id, data)    => req('PUT',    `/api/atividades/${id}`, data),
-
-      /**
-       * DELETE /api/atividades/:id
-       */
       delete:  (id)          => req('DELETE', `/api/atividades/${id}`),
     },
 
     alcateias: {
-      /** GET /api/alcateias */
-      list:    ()   => req('GET', '/api/alcateias'),
-      /** GET /api/alcateias/:id */
-      getById: (id) => req('GET', `/api/alcateias/${id}`),
+      list:        (params = {}) => req('GET',    '/api/alcateias' + qs(params)),
+      listByGrupo: (grupoId)     => req('GET',    `/api/alcateias?grupo=${grupoId}`),
+      getById:     (id)          => req('GET',    `/api/alcateias/${id}`),
+      create:      (data)        => req('POST',   '/api/alcateias', data),
+      update:      (id, data)    => req('PUT',    `/api/alcateias/${id}`, data),
+      delete:      (id)          => req('DELETE', `/api/alcateias/${id}`),
     },
 
     matilhas: {
-      /** GET /api/matilhas */
-      list:    ()   => req('GET', '/api/matilhas'),
-      /** GET /api/matilhas/:id */
-      getById: (id) => req('GET', `/api/matilhas/${id}`),
+      list:           (params = {}) => req('GET',    '/api/matilhas' + qs(params)),
+      listByAlcateia: (alcateiaId)  => req('GET',    `/api/matilhas?alcateia=${alcateiaId}`),
+      getById:        (id)          => req('GET',    `/api/matilhas/${id}`),
+      create:         (data)        => req('POST',   '/api/matilhas', data),
+      update:         (id, data)    => req('PUT',    `/api/matilhas/${id}`, data),
+      delete:         (id)          => req('DELETE', `/api/matilhas/${id}`),
     },
 
     progressoes: {
-      /** GET /api/progressoes */
-      list:    ()   => req('GET', '/api/progressoes'),
-      /** GET /api/progressoes/:id */
-      getById: (id) => req('GET', `/api/progressoes/${id}`),
+      list:            ()            => req('GET', '/api/progressoes'),
+      listByAssociado: (associadoId) => req('GET', `/api/progressoes?associado=${associadoId}`),
     },
 
     distintivos: {
-      /** GET /api/distintivos */
       list:    ()   => req('GET', '/api/distintivos'),
-      /** GET /api/distintivos/:id */
       getById: (id) => req('GET', `/api/distintivos/${id}`),
     },
 
     documentos: {
-      /** GET /api/documentos */
-      list:            ()     => req('GET',    '/api/documentos'),
-      /** GET /api/documentos?associado={uuid} */
-      listByAssociado: (id)   => req('GET',    `/api/documentos?associado=${id}`),
-      /** GET /api/documentos/:id */
-      getById:         (id)   => req('GET',    `/api/documentos/${id}`),
-      /** POST /api/documentos */
-      create:          (data) => req('POST',   '/api/documentos', data),
-      /** DELETE /api/documentos/:id — remove apenas o registro do banco */
-      delete:          (id)   => req('DELETE', `/api/documentos/${id}`),
+      listByAssociado: (id)      => req('GET',    `/api/documentos?associado=${id}`),
+      getById:         (id)      => req('GET',    `/api/documentos/${id}`),
+      create:          (data)    => req('POST',   '/api/documentos', data),
+      update:          (id, data)=> req('PUT',    `/api/documentos/${id}`, data),
+      delete:          (id)      => req('DELETE', `/api/documentos/${id}`),
     },
 
     fichasMedicas: {
-      /** GET /api/fichas-medicas */
-      list:    ()   => req('GET', '/api/fichas-medicas'),
-      /** GET /api/fichas-medicas/:id */
-      getById: (id) => req('GET', `/api/fichas-medicas/${id}`),
+      getByAssociado: (associadoId) => req('GET',  `/api/fichas-medicas?associado=${associadoId}`),
+      salvar:         (data)        => req('POST',  '/api/fichas-medicas', data),
     },
 
     responsaveis: {
-      /** GET /api/responsaveis */
-      list:            ()          => req('GET',    '/api/responsaveis'),
-      /** GET /api/responsaveis?associado={uuid} */
       listByAssociado: (assocId)   => req('GET',    `/api/responsaveis?associado=${assocId}`),
-      /** GET /api/responsaveis/:id */
       getById:         (id)        => req('GET',    `/api/responsaveis/${id}`),
-      /** POST /api/responsaveis */
       create:          (data)      => req('POST',   '/api/responsaveis', data),
-      /** PUT /api/responsaveis/:id — enviar objeto completo para evitar null */
       update:          (id, data)  => req('PUT',    `/api/responsaveis/${id}`, data),
-      /** DELETE /api/responsaveis/:id */
       delete:          (id)        => req('DELETE', `/api/responsaveis/${id}`),
     },
 
     acoesEducativas: {
-      /** GET /api/acoes-educativas */
-      list:    ()   => req('GET', '/api/acoes-educativas'),
-      /** GET /api/acoes-educativas/:id */
-      getById: (id) => req('GET', `/api/acoes-educativas/${id}`),
+      list:        (params = {}) => req('GET', '/api/acoes-educativas' + qs(params)),
+      listByBloco: (blocoId)     => req('GET', `/api/acoes-educativas?bloco=${blocoId}`),
+      getById:     (id)          => req('GET', `/api/acoes-educativas/${id}`),
     },
 
     grupos: {
-      /** GET /api/grupos-escoteiros */
       list:    ()   => req('GET', '/api/grupos-escoteiros'),
-      /** GET /api/grupos-escoteiros/:id */
       getById: (id) => req('GET', `/api/grupos-escoteiros/${id}`),
     },
+
+    eixos: {
+      list:    ()   => req('GET', '/api/eixos'),
+      getById: (id) => req('GET', `/api/eixos/${id}`),
+    },
+
+    blocoAprendizagem: {
+      list:       ()       => req('GET', '/api/blocos-aprendizagem'),
+      listByEixo: (eixoId) => req('GET', `/api/blocos-aprendizagem?eixo=${eixoId}`),
+      getById:    (id)     => req('GET', `/api/blocos-aprendizagem/${id}`),
+    },
+
+    atribuicoes: {
+      list:            (params = {}) => req('GET',    '/api/atribuicoes' + qs(params)),
+      listByAssociado: (id)          => req('GET',    `/api/atribuicoes?associado=${id}`),
+      listByAtividade: (id)          => req('GET',    `/api/atribuicoes?atividade=${id}`),
+      getById:         (id)          => req('GET',    `/api/atribuicoes/${id}`),
+      create:          (data)        => req('POST',   '/api/atribuicoes', data),
+      update:          (id, data)    => req('PUT',    `/api/atribuicoes/${id}`, data),
+      delete:          (id)          => req('DELETE', `/api/atribuicoes/${id}`),
+    },
+
+    escotistaAlcateia: {
+      listByAlcateia:  (id)   => req('GET',    `/api/escotistas-alcateias?alcateia=${id}`),
+      listByAssociado: (id)   => req('GET',    `/api/escotistas-alcateias?associado=${id}`),
+      create:          (data) => req('POST',   '/api/escotistas-alcateias', data),
+      encerrar:        (id)   => req('PUT',    `/api/escotistas-alcateias/${id}`),
+      delete:          (id)   => req('DELETE', `/api/escotistas-alcateias/${id}`),
+    },
+
+    membroMatilha: {
+      listByMatilha:   (matilhaId)   => req('GET',    `/api/membros-matilha?matilha=${matilhaId}`),
+      listByAssociado: (associadoId) => req('GET',    `/api/membros-matilha?associado=${associadoId}`),
+      create:          (data)        => req('POST',   '/api/membros-matilha', data),
+      encerrar:        (id)          => req('PUT',    `/api/membros-matilha/${id}`),
+      delete:          (id)          => req('DELETE', `/api/membros-matilha/${id}`),
+    },
+
   };
 
 })();

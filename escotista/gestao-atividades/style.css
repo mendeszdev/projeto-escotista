@@ -908,3 +908,7 @@ body {
     grid-template-columns: 160px 1fr 100px 90px 110px 120px;
   }
 }
+
+/* ── REFACTORED FROM INLINE STYLES ── */
+.quick-bar-icon { width: 16px; height: 20px; color: var(--gold); }
+.td-date { font-size: 14px; color: var(--stone-700); line-height: 20px; }

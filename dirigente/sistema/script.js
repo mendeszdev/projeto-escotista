@@ -117,13 +117,42 @@ function initLogoUpload() {
 }
 
 /* ─────────────────────────────────────────
+   LOAD GRUPO CONFIG — API
+───────────────────────────────────────── */
+async function loadGrupoConfig() {
+  if (typeof API === 'undefined') return;
+  try {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (!user.grupoId) return;
+    const grupo = await API.grupos.getById(user.grupoId);
+
+    const nomeInput = document.getElementById('input-nome-grupo');
+    if (nomeInput && grupo.nome) nomeInput.value = grupo.nome;
+  } catch (err) {
+    console.warn('[Sistema] Erro ao carregar grupo:', err.message);
+  }
+}
+
+/* ─────────────────────────────────────────
    SAVE IDENTITY
 ───────────────────────────────────────── */
 function initSaveIdentity() {
   document
     .getElementById("btn-save-identity")
-    ?.addEventListener("click", () => {
-      showToast("✅", "Identidade visual salva com sucesso!", 4000);
+    ?.addEventListener("click", async () => {
+      if (typeof API === 'undefined') {
+        showToast("✅", "Identidade visual salva com sucesso!", 4000);
+        return;
+      }
+      try {
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        if (!user.grupoId) { showToast("⚠️", "Grupo não identificado."); return; }
+        const nome = document.getElementById('input-nome-grupo')?.value.trim();
+        await API.grupos.update ? API.grupos.update(user.grupoId, { nome }) : null;
+        showToast("✅", "Identidade visual salva com sucesso!", 4000);
+      } catch (err) {
+        showToast("❌", `Erro ao salvar: ${err.message}`, 4000);
+      }
     });
 }
 
@@ -212,6 +241,7 @@ function initTopbarSearch() {
    BOOTSTRAP
 ───────────────────────────────────────── */
 document.addEventListener("DOMContentLoaded", () => {
+  loadGrupoConfig();
   initSidebarNav();
   initColorPalette();
   initLogoUpload();

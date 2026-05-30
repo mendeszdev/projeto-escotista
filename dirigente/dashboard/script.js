@@ -1,5 +1,5 @@
 // Dashboard Estratégico - Dirigente
-const API = 'http://localhost:8080';
+const BASE_URL = 'http://localhost:8080/escoteiros-api';
 
 document.addEventListener('DOMContentLoaded', function () {
     verificarSessao();
@@ -24,14 +24,14 @@ function configurarNavegacao() {
 }
 
 function verificarSessao() {
-    const user = JSON.parse(localStorage.getItem('user_data') || '{}');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
     if (!user || !user.role) window.location.href = '../../login/';
 }
 
 function headers() {
     return {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
     };
 }
 
@@ -39,13 +39,17 @@ async function carregarDashboard() {
     const placeholder = document.querySelector('.placeholder-content-dirigente');
     placeholder.innerHTML = '<p style="color:#aaa">Carregando dados...</p>';
 
+    const user    = JSON.parse(localStorage.getItem('user') || '{}');
+    const grupoId = user.grupoId;
+    const grupoFilter = grupoId ? `?grupo=${grupoId}` : '';
+
     let associados = [], alcateias = [], atividades = [];
 
     try {
         const [resA, resAl, resAt] = await Promise.all([
-            fetch(`${API}/api/associados`, { headers: headers() }),
-            fetch(`${API}/api/alcateias`, { headers: headers() }),
-            fetch(`${API}/api/atividades`, { headers: headers() }),
+            fetch(`${BASE_URL}/api/associados${grupoFilter}`, { headers: headers() }),
+            fetch(`${BASE_URL}/api/alcateias${grupoFilter}`,  { headers: headers() }),
+            fetch(`${BASE_URL}/api/atividades`,               { headers: headers() }),
         ]);
         associados  = await resA.json();
         alcateias   = await resAl.json();
@@ -88,7 +92,6 @@ async function carregarDashboard() {
             .dash-empty { padding:20px; text-align:center; color:#aaa; font-size:13px; }
         </style>
 
-        <!-- Cards de estatísticas -->
         <div class="dash-stats">
             <div class="dash-card">
                 <div class="dash-card-icon">👥</div>
@@ -117,7 +120,6 @@ async function carregarDashboard() {
             </div>
         </div>
 
-        <!-- Associados recentes -->
         <div class="dash-section-title">Associados Recentes</div>
         <div class="dash-lista">
             ${recentes.length === 0
@@ -138,8 +140,9 @@ async function carregarDashboard() {
 }
 
 function logout() {
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('user_data');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('user');
     window.location.href = '../../login/';
 }
 

@@ -42,7 +42,7 @@ function updateBadge() {
   const badge = document.getElementById('selection-badge');
   const total = document.querySelectorAll('.lobinho-item').length;
   const sel   = countSelected();
-  badge.textContent = sel === 0 ? `RF${total}` : `${sel}/${total}`;
+  if (badge) badge.textContent = sel === 0 ? `RF${total}` : `${sel}/${total}`;
 }
 
 function initLobinhoSelection() {
@@ -93,34 +93,127 @@ function resetForm() {
 }
 
 /* ─────────────────────────────────────────
+   CARGA DINÂMICA — ações educativas
+───────────────────────────────────────── */
+async function loadAcoesEducativas() {
+  if (typeof API === 'undefined') return;
+  try {
+    const acoes = await API.acoesEducativas.list();
+    const sel   = document.getElementById('activity-block');
+    if (!sel) return;
+    sel.innerHTML = '<option value="">Selecionar ação educativa...</option>';
+    acoes.forEach(acao => {
+      const opt = document.createElement('option');
+      opt.value       = acao.id;
+      opt.textContent = acao.nome;
+      sel.appendChild(opt);
+    });
+  } catch (err) {
+    console.warn('[CriaçãoAtividade] Erro ao carregar ações educativas:', err.message);
+  }
+}
+
+/* ─────────────────────────────────────────
+   CARGA DINÂMICA — alcateias do escotista
+───────────────────────────────────────── */
+async function loadAlcateias() {
+  if (typeof API === 'undefined') return;
+  try {
+    const user    = JSON.parse(localStorage.getItem('user') || '{}');
+    const vinculos = await API.escotistaAlcateia.listByAssociado(user.id);
+    const sel     = document.getElementById('activity-alcateia');
+    if (!sel) return;
+    sel.innerHTML = '<option value="">Selecionar alcateia...</option>';
+    vinculos.forEach(v => {
+      const opt = document.createElement('option');
+      opt.value       = v.alcateiaId;
+      opt.textContent = v.alcateiaId;
+      sel.appendChild(opt);
+    });
+    if (vinculos.length === 1) {
+      sel.value = vinculos[0].alcateiaId;
+      await loadLobinhos(vinculos[0].alcateiaId);
+    }
+    sel.addEventListener('change', () => loadLobinhos(sel.value));
+  } catch (err) {
+    console.warn('[CriaçãoAtividade] Erro ao carregar alcateias:', err.message);
+  }
+}
+
+/* ─────────────────────────────────────────
+   CARGA DINÂMICA — lobinhos da alcateia
+───────────────────────────────────────── */
+async function loadLobinhos(alcateiaId) {
+  if (!alcateiaId || typeof API === 'undefined') return;
+  try {
+    const lobinhos = await API.associados.list({ perfil: 'lobinho' });
+    const container = document.querySelector('.lobinho-list') || document.querySelector('.lobinhos-grid');
+    if (!container) return;
+    container.innerHTML = '';
+    lobinhos.forEach(l => {
+      const li = document.createElement('li');
+      li.className         = 'lobinho-item';
+      li.role              = 'option';
+      li.dataset.id        = l.id;
+      li.setAttribute('aria-selected', 'false');
+      li.innerHTML = `
+        <div class="lobinho-checkbox" aria-hidden="true"></div>
+        <div class="lobinho-avatar">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
+                     7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6
+                     4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="lobinho-name">${l.nomeEscoteiro || l.nomeCompleto || '—'}</div>
+          <div class="lobinho-pack">${l.matricula || ''}</div>
+        </div>
+      `;
+      container.appendChild(li);
+    });
+    initLobinhoSelection();
+    updateBadge();
+  } catch (err) {
+    console.warn('[CriaçãoAtividade] Erro ao carregar lobinhos:', err.message);
+  }
+}
+
+/* ─────────────────────────────────────────
    FORM VALIDATION & SUBMIT
 ───────────────────────────────────────── */
 async function handleSubmit(e) {
   e.preventDefault();
 
-  const name  = document.getElementById('activity-name')?.value.trim();
-  const desc  = document.getElementById('activity-desc')?.value.trim();
-  const block = document.getElementById('activity-block')?.value;
-  const date  = document.getElementById('activity-date')?.value;
-  const sel   = countSelected();
+  const name       = document.getElementById('activity-name')?.value.trim();
+  const desc       = document.getElementById('activity-desc')?.value.trim();
+  const block      = document.getElementById('activity-block')?.value;
+  const alcateiaId = document.getElementById('activity-alcateia')?.value;
+  const date       = document.getElementById('activity-date')?.value;
+  const sel        = countSelected();
 
-  if (!name)  { showToast('⚠️', 'Informe o nome da atividade.');          document.getElementById('activity-name')?.focus(); return; }
-  if (!desc)  { showToast('⚠️', 'Adicione uma descrição para a tarefa.');  document.getElementById('activity-desc')?.focus(); return; }
-  if (!block) { showToast('⚠️', 'Selecione o bloco de aprendizagem.');     document.getElementById('activity-block')?.focus(); return; }
-  if (!date)  { showToast('⚠️', 'Defina uma data limite para a atividade.'); document.getElementById('activity-date')?.focus(); return; }
-  if (sel === 0) { showToast('⚠️', 'Selecione pelo menos um lobinho da matilha.'); return; }
+  if (!name)       { showToast('⚠️', 'Informe o nome da atividade.');              document.getElementById('activity-name')?.focus(); return; }
+  if (!desc)       { showToast('⚠️', 'Adicione uma descrição para a tarefa.');      document.getElementById('activity-desc')?.focus(); return; }
+  if (!block)      { showToast('⚠️', 'Selecione a ação educativa.');                document.getElementById('activity-block')?.focus(); return; }
+  if (!alcateiaId) { showToast('⚠️', 'Selecione a alcateia.');                     document.getElementById('activity-alcateia')?.focus(); return; }
+  if (!date)       { showToast('⚠️', 'Defina uma data limite para a atividade.');   document.getElementById('activity-date')?.focus(); return; }
+  if (sel === 0)   { showToast('⚠️', 'Selecione pelo menos um lobinho da matilha.'); return; }
 
   const submitBtn = e.submitter || document.querySelector('[type="submit"]');
   if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Salvando…'; }
 
   try {
     if (typeof API !== 'undefined') {
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
       const payload = {
-        titulo:      name,
-        descricao:   desc,
-        bloco:       block,
-        dataLimite:  date,
-        lobinhosIds: getSelectedLobinhosIds(),
+        nomePersonalizado:      name,
+        descricaoPersonalizada: desc,
+        acaoEducativaId:        block || null,
+        alcateiaId,
+        ePersonalizada:         !block,
+        dataLimite:             date,
+        lobinhosIds:            getSelectedLobinhosIds(),
+        criadoPor:              user.id,
       };
       await API.atividades.create(payload);
     }
@@ -139,14 +232,16 @@ async function handleSubmit(e) {
 /* ─────────────────────────────────────────
    BOOTSTRAP
 ───────────────────────────────────────── */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   initSidebarNav();
+
+  await Promise.all([loadAcoesEducativas(), loadAlcateias()]);
+
   initLobinhoSelection();
 
   document.getElementById('btn-select-all')?.addEventListener('click', toggleSelectAll);
   document.getElementById('create-form')?.addEventListener('submit', handleSubmit);
   document.getElementById('btn-cancel')?.addEventListener('click', () => {
-    window.location.href = '../gestao-atividades/'; return;
-    showToast('↩️', 'Criação de atividade cancelada.');
+    window.location.href = '../gestao-atividades/';
   });
 });

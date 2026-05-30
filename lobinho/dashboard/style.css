@@ -871,3 +871,9 @@ h1, h2, h3, h4 {
     letter-spacing: -1px;
 }
 }
+
+/* ── REFACTORED FROM INLINE STYLES ── */
+.badge-circle--teal   { background-color: #5fe0f6; }
+.badge-circle--yellow { background-color: #feb300; }
+.badge-circle--muted  { background-color: #ece8e0; }
+.xp-fill { width: 65%; }

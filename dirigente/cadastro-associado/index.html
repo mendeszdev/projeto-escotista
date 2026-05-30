@@ -50,18 +50,237 @@
             </aside>
 
             <main class="main-content-dirigente">
-                <section class="header-section-dirigente">
-                    <h1 class="page-title-dirigente">Cadastro de Novo Associado</h1>
-                    <p class="page-description-dirigente">Tela em desenvolvimento - cadastro-associado-dirigente</p>
-                </section>
-                <div class="placeholder-content-dirigente">
-                    <p>Conteúdo específico da tela Cadastro de Novo Associado será renderizado aqui.</p>
+                <div class="cadastro-container">
+                    <h1 class="hero-title">Cadastro de Novo Associado</h1>
+                    <p class="hero-subtitle">Preencha os dados do caminheiro da trilha.</p>
+
+                    <form id="cadastro-form" novalidate>
+
+                        <!-- SEÇÃO 1 — Dados Pessoais -->
+                        <div class="section-card">
+                            <p class="section-title">Dados Pessoais</p>
+                            <div class="fields-grid">
+                                <div class="field-card field-span-2">
+                                    <label class="field-label">Nome Completo *</label>
+                                    <input type="text" id="field-nome" placeholder="Ex: Pedro Henrique Santos">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">Nome Escoteiro</label>
+                                    <input type="text" id="field-nome-escoteiro" placeholder="Ex: Falcão Veloz">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">Data de Nascimento *</label>
+                                    <input type="date" id="field-nascimento">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">CPF *</label>
+                                    <input type="text" id="field-cpf" placeholder="000.000.000-00" maxlength="14">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">RG</label>
+                                    <input type="text" id="field-rg" placeholder="Ex: 12.345.678-9">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">Passaporte</label>
+                                    <input type="text" id="field-passaporte" placeholder="Ex: AB123456" maxlength="30">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">Gênero</label>
+                                    <select id="field-genero">
+                                        <option value="">Selecionar...</option>
+                                        <option value="masculino">Masculino</option>
+                                        <option value="feminino">Feminino</option>
+                                        <option value="outro">Outro</option>
+                                        <option value="nao_informado">Prefiro não informar</option>
+                                    </select>
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">Estado Civil</label>
+                                    <select id="field-estado-civil">
+                                        <option value="">Selecionar...</option>
+                                        <option value="solteiro">Solteiro(a)</option>
+                                        <option value="casado">Casado(a)</option>
+                                        <option value="divorciado">Divorciado(a)</option>
+                                        <option value="viuvo">Viúvo(a)</option>
+                                    </select>
+                                    <span class="field-error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SEÇÃO 2 — Perfil e Matrícula -->
+                        <div class="section-card" id="card-adulto">
+                            <p class="section-title">Perfil na Alcateia</p>
+                            <div class="fields-grid">
+                                <div class="field-card">
+                                    <label class="field-label">Perfil *</label>
+                                    <select id="field-perfil">
+                                        <option value="">Selecionar...</option>
+                                        <option value="lobinho">Lobinho</option>
+                                        <option value="escotista">Escotista</option>
+                                        <option value="dirigente">Dirigente</option>
+                                    </select>
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">Matrícula</label>
+                                    <input type="text" id="field-matricula" placeholder="Gerada automaticamente" readonly>
+                                    <span class="field-error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SEÇÃO 3 — Contato -->
+                        <div class="section-card">
+                            <p class="section-title">Contato</p>
+                            <div class="fields-grid">
+                                <div class="field-card">
+                                    <label class="field-label">E-mail</label>
+                                    <input type="email" id="field-email" placeholder="email@exemplo.com">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">Telefone</label>
+                                    <input type="tel" id="field-tel" placeholder="(11) 99999-9999">
+                                    <span class="field-error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SEÇÃO 4 — Endereço -->
+                        <div class="section-card">
+                            <p class="section-title">Endereço</p>
+                            <div class="fields-grid">
+                                <div class="field-card">
+                                    <label class="field-label">CEP</label>
+                                    <input type="text" id="field-cep" placeholder="00000-000" maxlength="9">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">Número</label>
+                                    <input type="text" id="field-numero" placeholder="Ex: 123">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card field-span-2">
+                                    <label class="field-label">Logradouro</label>
+                                    <input type="text" id="field-rua" placeholder="Rua / Avenida">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">Bairro</label>
+                                    <input type="text" id="field-bairro">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">Cidade</label>
+                                    <input type="text" id="field-cidade">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">Estado</label>
+                                    <input type="text" id="field-estado" maxlength="2" placeholder="UF">
+                                    <span class="field-error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SEÇÃO 5 — Responsável Legal -->
+                        <div class="section-card">
+                            <p class="section-title">Responsável Legal</p>
+                            <div class="fields-grid">
+                                <div class="field-card field-span-2">
+                                    <label class="field-label">Nome Completo do Responsável</label>
+                                    <input type="text" id="field-resp-nome" placeholder="Nome do responsável">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">Parentesco</label>
+                                    <input type="text" id="field-resp-parentesco" placeholder="Ex: Mãe, Pai, Avó">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">CPF do Responsável</label>
+                                    <input type="text" id="field-resp-cpf" placeholder="000.000.000-00" maxlength="14">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">Telefone do Responsável</label>
+                                    <input type="tel" id="field-resp-telefone" placeholder="(11) 99999-9999">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card">
+                                    <label class="field-label">E-mail do Responsável</label>
+                                    <input type="email" id="field-resp-email" placeholder="email@exemplo.com">
+                                    <span class="field-error"></span>
+                                </div>
+                                <div class="field-card field-span-2 field-checkbox-row">
+                                    <input type="checkbox" id="field-resp-financeiro">
+                                    <label class="field-label" for="field-resp-financeiro">Responsável Financeiro</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SEÇÃO 6 — Foto de Perfil -->
+                        <div class="section-card">
+                            <p class="section-title">Foto de Perfil</p>
+                            <div class="foto-preview">
+                                <div class="foto-circle" id="foto-preview">
+                                    <svg viewBox="0 0 24 24" fill="#ccc" width="36" height="36">
+                                        <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                                    </svg>
+                                    <img id="foto-img" alt="Foto de perfil">
+                                </div>
+                                <div>
+                                    <input type="file" id="file-foto" accept="image/*">
+                                    <button type="button" id="btn-choose-photo" onclick="document.getElementById('file-foto').click()">Escolher foto</button>
+                                    <p id="foto-nome"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SEÇÃO 7 — Certidão de Idoneidade -->
+                        <div class="section-card">
+                            <p class="section-title">Certidão de Idoneidade (PDF)</p>
+                            <div id="upload-zone" class="upload-zone" onclick="document.getElementById('file-input').click()">
+                                <input type="file" id="file-input" accept="application/pdf">
+                                <p class="upload-label">Clique para enviar PDF</p>
+                            </div>
+                        </div>
+
+                        <!-- AÇÕES -->
+                        <div class="form-actions">
+                            <button type="button" id="btn-discard">Descartar</button>
+                            <button type="button" id="btn-save">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round" class="btn-icon-sm">
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                                    <polyline points="17 21 17 13 7 13 7 21"/>
+                                    <polyline points="7 3 7 8 15 8"/>
+                                </svg>
+                                Salvar Cadastro
+                            </button>
+                        </div>
+
+                    </form>
                 </div>
             </main>
         </div>
     </div>
 
+    <div class="toast" id="toast" role="alert" aria-live="polite">
+        <span id="toast-icon"></span>
+        <span id="toast-msg"></span>
+    </div>
+
     <script src="../../js/main.js"></script>
+    <script src="../../js/supabase-config.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

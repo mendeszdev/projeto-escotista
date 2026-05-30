@@ -1,5 +1,5 @@
 // Gestão de Alcatéias - Dirigente
-const API = 'http://localhost:8080';
+const BASE_URL = 'http://localhost:8080/';
 
 document.addEventListener('DOMContentLoaded', function () {
     verificarSessao();
@@ -7,14 +7,14 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function verificarSessao() {
-    const user = JSON.parse(localStorage.getItem('user_data') || '{}');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
     if (!user || !user.role) window.location.href = '../../login/';
 }
 
 function headers() {
     return {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
     };
 }
 
@@ -23,7 +23,7 @@ async function carregarAlcateias() {
     placeholder.innerHTML = '<p style="color:#aaa">Carregando alcatéias...</p>';
 
     try {
-        const res = await fetch(`${API}/api/alcateias`, { headers: headers() });
+        const res = await fetch(`${BASE_URL}/api/alcateias`, { headers: headers() });
         const alcateias = await res.json();
         renderizar(alcateias);
     } catch (e) {
@@ -61,7 +61,6 @@ function renderizar(alcateias) {
             .alc-btn:hover { background:#f5f5f5; }
             .alc-empty { text-align:center; padding:40px; color:#aaa; font-size:14px; }
 
-            /* Modal */
             .modal-overlay {
                 display:none; position:fixed; inset:0;
                 background:rgba(0,0,0,0.4); z-index:1000;
@@ -88,6 +87,13 @@ function renderizar(alcateias) {
                 background:#f0a500; color:#fff; border:none;
                 padding:9px 16px; border-radius:8px; font-weight:600; cursor:pointer;
             }
+            /* Modal matilhas */
+            .matilha-lista { margin-top:12px; }
+            .matilha-item {
+                padding:8px 12px; background:#f8f8f8; border-radius:8px;
+                margin-bottom:8px; font-size:14px;
+            }
+            .matilha-empty { color:#aaa; font-size:13px; padding:8px 0; }
         </style>
 
         <div class="alc-toolbar">
@@ -104,7 +110,7 @@ function renderizar(alcateias) {
                         <div class="alc-desc">${a.descricao || 'Sem descrição'}</div>
                         <span class="alc-badge">${a.status || 'ativo'}</span>
                         <div class="alc-actions">
-                            <button class="alc-btn" onclick="verMatilhas('${a.id}')">🐺 Matilhas</button>
+                            <button class="alc-btn" onclick="verMatilhas('${a.id}','${a.nome || ''}')">🐺 Matilhas</button>
                             <button class="alc-btn" onclick="deletarAlcateia('${a.id}','${a.nome}')">🗑️</button>
                         </div>
                     </div>
@@ -112,7 +118,7 @@ function renderizar(alcateias) {
             }
         </div>
 
-        <!-- Modal -->
+        <!-- Modal nova alcateia -->
         <div class="modal-overlay" id="modal-alc">
             <div class="modal-box">
                 <h2>Nova Alcateia</h2>
@@ -121,6 +127,21 @@ function renderizar(alcateias) {
                 <div class="modal-footer">
                     <button class="modal-btn-cancel" onclick="fecharModal()">Cancelar</button>
                     <button class="modal-btn-save" onclick="salvarAlcateia()">Salvar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal matilhas -->
+        <div class="modal-overlay" id="modal-matilhas">
+            <div class="modal-box">
+                <h2 id="modal-matilhas-titulo">Matilhas</h2>
+                <div id="modal-matilhas-lista" class="matilha-lista"></div>
+                <div style="margin-top:14px; display:flex; gap:8px;">
+                    <input type="text" id="nova-matilha-nome" placeholder="Nome da nova matilha" style="flex:1; padding:8px 12px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
+                    <button class="modal-btn-save" onclick="criarMatilha()" style="white-space:nowrap">+ Criar</button>
+                </div>
+                <div class="modal-footer" style="margin-top:12px;">
+                    <button class="modal-btn-cancel" onclick="fecharModalMatilhas()">Fechar</button>
                 </div>
             </div>
         </div>
@@ -137,21 +158,66 @@ function fecharModal() {
     document.getElementById('modal-alc').classList.remove('open');
 }
 
+function fecharModalMatilhas() {
+    document.getElementById('modal-matilhas').classList.remove('open');
+}
+
+let _alcateiaAtualId = null;
+
+async function verMatilhas(alcateiaId, alcateiaName) {
+    _alcateiaAtualId = alcateiaId;
+    const modal = document.getElementById('modal-matilhas');
+    const titulo = document.getElementById('modal-matilhas-titulo');
+    const lista  = document.getElementById('modal-matilhas-lista');
+
+    if (titulo) titulo.textContent = `Matilhas — ${alcateiaName}`;
+    if (lista)  lista.innerHTML = '<div class="matilha-empty">Carregando…</div>';
+    modal.classList.add('open');
+
+    try {
+        const res = await fetch(`${BASE_URL}/api/matilhas?alcateia=${alcateiaId}`, { headers: headers() });
+        const matilhas = await res.json();
+        lista.innerHTML = matilhas.length === 0
+            ? '<div class="matilha-empty">Nenhuma matilha cadastrada nesta alcateia.</div>'
+            : matilhas.map(m => `<div class="matilha-item">🐺 ${m.nome || m.id}</div>`).join('');
+    } catch (e) {
+        lista.innerHTML = '<div class="matilha-empty" style="color:#e74c3c">Erro ao carregar matilhas.</div>';
+    }
+}
+
+async function criarMatilha() {
+    const nome = document.getElementById('nova-matilha-nome')?.value.trim();
+    if (!nome || !_alcateiaAtualId) return;
+
+    try {
+        const res = await fetch(`${BASE_URL}/api/matilhas`, {
+            method: 'POST',
+            headers: headers(),
+            body: JSON.stringify({ nome, alcateiaId: _alcateiaAtualId, status: 'ativo' }),
+        });
+        if (!res.ok) { const e = await res.json(); throw new Error(e.erro || 'Erro'); }
+        document.getElementById('nova-matilha-nome').value = '';
+        await verMatilhas(_alcateiaAtualId, '');
+    } catch (e) {
+        alert('Erro ao criar matilha: ' + e.message);
+    }
+}
+
 async function salvarAlcateia() {
     const nome  = document.getElementById('alc-nome').value.trim();
     const desc  = document.getElementById('alc-desc').value.trim();
     if (!nome) { alert('Informe o nome da alcateia'); return; }
 
-    const user = JSON.parse(localStorage.getItem('user_data') || '{}');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
 
     try {
-        const res = await fetch(`${API}/api/alcateias`, {
+        const res = await fetch(`${BASE_URL}/api/alcateias`, {
             method: 'POST',
             headers: headers(),
             body: JSON.stringify({
                 nome, descricao: desc || null,
                 status: 'ativo',
-                grupoEscotelroId: user.grupoId || null
+                grupoEscoteiroId: user.grupoId || null,
             })
         });
         if (!res.ok) { const e = await res.json(); throw new Error(e.erro || 'Erro'); }
@@ -165,15 +231,11 @@ async function salvarAlcateia() {
 async function deletarAlcateia(id, nome) {
     if (!confirm(`Remover alcateia "${nome}"?`)) return;
     try {
-        await fetch(`${API}/api/alcateias/${id}`, { method: 'DELETE', headers: headers() });
+        await fetch(`${BASE_URL}/api/alcateias/${id}`, { method: 'DELETE', headers: headers() });
         carregarAlcateias();
     } catch (e) {
         alert('Erro ao remover');
     }
-}
-
-function verMatilhas(id) {
-    alert('Gestão de matilhas em desenvolvimento — ID: ' + id);
 }
 
 window.TelaGestaoAlcateiasDirigente = { carregarAlcateias };

@@ -108,10 +108,49 @@ function initTimeline() {
 }
 
 /* ─────────────────────────────────────────
+   LOAD PERFIL — API
+───────────────────────────────────────── */
+async function loadPerfil() {
+  if (typeof API === 'undefined') return;
+  try {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (!user.id) return;
+    const assoc = await API.associados.getById(user.id);
+
+    const nomeEl = document.querySelector('.profile-name, .hero-name, h1');
+    if (nomeEl && assoc.nomeCompleto) nomeEl.textContent = assoc.nomeCompleto;
+
+    const emailEl = document.querySelector('.contact-email .contact-text, [data-contact="email"]');
+    if (emailEl && assoc.email) emailEl.textContent = assoc.email;
+
+    const telefoneEl = document.querySelector('.contact-phone .contact-text, [data-contact="telefone"]');
+    if (telefoneEl && assoc.telefone) telefoneEl.textContent = assoc.telefone;
+
+    const matEl = document.querySelector('.profile-matricula, [data-field="matricula"]');
+    if (matEl && assoc.matricula) matEl.textContent = assoc.matricula;
+
+    const docs = await API.documentos.listByAssociado(user.id).catch(() => []);
+    if (docs.length) {
+      const docsContainer = document.querySelector('.documents-list, .docs-container');
+      if (docsContainer) {
+        docsContainer.innerHTML = docs.map(d => `
+          <div class="doc-item">
+            <span class="doc-name">${d.nomeArquivo || d.tipo || '—'}</span>
+            ${d.url ? `<a href="${d.url}" target="_blank" style="font-size:12px;color:#237329">Ver</a>` : ''}
+          </div>
+        `).join('');
+      }
+    }
+  } catch (err) {
+    console.warn('[Perfil Dirigente] Erro ao carregar dados:', err.message);
+  }
+}
+
+/* ─────────────────────────────────────────
    BOOTSTRAP
 ───────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-
+  loadPerfil();
   initProfileActions();
   initContactCopy();
   initDocMaskToggle();

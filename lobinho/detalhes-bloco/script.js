@@ -1,411 +1,145 @@
 requireAuth('lobinho');
 
-/**
- * DETALHES DO BLOCO FÍSICO - SCRIPT
- * =====================================
- * 
- * Este arquivo contém toda a lógica JavaScript para a tela de Detalhes do Bloco Físico.
- * Inclui funções para registrar atividades, compartilhar, navegar e interações gerais.
- * 
- * Estrutura pronta para integração com API backend.
- */
+/* detalhes-bloco.js */
 
-// ============================================
-// ESTADO DA PÁGINA
-// ============================================
-
-const blockDetailsState = {
-    blockId: '72-1809',
-    blockName: 'Cuidado com o corpo',
-    blockTitle: 'O Despertar da Pantera Bagheera',
-    energy: 85,
-    participants: 12,
-    activities: [
-        {
-            id: 1,
-            title: 'Corrida do Baloo',
-            description: 'Complete um circuito de obstáculos na natureza em menos de 5 minutos.',
-            icon: '🏃',
-            color: '#feb300',
-            status: 'available'
-        },
-        {
-            id: 2,
-            title: 'Nutrição do Lobo',
-            description: 'Aprenda e identifique 5 frutas silvestres que são seguras para comer.',
-            icon: '🍎',
-            color: '#9df197',
-            status: 'available'
-        },
-        {
-            id: 3,
-            title: 'Mergulho do Rio',
-            description: 'Demonstre flutuabilidade básica em águas calmas por 60 segundos.',
-            icon: '🏊',
-            color: '#5fe0f6',
-            status: 'available'
-        }
-    ],
-    pending: [
-        {
-            id: 1,
-            title: 'Salto da Pantera',
-            status: 'Aguardando Akela...',
-            date: '15/10'
-        },
-        {
-            id: 2,
-            title: 'Trilha Silenciosa',
-            status: 'Enviado hoje',
-            date: '18/10'
-        }
-    ],
-    completed: [
-        {
-            id: 1,
-            title: 'Higiene do Covil',
-            date: '12/10'
-        },
-        {
-            id: 2,
-            title: 'Respiração da Brisa',
-            date: '05/10'
-        }
-    ]
-};
-
-// ============================================
-// INICIALIZAÇÃO
-// ============================================
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Página de Detalhes do Bloco carregada');
-    
-    // Carregar dados da página
-    loadBlockDetails();
-    
-    // Configurar event listeners
-    setupEventListeners();
+document.addEventListener('DOMContentLoaded', async function() {
+  await loadBlockDetails();
+  setupEventListeners();
 });
 
-// ============================================
-// FUNÇÕES DE CARREGAMENTO
-// ============================================
-
-/**
- * Carrega os detalhes do bloco de aprendizagem
- * TODO: Integrar com API para obter dados reais do backend
- */
+/* ─────────────────────────────────────────
+   CARREGAMENTO — bloco via sessionStorage
+───────────────────────────────────────── */
 async function loadBlockDetails() {
-    try {
-        console.log('📥 Carregando detalhes do bloco...');
-        
-        // TODO: Substituir por chamada real à API
-        // const response = await fetch(`/api/blocks/${blockDetailsState.blockId}`);
-        // const data = await response.json();
-        // blockDetailsState = { ...blockDetailsState, ...data };
-        
-        // Por enquanto, usando dados mockados
-        console.log('✅ Detalhes do bloco carregados:', blockDetailsState);
-        
-    } catch (error) {
-        console.error('❌ Erro ao carregar detalhes do bloco:', error);
-        showError('Erro ao carregar detalhes do bloco');
+  if (typeof API === 'undefined') return;
+
+  try {
+    const blocoId = sessionStorage.getItem('selectedBloco');
+    if (!blocoId) return;
+
+    const [bloco, acoes] = await Promise.all([
+      API.blocoAprendizagem.getById(blocoId),
+      API.acoesEducativas.listByBloco(blocoId),
+    ]);
+
+    /* Título do bloco */
+    const titleEl = document.querySelector('.block-title, h1, .hero-title');
+    if (titleEl && bloco.nome) titleEl.textContent = bloco.nome;
+
+    const descEl = document.querySelector('.block-desc, .hero-subtitle, .block-description');
+    if (descEl && bloco.descricao) descEl.textContent = bloco.descricao;
+
+    /* Lista de ações educativas */
+    const container = document.querySelector('.activities-list, .acoes-lista, .block-activities');
+    if (container && acoes.length > 0) {
+      container.innerHTML = acoes.map(acao => `
+        <div class="activity-card" data-activity="${acao.id}" style="background:#fff;border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.07)">
+          <h3 style="margin:0 0 4px;font-size:15px">${acao.nome || '—'}</h3>
+          <p style="margin:0 0 12px;color:#777;font-size:13px">${acao.descricao || ''}</p>
+          <button class="btn-registrar-atividade" data-activity="${acao.id}" style="background:#237329;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;font-size:14px">
+            Registrar Atividade
+          </button>
+        </div>
+      `).join('');
     }
+
+  } catch (err) {
+    console.error('[DetalheBloco] Erro ao carregar:', err);
+  }
 }
 
-// ============================================
-// CONFIGURAÇÃO DE EVENT LISTENERS
-// ============================================
-
-/**
- * Configura todos os event listeners da página
- */
+/* ─────────────────────────────────────────
+   EVENTOS
+───────────────────────────────────────── */
 function setupEventListeners() {
-    // Botões de registrar atividade
-    document.querySelectorAll('.btn-registrar-atividade').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const activityId = this.dataset.activity;
-            openActivityModal(activityId);
-        });
-    });
-    
-    // Botão de compartilhar
-    const btnShare = document.getElementById('btnShare');
-    if (btnShare) {
-        btnShare.addEventListener('click', shareBlock);
-    }
-    
-    // Botão de perfil
-    const btnProfile = document.getElementById('btnProfile');
-    if (btnProfile) {
-        btnProfile.addEventListener('click', goToProfile);
-    }
-    
-    // Botão "Ver toda a jornada"
-    const btnJourney = document.querySelector('.btn-see-all-journey');
-    if (btnJourney) {
-        btnJourney.addEventListener('click', viewFullJourney);
-    }
-    
-    // Botão "Ir para Desafio Final"
-    const btnChallenge = document.querySelector('.btn-final-challenge');
-    if (btnChallenge) {
-        btnChallenge.addEventListener('click', goToFinalChallenge);
-    }
-    
-    // Links de ações pendentes
-    document.querySelectorAll('.pending-action').forEach(btn => {
-        btn.addEventListener('click', function() {
-            viewPendingDetails(this);
-        });
-    });
-    
-    // Botões de deletar atividades concluídas
-    document.querySelectorAll('.completed-action').forEach(btn => {
-        btn.addEventListener('click', function() {
-            deleteCompletedActivity(this);
-        });
-    });
-}
-
-// ============================================
-// FUNÇÕES DE ATIVIDADES
-// ============================================
-
-/**
- * Abre modal para registrar uma atividade
- * @param {string} activityId - ID da atividade
- */
-function openActivityModal(activityId) {
-    const activity = blockDetailsState.activities.find(a => a.id == activityId);
-    
-    if (!activity) {
-        console.error('❌ Atividade não encontrada');
-        return;
-    }
-    
-    console.log('📝 Abrindo modal para registrar:', activity.title);
-    
-    // TODO: Implementar modal visual
-    // Por enquanto, simular com alert
-    const result = confirm(`Deseja registrar a atividade: "${activity.title}"?`);
-    
-    if (result) {
-        registerActivity(activityId);
-    }
-}
-
-/**
- * Registra uma atividade como concluída
- * @param {string} activityId - ID da atividade
- */
-async function registerActivity(activityId) {
+  document.getElementById('btnShare')?.addEventListener('click', async () => {
     try {
-        console.log('📤 Registrando atividade:', activityId);
-        
-        // TODO: Integrar com API
-        // const response = await fetch('/api/activities/register', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({
-        //         blockId: blockDetailsState.blockId,
-        //         activityId: activityId,
-        //         timestamp: new Date().toISOString()
-        //     })
-        // });
-        
-        // if (!response.ok) throw new Error('Erro ao registrar atividade');
-        // const data = await response.json();
-        
-        // Simular sucesso
-        showSuccess(`Atividade registrada com sucesso!`);
-        
-        // Recarregar dados
-        setTimeout(() => {
-            location.reload();
-        }, 1500);
-        
-    } catch (error) {
-        console.error('❌ Erro ao registrar atividade:', error);
-        showError('Erro ao registrar atividade. Tente novamente.');
+      if (navigator.share) await navigator.share({ url: window.location.href });
+    } catch (err) {
+      if (err.name !== 'AbortError') console.error(err);
     }
-}
+  });
 
-/**
- * Visualiza detalhes de uma atividade pendente
- * @param {HTMLElement} element - Elemento clicado
- */
-function viewPendingDetails(element) {
-    const item = element.closest('.pending-item');
-    const title = item.querySelector('.pending-title').textContent;
-    
-    console.log('👀 Visualizando pendência:', title);
-    
-    // TODO: Implementar modal com detalhes
-    alert(`Detalhes de: ${title}`);
-}
-
-/**
- * Deleta uma atividade concluída
- * @param {HTMLElement} element - Elemento clicado
- */
-async function deleteCompletedActivity(element) {
-    const item = element.closest('.completed-item');
-    const title = item.querySelector('.completed-title').textContent;
-    
-    if (!confirm(`Deseja remover "${title}" do histórico?`)) {
-        return;
-    }
-    
-    console.log('🗑️ Deletando atividade concluída:', title);
-    
-    try {
-        // TODO: Integrar com API
-        // const response = await fetch('/api/activities/delete', {
-        //     method: 'DELETE',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({ title: title })
-        // });
-        
-        // Simular sucesso
-        item.style.opacity = '0.5';
-        setTimeout(() => {
-            item.remove();
-            showSuccess('Atividade removida do histórico');
-        }, 300);
-        
-    } catch (error) {
-        console.error('❌ Erro ao deletar atividade:', error);
-        showError('Erro ao remover atividade');
-    }
-}
-
-// ============================================
-// FUNÇÕES DE NAVEGAÇÃO
-// ============================================
-
-/**
- * Navega para a página de perfil do usuário
- */
-function goToProfile() {
-    console.log('🔗 Navegando para perfil do usuário');
+  document.getElementById('btnProfile')?.addEventListener('click', () => {
     window.location.href = '../perfil-usuario/';
+  });
+
+  /* Delegação — funciona com ações carregadas dinamicamente */
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.btn-registrar-atividade');
+    if (!btn) return;
+    const acaoId = btn.dataset.activity;
+    openActivityModal(acaoId, btn.closest('.activity-card')?.querySelector('h3')?.textContent || 'Atividade');
+  });
 }
 
-/**
- * Visualiza toda a jornada de atividades concluídas
- */
-function viewFullJourney() {
-    console.log('🗺️ Abrindo visualização de jornada completa');
-    
-    // TODO: Implementar modal ou página de jornada completa
-    alert('Jornada completa: Exibir todas as atividades concluídas');
+/* ─────────────────────────────────────────
+   MODAL + REGISTRO
+───────────────────────────────────────── */
+function openActivityModal(acaoEducativaId, activityTitle) {
+  const existing = document.getElementById('_bloco-modal');
+  if (existing) existing.remove();
+
+  const modal = document.createElement('div');
+  modal.id = '_bloco-modal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:1000';
+  modal.innerHTML = `
+    <div style="background:#fff;border-radius:12px;padding:28px;max-width:440px;width:90%">
+      <h2 style="margin:0 0 8px;color:#237329">Registrar Atividade</h2>
+      <p style="color:#555;margin:0 0 16px"><strong>${activityTitle}</strong></p>
+      <div style="margin-bottom:12px">
+        <label style="display:block;font-weight:600;margin-bottom:4px;font-size:14px">Descrição *</label>
+        <textarea id="descricaoRegistro" rows="4" placeholder="Descreva como você realizou esta atividade..." style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:14px;box-sizing:border-box;resize:vertical"></textarea>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px">
+        <button id="_bloco-cancel" style="background:#f0f0f0;border:none;padding:9px 16px;border-radius:8px;font-weight:600;cursor:pointer">Cancelar</button>
+        <button id="_bloco-submit" style="background:#237329;color:#fff;border:none;padding:9px 16px;border-radius:8px;font-weight:600;cursor:pointer">Registrar</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  modal.querySelector('#_bloco-cancel').addEventListener('click', () => modal.remove());
+  modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
+  modal.querySelector('#_bloco-submit').addEventListener('click', () => registerActivity(acaoEducativaId, modal));
 }
 
-/**
- * Navega para o desafio final da insígnia
- */
-function goToFinalChallenge() {
-    console.log('🏆 Navegando para desafio final');
-    
-    // TODO: Integrar com sistema de desafios
-    alert('Desafio Final: Insígnia da Saúde');
-}
+async function registerActivity(acaoEducativaId, modal) {
+  const descricao = document.getElementById('descricaoRegistro')?.value.trim();
+  if (!descricao) { alert('Informe a descrição da atividade.'); return; }
+  if (typeof API === 'undefined') { alert('API não disponível.'); return; }
 
-// ============================================
-// FUNÇÕES DE COMPARTILHAMENTO
-// ============================================
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
 
-/**
- * Compartilha o bloco de aprendizagem
- */
-async function shareBlock() {
-    console.log('📤 Compartilhando bloco');
-    
-    const shareData = {
-        title: blockDetailsState.blockTitle,
-        text: `Estou praticando "${blockDetailsState.blockTitle}" no Sistema de Escoteiros!`,
-        url: window.location.href
-    };
-    
-    try {
-        // Usar Web Share API se disponível
-        if (navigator.share) {
-            await navigator.share(shareData);
-            console.log('✅ Compartilhado com sucesso');
-        } else {
-            // Fallback: copiar link
-            copyToClipboard(window.location.href);
-            showSuccess('Link copiado para a área de transferência!');
-        }
-    } catch (error) {
-        if (error.name !== 'AbortError') {
-            console.error('❌ Erro ao compartilhar:', error);
-        }
+  try {
+    /* Buscar ou criar atividade para essa ação educativa */
+    const atividades = await API.atividades.list();
+    let atividadeId = atividades.find(a => a.acaoEducativaId === acaoEducativaId)?.id;
+
+    if (!atividadeId) {
+      const nova = await API.atividades.create({
+        acaoEducativaId,
+        alcateiaId:    user.alcateiaId || null,
+        criadoPor:     user.id,
+        ePersonalizada: false,
+      });
+      atividadeId = nova?.id;
     }
-}
 
-/**
- * Copia texto para a área de transferência
- * @param {string} text - Texto a copiar
- */
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).catch(err => {
-        console.error('❌ Erro ao copiar:', err);
+    if (!atividadeId) throw new Error('Não foi possível obter a atividade.');
+
+    await API.atribuicoes.create({
+      atividadeId,
+      associadoId:       user.id,
+      status:            'pendente',
+      descricaoRegistro: descricao,
     });
+
+    modal.remove();
+    alert('Atividade registrada! Aguarde a aprovação do escotista.');
+
+  } catch (err) {
+    console.error('[DetalheBloco] Erro ao registrar:', err);
+    alert('Erro ao registrar atividade: ' + err.message);
+  }
 }
-
-// ============================================
-// FUNÇÕES DE NOTIFICAÇÃO
-// ============================================
-
-/**
- * Exibe mensagem de sucesso
- * @param {string} message - Mensagem a exibir
- */
-function showSuccess(message) {
-    console.log('✅', message);
-    
-    // TODO: Implementar toast visual
-    // Por enquanto, usar alert
-    alert(message);
-}
-
-/**
- * Exibe mensagem de erro
- * @param {string} message - Mensagem a exibir
- */
-function showError(message) {
-    console.error('❌', message);
-    
-    // TODO: Implementar toast visual
-    // Por enquanto, usar alert
-    alert(message);
-}
-
-// ============================================
-// FUNÇÕES AUXILIARES
-// ============================================
-
-/**
- * Formata data para formato legível
- * @param {string} dateString - Data em string
- * @returns {string} Data formatada
- */
-function formatDate(dateString) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('pt-BR', options);
-}
-
-/**
- * Calcula progresso percentual
- * @param {number} completed - Atividades completas
- * @param {number} total - Total de atividades
- * @returns {number} Percentual
- */
-function calculateProgress(completed, total) {
-    return Math.round((completed / total) * 100);
-}
-
-console.log('✅ Script de Detalhes do Bloco carregado com sucesso!');
