@@ -138,24 +138,7 @@
           <!-- Selection Grid (Bloco + Data) -->
           <div class="mini-grid">
 
-            <!-- Alcateia -->
-            <div class="form-card-sm">
-              <label class="field-label" for="activity-alcateia">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                     stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-                Alcateia
-              </label>
-              <select class="field-select" id="activity-alcateia">
-                <option value="">Selecionar alcateia...</option>
-              </select>
-            </div>
-
-            <!-- Bloco de Aprendizagem / Ação Educativa -->
+            <!-- Bloco de Aprendizagem -->
             <div class="form-card-sm">
               <label class="field-label" for="activity-block">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -164,10 +147,16 @@
                   <line x1="12" y1="8" x2="12" y2="12"/>
                   <line x1="12" y1="16" x2="12.01" y2="16"/>
                 </svg>
-                Ação Educativa
+                Bloco de Aprendizagem
               </label>
               <select class="field-select" id="activity-block">
-                <option value="">Selecionar ação educativa...</option>
+                <option value="">Selecione uma área...</option>
+                <option value="habitos">Hábitos Saudáveis</option>
+                <option value="intelectual">Intelectual</option>
+                <option value="espiritual">Espiritualidade</option>
+                <option value="social">Social</option>
+                <option value="natureza">Natureza</option>
+                <option value="criatividade">Criatividade</option>
               </select>
             </div>
 
@@ -364,12 +353,11 @@
 
 <script src="script.js"></script>
 
-<script src="../../js/main.js"></script>
 <script>
+// Logout handler
 document.querySelector('.topbar-icon-btn[title="Sair"]')?.addEventListener('click', () => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user');
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('user_data');
     window.location.href = '../../login/';
 });
 </script>

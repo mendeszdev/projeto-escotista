@@ -1,5 +1,5 @@
 // Gestão de Associados - Dirigente
-const BASE_URL = 'http://localhost:8080/escoteiros-api';
+const API = 'http://localhost:8080';
 let todosAssociados = [];
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -8,14 +8,14 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function verificarSessao() {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const user = JSON.parse(localStorage.getItem('user_data') || '{}');
     if (!user || !user.role) window.location.href = '../../login/';
 }
 
 function headers() {
     return {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+        'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
     };
 }
 
@@ -24,7 +24,7 @@ async function carregarAssociados() {
     placeholder.innerHTML = '<p style="color:#aaa">Carregando associados...</p>';
 
     try {
-        const res = await fetch(`${BASE_URL}/api/associados`, { headers: headers() });
+        const res = await fetch(`${API}/api/associados`, { headers: headers() });
         todosAssociados = await res.json();
         renderizar(todosAssociados);
     } catch (e) {
@@ -74,6 +74,7 @@ function renderizar(lista) {
             }
             .assoc-empty { text-align:center; padding:32px; color:#aaa; }
 
+            /* Modal */
             .modal-overlay {
                 display:none; position:fixed; inset:0;
                 background:rgba(0,0,0,0.4); z-index:1000;
@@ -102,6 +103,7 @@ function renderizar(lista) {
             }
         </style>
 
+        <!-- Toolbar -->
         <div class="assoc-toolbar">
             <input type="text" id="assoc-search" class="assoc-search" placeholder="Buscar por nome ou matrícula...">
             <select id="assoc-filtro" class="assoc-select">
@@ -113,6 +115,7 @@ function renderizar(lista) {
             <button class="assoc-btn-novo" onclick="abrirModal()">+ Novo</button>
         </div>
 
+        <!-- Tabela -->
         <table class="assoc-table">
             <thead>
                 <tr>
@@ -128,12 +131,11 @@ function renderizar(lista) {
             </tbody>
         </table>
 
+        <!-- Modal -->
         <div class="modal-overlay" id="modal-assoc">
             <div class="modal-box">
                 <h2>Novo Associado</h2>
                 <div class="modal-field"><label>Nome Completo *</label><input type="text" id="m-nome"></div>
-                <div class="modal-field"><label>CPF *</label><input type="text" id="m-cpf" placeholder="000.000.000-00"></div>
-                <div class="modal-field"><label>Data de Nascimento *</label><input type="date" id="m-nasc"></div>
                 <div class="modal-field"><label>Matrícula *</label><input type="text" id="m-matricula" placeholder="000.000-0"></div>
                 <div class="modal-field"><label>Senha *</label><input type="password" id="m-senha"></div>
                 <div class="modal-field"><label>Perfil *</label>
@@ -143,6 +145,7 @@ function renderizar(lista) {
                         <option value="dirigente">Dirigente</option>
                     </select>
                 </div>
+                <div class="modal-field"><label>Data de Nascimento *</label><input type="date" id="m-nasc"></div>
                 <div class="modal-field"><label>Email</label><input type="email" id="m-email"></div>
                 <div class="modal-footer">
                     <button class="modal-btn-cancel" onclick="fecharModal()">Cancelar</button>
@@ -152,6 +155,7 @@ function renderizar(lista) {
         </div>
     `;
 
+    // Eventos de filtro
     document.getElementById('assoc-search').addEventListener('input', filtrar);
     document.getElementById('assoc-filtro').addEventListener('change', filtrar);
 }
@@ -196,29 +200,28 @@ function fecharModal() {
 
 async function salvarAssociado() {
     const nome      = document.getElementById('m-nome').value.trim();
-    const cpf       = document.getElementById('m-cpf').value.trim();
     const matricula = document.getElementById('m-matricula').value.trim();
     const senha     = document.getElementById('m-senha').value.trim();
     const perfil    = document.getElementById('m-perfil').value;
     const nasc      = document.getElementById('m-nasc').value;
     const email     = document.getElementById('m-email').value.trim();
 
-    if (!nome || !cpf || !matricula || !senha || !nasc) {
+    if (!nome || !matricula || !senha || !nasc) {
         alert('Preencha os campos obrigatórios (*)');
         return;
     }
 
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const user = JSON.parse(localStorage.getItem('user_data') || '{}');
 
     try {
-        const res = await fetch(`${BASE_URL}/api/associados`, {
+        const res = await fetch(`${API}/api/associados`, {
             method: 'POST',
             headers: headers(),
             body: JSON.stringify({
-                nomeCompleto: nome, cpf, matricula, senha,
+                nomeCompleto: nome, matricula, senhaHash: senha,
                 perfil, dataNascimento: nasc,
                 email: email || null, status: 'ativo',
-                grupoEscoteiroId: user.grupoId || null,
+                grupoEscotelroId: user.grupoId || null
             })
         });
         if (!res.ok) { const e = await res.json(); throw new Error(e.erro || 'Erro'); }
@@ -232,7 +235,7 @@ async function salvarAssociado() {
 async function deletarAssociado(id, nome) {
     if (!confirm(`Remover "${nome}"?`)) return;
     try {
-        await fetch(`${BASE_URL}/api/associados/${id}`, { method: 'DELETE', headers: headers() });
+        await fetch(`${API}/api/associados/${id}`, { method: 'DELETE', headers: headers() });
         carregarAssociados();
     } catch (e) {
         alert('Erro ao remover');

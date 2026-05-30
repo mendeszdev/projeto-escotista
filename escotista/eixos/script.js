@@ -74,49 +74,9 @@ function initAxisCards() {
   });
 }
 
-/* ─────────────────────────────────────────
-   LOAD EIXOS — API real
-───────────────────────────────────────── */
-async function loadEixos() {
-  if (typeof API === 'undefined') return;
-  try {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    const [eixos, progressoes] = await Promise.all([
-      API.eixos.list(),
-      user.id ? API.progressoes.listByAssociado(user.id) : Promise.resolve([]),
-    ]);
-
-    const cards = document.querySelectorAll('.axis-card');
-    eixos.forEach((eixo, i) => {
-      const card = cards[i];
-      if (!card) return;
-      card.dataset.eixoTipo = eixo.tipo || eixo.id;
-
-      const prog = progressoes.find(p => p.eixoId === eixo.id);
-      const pct  = prog ? Math.round(prog.percentualConcluido) : 0;
-
-      const titleEl = card.querySelector('.axis-title');
-      if (titleEl) titleEl.textContent = eixo.nome;
-
-      const bar = card.querySelector('.axis-bar[data-width]');
-      if (bar) {
-        bar.dataset.width = `${pct}%`;
-        bar.style.width   = `${pct}%`;
-      }
-
-      const pctEl = card.querySelector('.axis-pct, .axis-progress-text');
-      if (pctEl) pctEl.textContent = `${pct}%`;
-    });
-
-  } catch (err) {
-    console.warn('[Eixos] Erro ao carregar:', err.message);
-  }
-}
-
 /* ── Bootstrap ── */
 document.addEventListener("DOMContentLoaded", () => {
   initSidebarNav();
   initProgressBars();
   initAxisCards();
-  loadEixos();
 });

@@ -129,7 +129,7 @@ async function loadAtividades(filtros = {}) {
 async function approveRow(btn) {
   const row        = btn.closest('.table-row');
   const name       = row.querySelector('.lobinho-name')?.textContent.trim() || 'Lobinho';
-  const atribuicaoId = row.dataset.id;
+  const id         = row.dataset.id;
   const statusCell = row.querySelector('.status-cell');
 
   statusCell.className = 'status-cell status-approved';
@@ -139,9 +139,8 @@ async function approveRow(btn) {
   row.querySelector('.btn-reject')?.remove();
   showToast('✅', `Atividade de ${name} aprovada!`);
 
-  if (atribuicaoId && typeof API !== 'undefined') {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    API.atribuicoes.update(atribuicaoId, { status: 'aprovado', validadoPor: user.id }).catch(err => {
+  if (id && typeof API !== 'undefined') {
+    API.atividades.update(id, { status: 'aprovado' }).catch(err => {
       console.error('[Atividades] Erro ao aprovar:', err);
     });
   }
@@ -150,7 +149,7 @@ async function approveRow(btn) {
 async function rejectRow(btn) {
   const row        = btn.closest('.table-row');
   const name       = row.querySelector('.lobinho-name')?.textContent.trim() || 'Lobinho';
-  const atribuicaoId = row.dataset.id;
+  const id         = row.dataset.id;
   const statusCell = row.querySelector('.status-cell');
 
   statusCell.className = 'status-cell status-rejected';
@@ -160,9 +159,8 @@ async function rejectRow(btn) {
   row.querySelector('.btn-reject')?.remove();
   showToast('❌', `Atividade de ${name} rejeitada.`);
 
-  if (atribuicaoId && typeof API !== 'undefined') {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    API.atribuicoes.update(atribuicaoId, { status: 'rejeitado', validadoPor: user.id }).catch(err => {
+  if (id && typeof API !== 'undefined') {
+    API.atividades.update(id, { status: 'rejeitado' }).catch(err => {
       console.error('[Atividades] Erro ao rejeitar:', err);
     });
   }
@@ -235,8 +233,7 @@ function batchValidate() {
 
     const id = row.dataset.id;
     if (id && typeof API !== 'undefined') {
-      const user = JSON.parse(localStorage.getItem('user') || '{}');
-      updates.push(API.atribuicoes.update(id, { status: 'aprovado', validadoPor: user.id }));
+      updates.push(API.atividades.update(id, { status: 'aprovado' }));
     }
   });
 

@@ -756,9 +756,3 @@ body {
     justify-content: center;
   }
 }
-
-/* ── REFACTORED FROM INLINE STYLES ── */
-.profile-svg-fallback { width: 64px; height: 64px; position: absolute; }
-.exam-svg-icon        { width: 12px; height: 12px; }
-.formation-icon--gold  { background: #feb300; }
-.formation-icon--green { background: #9df197; }

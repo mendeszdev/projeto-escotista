@@ -227,13 +227,20 @@ function handleForgotPassword(event) {
 /* ─── LOGOUT (chamado por outras telas) ───────────────────── */
 
 function logout() {
+<<<<<<< HEAD
+  authState.token = null;
+  localStorage.removeItem('auth_token');
+  localStorage.removeItem('user_data');
+  window.location.href = '../login/';
+=======
   authState.accessToken  = null;
   authState.refreshToken = null;
   localStorage.removeItem('accessToken');
   localStorage.removeItem('refreshToken');
   localStorage.removeItem('user');
-  localStorage.removeItem('token');
+  localStorage.removeItem('token'); // remove chave legada
   window.location.replace('/login/');
+>>>>>>> 46b8af6213d1ab90b652fc61a0b7035f67093410
 }
 
 window.authModule = { logout, isAuthenticated: () => !!authState.accessToken };

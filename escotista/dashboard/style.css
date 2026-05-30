@@ -852,9 +852,3 @@ body {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
-/* ── REFACTORED FROM INLINE STYLES ── */
-.metric-icon--validacoes  { width: 35px; height: 37px; }
-.metric-icon--engajamento { width: 36px; height: 28px; }
-.performers .performer-item:nth-child(1) .progress-bar { width: 92%; }
-.performers .performer-item:nth-child(2) .progress-bar { width: 75%; }

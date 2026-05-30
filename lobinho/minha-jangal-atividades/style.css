@@ -390,14 +390,3 @@ body {
         font-size: 2rem;
     }
 }
-
-/* ── REFACTORED FROM INLINE STYLES ── */
-.icon-logout-svg { width: 20px; height: 20px; }
-.eixo-1 .eixo-icon { background-color: #feb300; }
-.eixo-2 .eixo-icon { background-color: #9df197; }
-.eixo-3 .eixo-icon { background-color: #5fe0f6; }
-.eixo-4 .eixo-icon { background-color: #f5a623; }
-.eixo-1 .progress-fill { width: 85%; background-color: #865c00; }
-.eixo-2 .progress-fill { width: 42%; background-color: #237329; }
-.eixo-3 .progress-fill { width: 60%; background-color: #004387; }
-.eixo-4 .progress-fill { width: 25%; background-color: #be2d06; }

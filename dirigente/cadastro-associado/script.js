@@ -176,14 +176,7 @@ function initPerfilDinamico() {
   const cardAdult = document.getElementById('card-adulto');
   if (!select) return;
 
-  function gerarMatricula(perfil) {
-    const prefix = { lobinho: 'LB', escotista: 'ES', dirigente: 'DG' }[perfil] || 'XX';
-    const ano = new Date().getFullYear();
-    const seq = String(Math.floor(Math.random() * 999) + 1).padStart(3, '0');
-    return `${prefix}.${ano}-${seq}`;
-  }
-
-  function onPerfilChange() {
+  async function onPerfilChange() {
     const val = select.value;
 
     /* Toggle cards de requisitos */
@@ -193,11 +186,20 @@ function initPerfilDinamico() {
       cardAdult.style.pointerEvents = isAdult ? 'auto' : 'none';
     }
 
-    const mEl = document.getElementById('field-matricula');
-    if (!mEl) return;
-    if (!val) { mEl.value = ''; return; }
-    if (!mEl.value || mEl.value === '…') {
-      mEl.value = gerarMatricula(val);
+    /* Busca próxima matrícula */
+    if (!val) {
+      const mEl = document.getElementById('field-matricula');
+      if (mEl) mEl.value = '';
+      return;
+    }
+    try {
+      const mEl = document.getElementById('field-matricula');
+      if (mEl) mEl.value = '…';
+      const data = await API.associados.proximaMatricula(val);
+      if (mEl) mEl.value = data?.matricula || '';
+    } catch {
+      const mEl = document.getElementById('field-matricula');
+      if (mEl) mEl.value = '';
     }
   }
 
@@ -367,9 +369,9 @@ function collectFormData() {
   const str = id => (document.getElementById(id)?.value || '').trim() || undefined;
 
   return {
-    grupoEscoteiroId: grupoId || undefined,
+    grupoEscotelroId: grupoId || undefined,
     matricula:        val('field-matricula'),
-    senha:            cpfRaw || 'Senha@123',
+    senhaHash:        cpfRaw || 'Senha@123',
     perfil:           val('field-perfil'),
     nomeCompleto:     (document.getElementById('field-nome')?.value || '').trim(),
     nomeEscoteiro:    str('field-nome-escoteiro'),
@@ -378,7 +380,6 @@ function collectFormData() {
     estadoCivil:      val('field-estado-civil'),
     cpf:              val('field-cpf'),
     rg:               str('field-rg'),
-    passaporte:       str('field-passaporte'),
     email:            str('field-email'),
     telefone:         val('field-tel'),
     cep:              val('field-cep'),
@@ -401,7 +402,6 @@ function collectResponsavelData(associadoId) {
     parentesco:            (document.getElementById('field-resp-parentesco')?.value || '').trim() || undefined,
     telefone:              document.getElementById('field-resp-telefone')?.value || undefined,
     cpf:                   document.getElementById('field-resp-cpf')?.value || undefined,
-    email:                 (document.getElementById('field-resp-email')?.value || '').trim() || undefined,
     responsavelFinanceiro: document.getElementById('field-resp-financeiro')?.checked ?? false,
   };
 }
@@ -629,7 +629,6 @@ async function initEditMode() {
         setR('field-resp-parentesco', resp.parentesco);
         setR('field-resp-telefone',   resp.telefone);
         setR('field-resp-cpf',        resp.cpf);
-        setR('field-resp-email',      resp.email);
         const fin = document.getElementById('field-resp-financeiro');
         if (fin) fin.checked = resp.responsavelFinanceiro ?? false;
       }
