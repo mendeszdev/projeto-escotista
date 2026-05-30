@@ -1,3 +1,7 @@
+requireAuth('escotista');
+
+/* criacao-atividade.js */
+
 /* ─────────────────────────────────────────
    TOAST
 ───────────────────────────────────────── */
@@ -56,13 +60,8 @@ function toggleSelectAll() {
   const allSel = countSelected() === items.length;
 
   items.forEach(item => {
-    if (allSel) {
-      item.classList.remove('selected');
-      item.setAttribute('aria-selected', 'false');
-    } else {
-      item.classList.add('selected');
-      item.setAttribute('aria-selected', 'true');
-    }
+    if (allSel) { item.classList.remove('selected'); item.setAttribute('aria-selected', 'false'); }
+    else        { item.classList.add('selected');    item.setAttribute('aria-selected', 'true');  }
   });
 
   updateBadge();
@@ -71,54 +70,70 @@ function toggleSelectAll() {
 }
 
 /* ─────────────────────────────────────────
+   COLETA DOS IDS DOS LOBINHOS SELECIONADOS
+───────────────────────────────────────── */
+function getSelectedLobinhosIds() {
+  return [...document.querySelectorAll('.lobinho-item.selected')]
+    .map(el => el.dataset.id)
+    .filter(Boolean);
+}
+
+/* ─────────────────────────────────────────
+   RESET DO FORMULÁRIO
+───────────────────────────────────────── */
+function resetForm() {
+  document.getElementById('create-form')?.reset();
+  document.querySelectorAll('.lobinho-item').forEach(i => {
+    i.classList.remove('selected');
+    i.setAttribute('aria-selected', 'false');
+  });
+  updateBadge();
+  const label = document.getElementById('select-all-label');
+  if (label) label.textContent = 'Selecionar Toda a Matilha';
+}
+
+/* ─────────────────────────────────────────
    FORM VALIDATION & SUBMIT
 ───────────────────────────────────────── */
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
 
-  const name  = document.getElementById('activity-name').value.trim();
-  const desc  = document.getElementById('activity-desc').value.trim();
-  const block = document.getElementById('activity-block').value;
-  const date  = document.getElementById('activity-date').value;
+  const name  = document.getElementById('activity-name')?.value.trim();
+  const desc  = document.getElementById('activity-desc')?.value.trim();
+  const block = document.getElementById('activity-block')?.value;
+  const date  = document.getElementById('activity-date')?.value;
   const sel   = countSelected();
 
-  if (!name) {
-    showToast('⚠️', 'Informe o nome da atividade.');
-    document.getElementById('activity-name').focus();
-    return;
-  }
-  if (!desc) {
-    showToast('⚠️', 'Adicione uma descrição para a tarefa.');
-    document.getElementById('activity-desc').focus();
-    return;
-  }
-  if (!block) {
-    showToast('⚠️', 'Selecione o bloco de aprendizagem.');
-    document.getElementById('activity-block').focus();
-    return;
-  }
-  if (!date) {
-    showToast('⚠️', 'Defina uma data limite para a atividade.');
-    document.getElementById('activity-date').focus();
-    return;
-  }
-  if (sel === 0) {
-    showToast('⚠️', 'Selecione pelo menos um lobinho da matilha.');
-    return;
-  }
+  if (!name)  { showToast('⚠️', 'Informe o nome da atividade.');          document.getElementById('activity-name')?.focus(); return; }
+  if (!desc)  { showToast('⚠️', 'Adicione uma descrição para a tarefa.');  document.getElementById('activity-desc')?.focus(); return; }
+  if (!block) { showToast('⚠️', 'Selecione o bloco de aprendizagem.');     document.getElementById('activity-block')?.focus(); return; }
+  if (!date)  { showToast('⚠️', 'Defina uma data limite para a atividade.'); document.getElementById('activity-date')?.focus(); return; }
+  if (sel === 0) { showToast('⚠️', 'Selecione pelo menos um lobinho da matilha.'); return; }
 
-  showToast('🎉', `Atividade "${name}" criada para ${sel} lobinho(s)!`, 4000);
+  const submitBtn = e.submitter || document.querySelector('[type="submit"]');
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Salvando…'; }
 
-  setTimeout(() => {
-    document.getElementById('create-form').reset();
-    document.querySelectorAll('.lobinho-item').forEach(i => {
-      i.classList.remove('selected');
-      i.setAttribute('aria-selected', 'false');
-    });
-    updateBadge();
-    const label = document.getElementById('select-all-label');
-    if (label) label.textContent = 'Selecionar Toda a Matilha';
-  }, 1500);
+  try {
+    if (typeof API !== 'undefined') {
+      const payload = {
+        titulo:      name,
+        descricao:   desc,
+        bloco:       block,
+        dataLimite:  date,
+        lobinhosIds: getSelectedLobinhosIds(),
+      };
+      await API.atividades.create(payload);
+    }
+
+    showToast('🎉', `Atividade "${name}" criada para ${sel} lobinho(s)!`, 4000);
+    setTimeout(resetForm, 1500);
+
+  } catch (err) {
+    console.error('[Criação de atividade] Erro:', err);
+    showToast('❌', `Erro ao criar atividade: ${err.message}`, 5000);
+  } finally {
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Criar Atividade'; }
+  }
 }
 
 /* ─────────────────────────────────────────

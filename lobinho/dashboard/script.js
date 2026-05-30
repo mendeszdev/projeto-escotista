@@ -1,3 +1,5 @@
+requireAuth('lobinho');
+
 /* ============================================
    DASHBOARD LOBINHO - SCRIPT.JS
    Lógica de dashboard com funções comentadas
@@ -50,7 +52,7 @@ function loadUserProfile() {
     
     try {
         // Tentar obter dados do localStorage
-        const userData = localStorage.getItem('user_data');
+        const userData = localStorage.getItem('user');
         
         if (userData) {
             dashboardState.userProfile = JSON.parse(userData);

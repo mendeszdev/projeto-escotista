@@ -1,3 +1,5 @@
+requireAuth('lobinho');
+
 /**
  * MINHA JÂNGAL - BLOCOS DE EIXO
  * Script para gerenciar a tela de blocos de aprendizagem

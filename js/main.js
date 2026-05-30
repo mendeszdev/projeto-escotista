@@ -1,6 +1,6 @@
 /* ============================================================================
    MAIN.JS - LÓGICA CENTRALIZADA DO SISTEMA
-   Integrado com api-escotista (Java/Tomcat)
+   Integrado com api-escotista (Java/Tomcat) — JWT stateless
    ============================================================================ */
 
 /* ============================================================================
@@ -9,84 +9,77 @@
 
 const APP_STATE = {
   isAuthenticated: false,
-  user: null,
-  token: null,
-  currentPage: null,
-  userRole: null, // 'lobinho', 'escotista', 'dirigente'
+  user:         null,
+  accessToken:  null,
+  refreshToken: null,
+  currentPage:  null,
+  userRole:     null, // 'lobinho' | 'escotista' | 'dirigente'
   cache: {
-    activities: [],
-    users: [],
-    teams: [],
+    activities:  [],
+    users:       [],
+    teams:       [],
     specialties: []
   }
 };
 
-/**
- * ─────────────────────────────────────────────────────────────
- * BASE_URL: Endereço do backend Java (Tomcat).
- *
- * Desenvolvimento local → 'http://localhost:8080'
- * Produção             → 'https://seudominio.com.br'  (ajuste aqui)
- * ─────────────────────────────────────────────────────────────
- */
 const API_CONFIG = {
   BASE_URL: 'http://localhost:8080',
 
   ENDPOINTS: {
     AUTH: {
-      LOGIN:  '/api/auth/login',   // POST  → LoginServlet
-      LOGOUT: null                 // Sem endpoint de logout no backend atual (limpa só o localStorage)
+      LOGIN:   '/escoteiros-api/api/auth/login',   // POST
+      REFRESH: '/escoteiros-api/api/auth/refresh', // POST
     },
     ASSOCIADOS: {
-      LIST:   '/api/associados',           // GET
-      BY_ID:  '/api/associados/:id',       // GET
-      CREATE: '/api/associados',           // POST
-      UPDATE: '/api/associados/:id',       // PUT
-      DELETE: '/api/associados/:id',       // DELETE
-      BY_PERFIL: '/api/associados?perfil=', // GET ?perfil=lobinho
-      BY_GRUPO:  '/api/associados?grupo='   // GET ?grupo=<uuid>
+      LIST:      '/escoteiros-api/api/associados',
+      BY_ID:     '/escoteiros-api/api/associados/:id',
+      CREATE:    '/escoteiros-api/api/associados',
+      UPDATE:    '/escoteiros-api/api/associados/:id',
+      DELETE:    '/escoteiros-api/api/associados/:id',
+      BY_PERFIL: '/escoteiros-api/api/associados?perfil=',
+      BY_GRUPO:  '/escoteiros-api/api/associados?grupo='
     },
     ATIVIDADES: {
-      LIST:   '/api/atividades',           // GET
-      CREATE: '/api/atividades',           // POST
-      UPDATE: '/api/atividades/:id',       // PUT
-      DELETE: '/api/atividades/:id'        // DELETE
+      LIST:   '/escoteiros-api/api/atividades',
+      CREATE: '/escoteiros-api/api/atividades',
+      UPDATE: '/escoteiros-api/api/atividades/:id',
+      DELETE: '/escoteiros-api/api/atividades/:id'
     },
     ALCATEIAS: {
-      LIST:   '/api/alcateias',
-      BY_ID:  '/api/alcateias/:id'
+      LIST:  '/escoteiros-api/api/alcateias',
+      BY_ID: '/escoteiros-api/api/alcateias/:id'
     },
     MATILHAS: {
-      LIST:   '/api/matilhas',
-      BY_ID:  '/api/matilhas/:id'
+      LIST:  '/escoteiros-api/api/matilhas',
+      BY_ID: '/escoteiros-api/api/matilhas/:id'
     },
     PROGRESSOES: {
-      LIST:   '/api/progressoes',
-      BY_ID:  '/api/progressoes/:id'
+      LIST:  '/escoteiros-api/api/progressoes',
+      BY_ID: '/escoteiros-api/api/progressoes/:id'
     },
     DISTINTIVOS: {
-      LIST:   '/api/distintivos',
-      BY_ID:  '/api/distintivos/:id'
+      LIST:  '/escoteiros-api/api/distintivos',
+      BY_ID: '/escoteiros-api/api/distintivos/:id'
     },
     DOCUMENTOS: {
-      LIST:   '/api/documentos',
-      BY_ID:  '/api/documentos/:id'
+      LIST:  '/escoteiros-api/api/documentos',
+      BY_ID: '/escoteiros-api/api/documentos/:id'
     },
     FICHAS_MEDICAS: {
-      LIST:   '/api/fichas-medicas',
-      BY_ID:  '/api/fichas-medicas/:id'
+      LIST:  '/escoteiros-api/api/fichas-medicas',
+      BY_ID: '/escoteiros-api/api/fichas-medicas/:id'
     },
     RESPONSAVEIS: {
-      LIST:   '/api/responsaveis',
-      BY_ID:  '/api/responsaveis/:id'
+      LIST:  '/escoteiros-api/api/responsaveis',
+      BY_ID: '/escoteiros-api/api/responsaveis/:id'
     },
     ACOES_EDUCATIVAS: {
-      LIST:   '/api/acoes-educativas',
-      BY_ID:  '/api/acoes-educativas/:id'
+      LIST:  '/escoteiros-api/api/acoes-educativas',
+      BY_ID: '/escoteiros-api/api/acoes-educativas/:id'
     },
     GRUPOS: {
-      LIST:   '/api/grupos-escoteiros',
-      BY_ID:  '/api/grupos-escoteiros/:id'
+      LIST:  '/escoteiros-api/api/grupos-escoteiros',
+      BY_ID: '/escoteiros-api/api/grupos-escoteiros/:id'
     }
   },
 
@@ -94,15 +87,9 @@ const API_CONFIG = {
 };
 
 /* ============================================================================
-   2. FUNÇÕES DE AUTENTICAÇÃO
+   2. AUTENTICAÇÃO
    ============================================================================ */
 
-/**
- * Fazer login do usuário via POST /api/auth/login
- * @param {string} matricula - Matrícula no formato 123.456-7
- * @param {string} senha     - Senha do associado
- * @returns {Promise<Object>} Dados do usuário autenticado
- */
 async function login(matricula, senha) {
   if (!matricula || !senha) throw new Error('Matrícula e senha são obrigatórios');
 
@@ -110,37 +97,38 @@ async function login(matricula, senha) {
 
   if (!response.success) throw new Error(response.message || 'Credenciais inválidas');
 
-  APP_STATE.isAuthenticated = true;
-  APP_STATE.user    = response.user;
-  APP_STATE.token   = response.token;
-  APP_STATE.userRole = response.user.role;
-
-  localStorage.setItem('auth_token', response.token);
-  localStorage.setItem('user_data',  JSON.stringify(response.user));
-
+  _saveSession(response);
   return response;
 }
 
-async function logout() {
+function logout() {
   APP_STATE.isAuthenticated = false;
-  APP_STATE.user  = null;
-  APP_STATE.token = null;
-  localStorage.removeItem('auth_token');
-  localStorage.removeItem('user_data');
+  APP_STATE.user        = null;
+  APP_STATE.accessToken = null;
+  APP_STATE.refreshToken = null;
+  APP_STATE.userRole    = null;
+
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
+  localStorage.removeItem('user');
+  localStorage.removeItem('token'); // limpa chave legada
+
+  window.location.replace('/login/');
 }
 
 function isUserAuthenticated() {
-  const token    = localStorage.getItem('auth_token');
-  const userData = localStorage.getItem('user_data');
-  return !!(token && userData);
+  return !!localStorage.getItem('accessToken') && !!localStorage.getItem('user');
 }
 
 function restoreSession() {
   try {
-    const token    = localStorage.getItem('auth_token');
-    const userData = localStorage.getItem('user_data');
-    if (token && userData) {
-      APP_STATE.token           = token;
+    const accessToken  = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+    const userData     = localStorage.getItem('user');
+
+    if (accessToken && userData) {
+      APP_STATE.accessToken     = accessToken;
+      APP_STATE.refreshToken    = refreshToken || null;
       APP_STATE.user            = JSON.parse(userData);
       APP_STATE.isAuthenticated = true;
       APP_STATE.userRole        = APP_STATE.user.role;
@@ -150,8 +138,67 @@ function restoreSession() {
   }
 }
 
+function _saveSession(data) {
+  APP_STATE.isAuthenticated = true;
+  APP_STATE.accessToken  = data.accessToken;
+  APP_STATE.refreshToken = data.refreshToken;
+  APP_STATE.user         = data.user;
+  APP_STATE.userRole     = data.user.role;
+
+  localStorage.setItem('accessToken',  data.accessToken);
+  localStorage.setItem('refreshToken', data.refreshToken);
+  localStorage.setItem('user', JSON.stringify(data.user));
+  localStorage.removeItem('token'); // remove chave legada
+}
+
 /* ============================================================================
-   3. FUNÇÕES DE ASSOCIADOS (substitui "USERS")
+   3. REFRESH TOKEN
+   ============================================================================ */
+
+let _refreshPromise = null; // evita chamadas paralelas de refresh
+
+async function refreshTokens() {
+  // Se já há um refresh em andamento, aguarda o mesmo
+  if (_refreshPromise) return _refreshPromise;
+
+  _refreshPromise = (async () => {
+    const refreshToken = APP_STATE.refreshToken || localStorage.getItem('refreshToken');
+    if (!refreshToken) { logout(); return false; }
+
+    try {
+      const res = await fetch(
+        API_CONFIG.BASE_URL + API_CONFIG.ENDPOINTS.AUTH.REFRESH,
+        {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ refreshToken }),
+        }
+      );
+
+      if (!res.ok) { logout(); return false; }
+
+      const data = await res.json();
+      APP_STATE.accessToken  = data.accessToken;
+      APP_STATE.refreshToken = data.refreshToken;
+      localStorage.setItem('accessToken',  data.accessToken);
+      localStorage.setItem('refreshToken', data.refreshToken);
+      return true;
+
+    } catch {
+      logout();
+      return false;
+    }
+  })();
+
+  try {
+    return await _refreshPromise;
+  } finally {
+    _refreshPromise = null;
+  }
+}
+
+/* ============================================================================
+   4. FUNÇÕES DE ASSOCIADOS
    ============================================================================ */
 
 async function getAssociado(id) {
@@ -180,7 +227,7 @@ async function deletarAssociado(id) {
 }
 
 /* ============================================================================
-   4. FUNÇÕES DE ATIVIDADES
+   5. FUNÇÕES DE ATIVIDADES
    ============================================================================ */
 
 async function listActivities() {
@@ -203,21 +250,29 @@ async function deleteActivity(id) {
 }
 
 /* ============================================================================
-   5. FUNÇÕES DE REQUISIÇÃO HTTP
+   6. INTERCEPTOR DE REQUISIÇÕES HTTP (com auto-refresh)
    ============================================================================ */
 
 /**
- * Faz uma requisição ao backend com tratamento de erro.
- * Inclui automaticamente o token de autenticação no header.
+ * Ponto único de chamada à API.
+ * - Injeta Authorization: Bearer <accessToken>
+ * - Em 401: tenta refresh → repete a chamada uma vez
+ * - Em 401 após refresh: chama logout()
+ *
+ * @param {string}  method   - GET | POST | PUT | DELETE
+ * @param {string}  endpoint - Path relativo (sem base URL)
+ * @param {Object}  [data]   - Body (POST/PUT)
+ * @param {boolean} [_retry] - Interno: impede loop infinito de refresh
  */
-async function fetchAPI(method, endpoint, data = null) {
-  const url = API_CONFIG.BASE_URL + endpoint;
+async function fetchAPI(method, endpoint, data = null, _retry = false) {
+  const url         = API_CONFIG.BASE_URL + endpoint;
+  const accessToken = APP_STATE.accessToken || localStorage.getItem('accessToken') || '';
 
   const options = {
     method,
     headers: {
       'Content-Type':  'application/json',
-      'Authorization': `Bearer ${APP_STATE.token || localStorage.getItem('auth_token') || ''}`
+      'Authorization': `Bearer ${accessToken}`,
     }
   };
 
@@ -233,7 +288,13 @@ async function fetchAPI(method, endpoint, data = null) {
     const response = await fetch(url, options);
     clearTimeout(timeoutId);
 
-    // Erros HTTP
+    // Auto-refresh em 401 (uma tentativa)
+    if (response.status === 401 && !_retry) {
+      const refreshed = await refreshTokens();
+      if (refreshed) return fetchAPI(method, endpoint, data, true);
+      return null; // logout() já foi chamado dentro de refreshTokens()
+    }
+
     if (!response.ok) {
       let msg = `Erro ${response.status}`;
       try {
@@ -243,10 +304,8 @@ async function fetchAPI(method, endpoint, data = null) {
       throw new Error(msg);
     }
 
-    // Resposta vazia (ex: DELETE)
     const text = await response.text();
     if (!text) return null;
-
     return JSON.parse(text);
 
   } catch (error) {
@@ -257,7 +316,45 @@ async function fetchAPI(method, endpoint, data = null) {
 }
 
 /* ============================================================================
-   6. FUNÇÕES DE NAVEGAÇÃO
+   7. GUARD DE ROTA
+   ============================================================================ */
+
+/**
+ * Protege páginas de dashboard.
+ * Chame no topo de cada script de página (fora do DOMContentLoaded).
+ *
+ * @param {string} allowedRole - 'lobinho' | 'escotista' | 'dirigente'
+ */
+function requireAuth(allowedRole) {
+  const accessToken = localStorage.getItem('accessToken');
+  const rawUser     = localStorage.getItem('user');
+
+  if (!accessToken || !rawUser) {
+    window.location.replace('/login/');
+    return;
+  }
+
+  let user;
+  try { user = JSON.parse(rawUser); } catch { user = null; }
+
+  if (!user || !user.role) {
+    logout();
+    return;
+  }
+
+  // Role errado → redireciona para o dashboard correto do usuário
+  if (allowedRole && user.role !== allowedRole) {
+    const redirects = {
+      lobinho:   '/lobinho/dashboard/',
+      escotista: '/escotista/dashboard/',
+      dirigente: '/dirigente/dashboard/',
+    };
+    window.location.replace(redirects[user.role] || '/login/');
+  }
+}
+
+/* ============================================================================
+   8. NAVEGAÇÃO
    ============================================================================ */
 
 function navigateTo(path) {
@@ -265,7 +362,7 @@ function navigateTo(path) {
 }
 
 function navigateToDashboard() {
-  const role = APP_STATE.userRole || (JSON.parse(localStorage.getItem('user_data') || '{}')).role;
+  const role = APP_STATE.userRole || (JSON.parse(localStorage.getItem('user') || '{}')).role;
   switch (role) {
     case 'lobinho':   navigateTo('/lobinho/dashboard/');   break;
     case 'escotista': navigateTo('/escotista/dashboard/'); break;
@@ -275,32 +372,30 @@ function navigateToDashboard() {
 }
 
 /* ============================================================================
-   7. FUNÇÕES DE DOM (helpers)
+   9. HELPERS DE DOM
    ============================================================================ */
 
-const getElement  = s => document.querySelector(s);
-const getElements = s => document.querySelectorAll(s);
-const addClass    = (el, c)  => el?.classList.add(c);
-const removeClass = (el, c)  => el?.classList.remove(c);
-const showElement = el => removeClass(el, 'hidden');
-const hideElement = el => addClass(el, 'hidden');
-const setContent  = (el, h)  => { if (el) el.innerHTML = h; };
-const getInputValue = s => document.querySelector(s)?.value ?? '';
+const getElement    = s      => document.querySelector(s);
+const getElements   = s      => document.querySelectorAll(s);
+const addClass      = (el, c) => el?.classList.add(c);
+const removeClass   = (el, c) => el?.classList.remove(c);
+const showElement   = el     => removeClass(el, 'hidden');
+const hideElement   = el     => addClass(el, 'hidden');
+const setContent    = (el, h) => { if (el) el.innerHTML = h; };
+const getInputValue = s      => document.querySelector(s)?.value ?? '';
 const setInputValue = (s, v) => { const el = document.querySelector(s); if (el) el.value = v; };
 
 /* ============================================================================
-   8. VALIDAÇÕES
+   10. VALIDAÇÕES
    ============================================================================ */
 
 const validateEmail    = e => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 const validatePassword = p => p && p.length >= 6;
 const validateRequired = v => !!(v && v.trim());
-
-// Matrícula no formato 123.456-7
-const validateMatricula = m => /^\d{3}\.\d{3}-\d{1}$/.test(m);
+const validateMatricula = m => /^[A-Za-z]{2}\.\d{4}-\d{3}$/.test(m); // ex: LB.2024-001
 
 /* ============================================================================
-   9. NOTIFICAÇÕES (console + TODO visual)
+   11. NOTIFICAÇÕES
    ============================================================================ */
 
 function showSuccess(message) { console.log('[✅ SUCCESS]', message); }
@@ -308,11 +403,30 @@ function showError(message)   { console.error('[❌ ERROR]', message);  }
 function showWarning(message) { console.warn('[⚠️ WARNING]', message); }
 
 /* ============================================================================
-   10. INICIALIZAÇÃO
+   12. INICIALIZAÇÃO
    ============================================================================ */
 
 function initializeApp() {
   restoreSession();
+
+  // DOM is already parsed when scripts run at end of <body>; no DOMContentLoaded needed
+  document.querySelectorAll('[data-action="logout"]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      logout();
+    });
+  });
+
+  // Auto-highlight active sidebar item based on current URL
+  const pathname = window.location.pathname;
+  document.querySelectorAll('.sidebar-nav a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href || href === '#') return;
+    try {
+      const linkPath = new URL(href, window.location.href).pathname;
+      link.classList.toggle('active', pathname === linkPath);
+    } catch {}
+  });
 }
 
 if (document.readyState === 'loading') {
@@ -327,6 +441,8 @@ window.APP = {
   API_CONFIG,
   login,
   logout,
+  refreshTokens,
+  requireAuth,
   isUserAuthenticated,
   navigateToDashboard,
   navigateTo,

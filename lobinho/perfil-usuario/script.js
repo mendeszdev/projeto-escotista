@@ -1,3 +1,5 @@
+requireAuth('lobinho');
+
 /**
  * MEU PERFIL - SCRIPT
  * =====================================
